@@ -82,11 +82,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SaveBetsService.cs">
+    <Compile Include="AutoSaveBetsService.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SaveBetsService.Designer.cs">
-      <DependentUpon>SaveBetsService.cs</DependentUpon>
+    <Compile Include="AutoSaveBetsService.Designer.cs">
+      <DependentUpon>AutoSaveBetsService.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

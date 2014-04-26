@@ -85,7 +85,7 @@
     <Compile Include="Common\LogExtensions.cs" />
     <Compile Include="Constants\DateTimeFormatConstants.cs" />
     <Compile Include="Constants\EmailTemplateConstants.cs" />
-    <Compile Include="Criteria\GetWinLossByProductsCriteria.cs" />
+    <Compile Include="Criteria\GetSaveBetsBusinessCriteria.cs" />
     <Compile Include="Enums\Status.cs" />
     <Compile Include="Enums\TaskType.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />

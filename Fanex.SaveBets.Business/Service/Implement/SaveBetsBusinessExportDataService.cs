@@ -19,8 +19,8 @@ namespace SaveBetsBusiness.Service.Implement
     using SaveBetsBusiness.Criteria;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Model;
-    using SaveBetsBusiness.Service.Interface;
     using SaveBetsBusiness.Resources;
+    using SaveBetsBusiness.Service.Interface;
 
     /// <summary>
     /// TODO: Update summary.

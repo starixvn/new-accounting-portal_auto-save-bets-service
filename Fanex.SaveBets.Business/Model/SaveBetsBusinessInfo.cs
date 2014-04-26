@@ -51,10 +51,10 @@ namespace SaveBetsBusiness.Model
 
         public SaveBetsBusinessInfo Total { get; set; }
 
-        public void CalculateTotal(SaveBetsBusinessInfo SaveBetsBusinessInfo)
+        public void CalculateTotal(SaveBetsBusinessInfo saveBetsBusinessInfo)
         {
-            this.WinLoss += SaveBetsBusinessInfo.WinLoss;
-            this.MonthToDateWinLoss += SaveBetsBusinessInfo.MonthToDateWinLoss;
+            this.WinLoss += saveBetsBusinessInfo.WinLoss;
+            this.MonthToDateWinLoss += saveBetsBusinessInfo.MonthToDateWinLoss;
         }
     }
 }

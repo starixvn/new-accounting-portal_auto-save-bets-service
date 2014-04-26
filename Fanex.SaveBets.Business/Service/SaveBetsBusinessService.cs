@@ -26,12 +26,12 @@ namespace SaveBetsBusiness.Service
     public class SaveBetsBusinessService
     {
         private ISaveBetsBusinessRepository _repository = null;
-        private ISaveBetsBusinessExportDataService _SaveBetsBusinessExportDataService = null;
+        private ISaveBetsBusinessExportDataService _saveBetsBusinessExportDataService = null;
 
         public SaveBetsBusinessService()
         {
             _repository = new SaveBetsBusinessRepository();
-            _SaveBetsBusinessExportDataService = new SaveBetsBusinessExportDataService();
+            _saveBetsBusinessExportDataService = new SaveBetsBusinessExportDataService();
         }
 
         public void OnRunningDaily()
@@ -157,7 +157,7 @@ namespace SaveBetsBusiness.Service
                 if (winLossByProduct.IsEnoughData)
                 {
                     ////1. Export excel
-                    string fileAttachment = _SaveBetsBusinessExportDataService.ExportReportToExcel(winLossByProduct, criteria);
+                    string fileAttachment = _saveBetsBusinessExportDataService.ExportReportToExcel(winLossByProduct, criteria);
 
                     ////2. Send email and attach excel file
                     Mailing.MailingSaveBetsBusiness(winLossByProduct, fileAttachment, criteria);

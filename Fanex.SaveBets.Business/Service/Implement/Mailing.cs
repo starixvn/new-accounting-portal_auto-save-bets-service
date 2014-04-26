@@ -24,11 +24,11 @@ namespace SaveBetsBusiness.Service.Implement
         /// <summary>
         /// Mailings the win loss by products.
         /// </summary>
-        /// <param name="SaveBetsBusiness">The win loss by products.</param>
+        /// <param name="saveBetsBusiness">The win loss by products.</param>
         /// <param name="fileAttachment">The file attachment.</param>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Email will be send success or not.</returns>
-        public static bool MailingSaveBetsBusiness(SaveBetsBusinessInfo SaveBetsBusiness, string fileAttachment, GetSaveBetsBusinessCriteria criteria)
+        public static bool MailingSaveBetsBusiness(SaveBetsBusinessInfo saveBetsBusiness, string fileAttachment, GetSaveBetsBusinessCriteria criteria)
         {
             bool isSuccess = true;
             try
@@ -36,7 +36,7 @@ namespace SaveBetsBusiness.Service.Implement
                 var root = AppDomain.CurrentDomain.BaseDirectory;
                 string filePath = root + EmailTemplateConstants.SaveBetsBusinessTemplate;
                 string template = File.ReadAllText(filePath);
-                var emailContent = Razor.Parse(template, SaveBetsBusiness);
+                var emailContent = Razor.Parse(template, saveBetsBusiness);
 
                 string emailTo = AppSettings.MailTo;
                 string emailSubject = string.Format(AppSettings.MailSubject, criteria.WinLossDate.ToShortFormatedDate());
