@@ -19,162 +19,106 @@ namespace SaveBetsBusiness.Service
     using SaveBetsBusiness.Repositories.Interface;
     using SaveBetsBusiness.Service.Implement;
     using SaveBetsBusiness.Service.Interface;
+    using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class SaveBetsBusinessService
     {
-        private ISaveBetsBusinessRepository _repository = null;
+        private IProcessSaveBets processSaveBets = null;
         private ISaveBetsBusinessExportDataService _saveBetsBusinessExportDataService = null;
+        private List<DataRow> jobs = null;
 
         public SaveBetsBusinessService()
         {
-            _repository = new SaveBetsBusinessRepository();
+            processSaveBets = new ProcessSaveBets();
             _saveBetsBusinessExportDataService = new SaveBetsBusinessExportDataService();
+            jobs = new List<DataRow>();
         }
 
-        public void OnRunningDaily()
+        private void RenderSUMSheet()
         {
-            ProcessBusinessDaily();
+            var matchInfo = processSaveBets.MatchInfo;
+            var turnovers = processSaveBets.Turnovers;
+            var winlosses = processSaveBets.WinLosses;
+            //// your code should be put here
         }
 
-        public void OnRunningUrgently()
+        private void RenderDeadTB_LiveTBSheet()
         {
-            ProcessBusinessUrgently();
-        }
+            GetTotalBetCriteria criteria = new GetTotalBetCriteria();
+            var bettypes = processSaveBets.Bettypes_TB;
+            var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
 
-        /// <summary>
-        /// Processes the business urgently.
-        /// </summary>
-        private void ProcessBusinessUrgently()
-        {
-            if (!AppSettings.OnProcessing)
+            foreach (var liveIndicator in liveIndicators)
             {
-                try
+                var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
+
+                foreach (var bettype in bettypesByLiveIndicator)
                 {
-                    AppSettings.OnProcessing = true;
-                    
-                    GetSaveBetsBusinessCriteria criteria = new GetSaveBetsBusinessCriteria
-                    {
-                        WinLossDate = AppSettings.WinlostDateForceRunning
-                    };
+                    criteria.MatchId = processSaveBets.MatchId;
+                    criteria.LiveIndicator = bettype.LiveIndicator;
+                    criteria.Bettype = bettype.Bettype;
 
-                    bool isEnoughData = ProcessDataToSendMail(criteria);
-                }
-                catch (Exception ex)
-                {
-                    LogExtensions.ExceptionHandler(ex);
-                }
-
-                AppSettings.OnProcessing = false;
-            }
-        }
-
-        /// <summary>
-        /// Processes the business daily.
-        /// </summary>
-        /// <returns>Identify of task.</returns>
-        private int ProcessBusinessDaily()
-        {
-            int id = 0;
-
-            if (!AppSettings.OnProcessing)
-            {
-                try
-                {
-                    AppSettings.OnProcessing = true;
-
-                    if (_repository.HasTaskAlreadyRunToday())
-                    {
-                        CheckNotCompleteTask();
-                    }
-                    else
-                    {
-                        id = _repository.Insert(TaskType.Daily);
-                        GetSaveBetsBusinessCriteria criteria = new GetSaveBetsBusinessCriteria
-                        {
-                            WinLossDate = DateTime.Now.AddDays(-1)
-                        };
-
-                        bool isEnoughData = ProcessDataToSendMail(criteria);
-                        var status = isEnoughData ? Status.SentEmailSuccessful : Status.NotEnoughDataToSendEmail;
-                        _repository.UpdateStatus(id, status);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    LogExtensions.ExceptionHandler(ex);
-                }
-
-                AppSettings.OnProcessing = false;
-            }
-
-            return id;
-        }
-
-        /// <summary>
-        /// Checks the not complete task.
-        /// </summary>
-        private void CheckNotCompleteTask()
-        {
-            DataTable log = _repository.GetLogNotEnoughDataToSendEmail();
-            if (log.Rows.Count > 0)
-            {
-                int id = Convert.ToInt32(log.Rows[0]["Id"]);
-                DateTime updatedDate = Convert.ToDateTime(log.Rows[0]["UpdatedDate"]).AddMinutes(AppSettings.RunNextTimeInMinutes);
-
-                var currentTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
-                TimeSpan executeTime = new TimeSpan(updatedDate.Hour, updatedDate.Minute, 0);
-
-                bool isEnoughData = false;
-                int compareResult = TimeSpan.Compare(currentTime, executeTime);
-                if (compareResult >= 0)
-                {
-                    GetSaveBetsBusinessCriteria criteria = new GetSaveBetsBusinessCriteria
-                    {
-                        WinLossDate = DateTime.Now.AddDays(-1)
-                    };
-
-                    isEnoughData = ProcessDataToSendMail(criteria);
-                    var status = isEnoughData ? Status.SentEmailSuccessful : Status.NotEnoughDataToSendEmail;
-                    _repository.UpdateStatus(id, status);
+                    var rows = processSaveBets.GetTotalBets(criteria);
+                    //Render Dead-TB/Live-TB Sheet depend on the value of liveIndicator = true or false
                 }
             }
         }
 
-        /// <summary>
-        /// Processes the data to send mail.
-        /// </summary>
-        /// <param name="criteria">The get win loss by products criteria.</param>
-        /// <returns>Data is enough to send email.</returns>
-        private bool ProcessDataToSendMail(GetSaveBetsBusinessCriteria criteria)
+        private void RenderEachBettypeLiveIndicatorSheet()
         {
-            bool isEnoughData = false;
+            GetBetTicketsCriteria criteria = new GetBetTicketsCriteria();
+            var bettypes = processSaveBets.Bettypes_Bets;
+            var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
+
+            foreach (var liveIndicator in liveIndicators)
+            {
+                var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
+
+                foreach (var bettype in bettypesByLiveIndicator)
+                {
+                    criteria.MatchId = processSaveBets.MatchId;
+                    criteria.LiveIndicator = bettype.LiveIndicator;
+                    criteria.Bettype = bettype.Bettype;
+
+                    var rows = processSaveBets.GetBetTickets(criteria);
+                    //Render each bettype a Sheet depend on the value of liveIndicator = true or false
+                }
+            }
+        }
+
+        public void ProcessSaveBets()
+        {
             try
             {
-                SaveBetsBusinessInfo winLossByProduct = _repository.GetSaveBetsBusinessData(criteria);
-                if (winLossByProduct.IsEnoughData)
-                {
-                    ////1. Export excel
-                    string fileAttachment = _saveBetsBusinessExportDataService.ExportReportToExcel(winLossByProduct, criteria);
+                jobs = processSaveBets.Jobs;
+                var matchId = processSaveBets.MatchId;
 
-                    ////2. Send email and attach excel file
-                    Mailing.MailingSaveBetsBusiness(winLossByProduct, fileAttachment, criteria);
-                    isEnoughData = true;
-                }
-                else
+                if (jobs.Count == 0 || matchId == 0)
                 {
-                    Mailing.WinLossByProductEmailNotification(criteria);
+                    ////Jobs are empty, so the service does nothing.
+                    return;
                 }
+
+                ////1. SUM - Render data excel file at Summary: Top Left, Top Right and Bottom                
+                RenderSUMSheet();               
+
+                ////2. TB - Render data excel file at sheet Dead-TB/Live-TB 
+                RenderDeadTB_LiveTBSheet();
+
+                ////3.Bets - Render each bettype a Sheet
+                RenderEachBettypeLiveIndicatorSheet();
+               
             }
             catch (Exception ex)
             {
-                LogExtensions.ExceptionHandler(ex);
-                isEnoughData = false;
+                throw ex;
             }
-
-            return isEnoughData;
         }
+
+        
     }
 }

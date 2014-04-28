@@ -18,17 +18,17 @@ namespace SaveBetsBusiness.Criteria
     /// <summary>
     /// Get win loss by products criteria.
     /// </summary>
-    public class GetSaveBetsBusinessCriteria : CriteriaBase
+    public class GetBetTicketsCriteria : CriteriaBase
     {
-        public DateTime WinLossDate
-        {
-            get;
-            set;
-        }
+        public int MatchId { get; set; }
+
+        public int Bettype { get; set; }
+
+        public bool LiveIndicator { get; set; }
 
         public override string GetSettingKey()
         {
-            return "Win_Loss_By_Products_Report";
+            return "Save_GetBets";
         }
 
         public override bool IsValid()

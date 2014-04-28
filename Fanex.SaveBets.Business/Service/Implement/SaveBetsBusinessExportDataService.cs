@@ -39,7 +39,7 @@ namespace SaveBetsBusiness.Service.Implement
         /// <param name="report">The report.</param>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Export excel file.</returns>
-        public string ExportReportToExcel(SaveBetsBusinessInfo report, GetSaveBetsBusinessCriteria criteria)
+        public string ExportReportToExcel(SaveBetsBusinessInfo report, GetMatchInfoCriteria criteria)
         {
             FileStream fileStream = null;
             HSSFWorkbook excelFile = new HSSFWorkbook();
@@ -63,7 +63,7 @@ namespace SaveBetsBusiness.Service.Implement
             var reportDirectory = this.CreateSaveBetsBusinessReportDirectory(criteria);
             string reportName = string.Format(
                 SaveBetsBusinessResource.SaveBetsBusiness_ReportName,
-                criteria.WinLossDate.ToShortFormatedDateWithSlash().Replace('/', '_'));
+                string.Empty);
             var reportPath = Path.Combine(reportDirectory, reportName);
             var fullReportPath = string.Format("{0}.{1}", reportPath, "xls");
 
@@ -358,24 +358,10 @@ namespace SaveBetsBusiness.Service.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Directory of win loss by products report.</returns>
-        private string CreateSaveBetsBusinessReportDirectory(GetSaveBetsBusinessCriteria criteria)
+        private string CreateSaveBetsBusinessReportDirectory(GetMatchInfoCriteria criteria)
         {
             string reportDataDirectory = AppSettings.ExportDataDirectory;
-
-            DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
-
-            string directoryByYearAndMonth = string.Format(
-                "{0}{1}",
-                criteria.WinLossDate.ToString("yyyy"),
-                criteria.WinLossDate.ToString("MM"));
-            string directoryByYearAndMonthPath = Path.Combine(reportDataDirectory, directoryByYearAndMonth);
-            DirectoryExtensions.CheckAndCreateDirectory(directoryByYearAndMonthPath);
-
-            string directoryByReport = "SaveBetsBusiness";
-            string directoryByReportPath = Path.Combine(directoryByYearAndMonthPath, directoryByReport);
-            DirectoryExtensions.CheckAndCreateDirectory(directoryByReportPath);
-
-            return directoryByReportPath;
+            return reportDataDirectory;
         }
     }
 }

@@ -77,25 +77,16 @@ namespace AutoSaveBetsService
         {
             try
             {
-                TimeSpan executeTime = new TimeSpan(AppSettings.RunAtHours, AppSettings.RunAtMinutes, 0);
-                var currentTime = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
-
-                int compareResult = TimeSpan.Compare(currentTime, executeTime);
-                if (compareResult >= 0)
+                if(!AppSettings.OnProcessing)
                 {
-                    service.OnRunningDaily();
-                }
-
-                if (!AppSettings.ForceRunningOnProcessing && AppSettings.ForceRunning)
-                {
-                    AppSettings.ForceRunningOnProcessing = true;
-                    DbSettingProviderManager.Current.Restart();
-
-                    service.OnRunningUrgently();
-                }
+                    AppSettings.OnProcessing = true;
+                    service.ProcessSaveBets();
+                    AppSettings.OnProcessing = false;
+                }              
             }
             catch (Exception ex)
             {
+                AppSettings.OnProcessing = false;
                 LogExtensions.ExceptionHandler(ex);
             }
         }

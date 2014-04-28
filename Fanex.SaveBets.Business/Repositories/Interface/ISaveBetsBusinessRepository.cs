@@ -16,14 +16,16 @@ namespace SaveBetsBusiness.Repositories.Interface
     /// </summary>
     public interface ISaveBetsBusinessRepository
     {
-        int Insert(TaskType type);
+        DataTable GetSaveGetJobs();
 
-        void UpdateStatus(int id, Status status);
+        DataTable GetTurnover(int MatchId);
 
-        DataTable GetLogNotEnoughDataToSendEmail();
+        DataTable GetWinLoss(int MatchId);
 
-        SaveBetsBusinessInfo GetSaveBetsBusinessData(GetSaveBetsBusinessCriteria criteria);
+        DataTable GetMatchInfo(int MatchId);
 
-        bool HasTaskAlreadyRunToday();
+        DataTable GetTotalBet(GetTotalBetCriteria criteria);
+
+        DataTable GetBetTikets(GetBetTicketsCriteria criteria);
     }
 }

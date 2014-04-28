@@ -14,6 +14,6 @@ namespace SaveBetsBusiness.Service.Interface
 
     public interface ISaveBetsBusinessExportDataService
     {
-        string ExportReportToExcel(SaveBetsBusinessInfo report, GetSaveBetsBusinessCriteria criteria);
+        string ExportReportToExcel(SaveBetsBusinessInfo report, GetMatchInfoCriteria criteria);
     }
 }
