@@ -47,7 +47,6 @@ namespace SaveBetsBusiness.Service.Implement
                 }
 
                 matchId = jobs.AsEnumerable().Select(m => Converter.To<int>(m["MatchId"])).Distinct().FirstOrDefault();
-                matchId = 8527049;//for testing
                 jobsByMatch = jobs.AsEnumerable().Where(m => Converter.To<int>(m["MatchId"]) == matchId).ToList();
 
                 bettypes_tb = jobsByMatch.AsEnumerable()
