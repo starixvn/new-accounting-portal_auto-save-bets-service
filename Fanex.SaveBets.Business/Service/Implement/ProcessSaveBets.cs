@@ -67,7 +67,6 @@ namespace SaveBetsBusiness.Service.Implement
                     })
                     .ToList();
                 
-
                 return jobsByMatch;
             }
         }
@@ -108,14 +107,14 @@ namespace SaveBetsBusiness.Service.Implement
         }
 
 
-        public List<DataRow> GetTotalBets(GetTotalBetCriteria criteria)
+        public IDataReader GetTotalBets(GetTotalBetCriteria criteria)
         {
-            return repository.GetTotalBet(criteria).AsEnumerable().ToList();
+            return repository.GetTotalBet(criteria);
         }
 
-        public List<DataRow> GetBetTickets(GetBetTicketsCriteria criteria)
+        public IDataReader GetBetTickets(GetBetTicketsCriteria criteria)
         {
-            return repository.GetBetTikets(criteria).AsEnumerable().ToList();
+            return repository.GetBetTikets(criteria);
         }
 
 
@@ -129,8 +128,6 @@ namespace SaveBetsBusiness.Service.Implement
         {
             get { return bettypes_bets ; }
         }
-
-
         
     }
 }

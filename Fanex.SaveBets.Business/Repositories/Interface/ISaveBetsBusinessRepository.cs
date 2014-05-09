@@ -24,8 +24,8 @@ namespace SaveBetsBusiness.Repositories.Interface
 
         DataTable GetMatchInfo(int MatchId);
 
-        DataTable GetTotalBet(GetTotalBetCriteria criteria);
+        IDataReader GetTotalBet(GetTotalBetCriteria criteria);
 
-        DataTable GetBetTikets(GetBetTicketsCriteria criteria);
+        IDataReader GetBetTikets(GetBetTicketsCriteria criteria);
     }
 }

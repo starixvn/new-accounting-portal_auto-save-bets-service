@@ -77,7 +77,7 @@ namespace AutoSaveBetsService
         {
             try
             {
-                if(!AppSettings.OnProcessing)
+                if (!AppSettings.OnProcessing)
                 {
                     AppSettings.OnProcessing = true;
                     service.ProcessSaveBets();

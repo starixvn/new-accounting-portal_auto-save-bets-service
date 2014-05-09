@@ -21,6 +21,7 @@ namespace SaveBetsBusiness.Service
     using SaveBetsBusiness.Service.Interface;
     using System.Collections.Generic;
     using System.Linq;
+    using NPOI.HSSF.UserModel;
 
     /// <summary>
     /// TODO: Update summary.
@@ -38,7 +39,7 @@ namespace SaveBetsBusiness.Service
             jobs = new List<DataRow>();
         }
 
-        private void RenderSUMSheet()
+        private void RenderSUMSheet(ref HSSFWorkbook excelFile)
         {
             var matchInfo = processSaveBets.MatchInfo;
             var turnovers = processSaveBets.Turnovers;
@@ -46,7 +47,7 @@ namespace SaveBetsBusiness.Service
             //// your code should be put here
         }
 
-        private void RenderDeadTB_LiveTBSheet()
+        private void RenderDeadTB_LiveTBSheet(ref HSSFWorkbook excelFile)
         {
             GetTotalBetCriteria criteria = new GetTotalBetCriteria();
             var bettypes = processSaveBets.Bettypes_TB;
@@ -68,7 +69,7 @@ namespace SaveBetsBusiness.Service
             }
         }
 
-        private void RenderEachBettypeLiveIndicatorSheet()
+        private void RenderEachBettypeLiveIndicatorSheet(ref HSSFWorkbook excelFile)
         {
             GetBetTicketsCriteria criteria = new GetBetTicketsCriteria();
             var bettypes = processSaveBets.Bettypes_Bets;
@@ -103,14 +104,16 @@ namespace SaveBetsBusiness.Service
                     return;
                 }
 
+                HSSFWorkbook excelFile = new HSSFWorkbook(); 
+
                 ////1. SUM - Render data excel file at Summary: Top Left, Top Right and Bottom                
-                RenderSUMSheet();               
+                RenderSUMSheet(ref excelFile);               
 
                 ////2. TB - Render data excel file at sheet Dead-TB/Live-TB 
-                RenderDeadTB_LiveTBSheet();
+                RenderDeadTB_LiveTBSheet(ref excelFile);
 
                 ////3.Bets - Render each bettype a Sheet
-                RenderEachBettypeLiveIndicatorSheet();
+                RenderEachBettypeLiveIndicatorSheet(ref excelFile);
                
             }
             catch (Exception ex)

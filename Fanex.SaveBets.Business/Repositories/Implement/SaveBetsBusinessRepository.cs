@@ -7,29 +7,18 @@
 namespace SaveBetsBusiness.Repositories.Implement
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.Data;
-    using System.Diagnostics.CodeAnalysis;
-    using Fanex.AccountingReports.SqLiteDatabase;
-    using Fanex.Common;
     using Fanex.Data;
     using SaveBetsBusiness.Criteria;
-    using SaveBetsBusiness.Enums;
-    using SaveBetsBusiness.Model;
     using SaveBetsBusiness.Repositories.Interface;
-    using SaveBetsBusiness.Resources;
-    using SaveBetsBusiness.Common;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class SaveBetsBusinessRepository : ISaveBetsBusinessRepository
     {
-
         public SaveBetsBusinessRepository()
         {
-
         }
 
         public DataTable GetSaveGetJobs()
@@ -54,7 +43,6 @@ namespace SaveBetsBusiness.Repositories.Implement
             return dataTable;
         }
 
-
         public DataTable GetTurnover(int MatchId)
         {
             DataTable dataTable = new DataTable();
@@ -74,7 +62,6 @@ namespace SaveBetsBusiness.Repositories.Implement
                         dataTable = dataSet.Tables[0];
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -83,7 +70,6 @@ namespace SaveBetsBusiness.Repositories.Implement
 
             return dataTable;
         }
-
 
         public DataTable GetWinLoss(int MatchId)
         {
@@ -104,7 +90,6 @@ namespace SaveBetsBusiness.Repositories.Implement
                         dataTable = dataSet.Tables[0];
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -113,7 +98,6 @@ namespace SaveBetsBusiness.Repositories.Implement
 
             return dataTable;
         }
-
 
         public DataTable GetMatchInfo(int MatchId)
         {
@@ -134,7 +118,6 @@ namespace SaveBetsBusiness.Repositories.Implement
                         dataTable = dataSet.Tables[0];
                     }
                 }
-
             }
             catch (Exception ex)
             {
@@ -144,10 +127,9 @@ namespace SaveBetsBusiness.Repositories.Implement
             return dataTable;
         }
 
-
-        public DataTable GetTotalBet(GetTotalBetCriteria criteria)
+        public IDataReader GetTotalBet(GetTotalBetCriteria criteria)
         {
-            DataTable dataTable = new DataTable();
+            IDataReader reader = null;
             try
             {
                 using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
@@ -155,26 +137,20 @@ namespace SaveBetsBusiness.Repositories.Implement
                     var parameters = criteria.GetSpParams();
                     db.AssignParamValues(parameters);
 
-                    var dataSet = db.ExecuteDataSet();
-                    if (dataSet != null && dataSet.Tables.Count > 0)
-                    {
-                        dataTable = dataSet.Tables[0];
-                    }
+                    reader = db.ExecuteReader(parameters);
                 }
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            return dataTable;
+            return reader;
         }
 
-
-        public DataTable GetBetTikets(GetBetTicketsCriteria criteria)
+        public IDataReader GetBetTikets(GetBetTicketsCriteria criteria)
         {
-            DataTable dataTable = new DataTable();
+            IDataReader reader = null;
             try
             {
                 using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
@@ -182,20 +158,15 @@ namespace SaveBetsBusiness.Repositories.Implement
                     var parameters = criteria.GetSpParams();
                     db.AssignParamValues(parameters);
 
-                    var dataSet = db.ExecuteDataSet();
-                    if (dataSet != null && dataSet.Tables.Count > 0)
-                    {
-                        dataTable = dataSet.Tables[0];
-                    }
+                    reader = db.ExecuteReader(parameters);
                 }
-
             }
             catch (Exception ex)
             {
                 throw ex;
             }
 
-            return dataTable;
+            return reader;
         }
     }
 }

@@ -26,9 +26,9 @@ namespace SaveBetsBusiness.Service.Interface
 
         DataRow MatchInfo { get; }
 
-        List<DataRow> GetTotalBets(GetTotalBetCriteria criteria);
+        IDataReader GetTotalBets(GetTotalBetCriteria criteria);
 
-        List<DataRow> GetBetTickets(GetBetTicketsCriteria criteria);
+        IDataReader GetBetTickets(GetBetTicketsCriteria criteria);
 
         List<BettypeInfo> Bettypes_TB { get; }
 
