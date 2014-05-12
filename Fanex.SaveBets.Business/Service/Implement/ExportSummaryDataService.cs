@@ -221,8 +221,8 @@ namespace SaveBetsBusiness.Service.Implement
 
         public void Dispose()
         {
-            this.Dispose();
             GC.SuppressFinalize(this);
+            GC.Collect();
         }
 
         /// <summary>
