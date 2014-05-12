@@ -21,6 +21,10 @@ namespace SaveBetsBusiness.Repositories.Implement
         {
         }
 
+        /// <summary>
+        /// Gets the save get jobs.
+        /// </summary>
+        /// <returns>Save bet jobs.</returns>
         public DataTable GetSaveGetJobs()
         {
             DataTable dataTable = new DataTable();
@@ -43,13 +47,18 @@ namespace SaveBetsBusiness.Repositories.Implement
             return dataTable;
         }
 
-        public DataTable GetTurnover(int MatchId)
+        /// <summary>
+        /// Gets the turnover.
+        /// </summary>
+        /// <param name="matchId">The match identifier.</param>
+        /// <returns>Turn over information.</returns>
+        public DataTable GetTurnover(int matchId)
         {
             DataTable dataTable = new DataTable();
             try
             {
                 GetTurnoverCriteria criteria = new GetTurnoverCriteria();
-                criteria.MatchId = MatchId;
+                criteria.MatchId = matchId;
 
                 using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
                 {
@@ -71,13 +80,18 @@ namespace SaveBetsBusiness.Repositories.Implement
             return dataTable;
         }
 
-        public DataTable GetWinLoss(int MatchId)
+        /// <summary>
+        /// Gets the win loss.
+        /// </summary>
+        /// <param name="matchId">The match identifier.</param>
+        /// <returns>Get win loss of match information.</returns>
+        public DataTable GetWinLoss(int matchId)
         {
             DataTable dataTable = new DataTable();
             try
             {
                 GetWinLossCriteria criteria = new GetWinLossCriteria();
-                criteria.MatchId = MatchId;
+                criteria.MatchId = matchId;
 
                 using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
                 {
@@ -99,13 +113,18 @@ namespace SaveBetsBusiness.Repositories.Implement
             return dataTable;
         }
 
-        public DataTable GetMatchInfo(int MatchId)
+        /// <summary>
+        /// Gets the match information.
+        /// </summary>
+        /// <param name="matchId">The match identifier.</param>
+        /// <returns>Match information.</returns>
+        public DataTable GetMatchInfo(int matchId)
         {
             DataTable dataTable = new DataTable();
             try
             {
                 GetMatchInfoCriteria criteria = new GetMatchInfoCriteria();
-                criteria.MatchId = MatchId;
+                criteria.MatchId = matchId;
 
                 using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
                 {
@@ -127,6 +146,11 @@ namespace SaveBetsBusiness.Repositories.Implement
             return dataTable;
         }
 
+        /// <summary>
+        /// Gets the total bet.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Total bet of match.</returns>
         public IDataReader GetTotalBet(GetTotalBetCriteria criteria)
         {
             IDataReader reader = null;
@@ -148,7 +172,12 @@ namespace SaveBetsBusiness.Repositories.Implement
             return reader;
         }
 
-        public IDataReader GetBetTikets(GetBetTicketsCriteria criteria)
+        /// <summary>
+        /// Gets the bet ticket.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>Bet tickets of match.</returns>
+        public IDataReader GetBetTickets(GetBetTicketsCriteria criteria)
         {
             IDataReader reader = null;
             try

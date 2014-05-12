@@ -39,7 +39,7 @@ namespace SaveBetsBusiness.Extensions
         public static readonly Color BorderColor = Color.Gray;
 
         private const string FontName = "Tahoma";
-        private const string IntNumberFormat = "#,#";
+        private const string IntNumberFormat = "#,##0";
         private const string TwoDecimalDigitNumber = "##,##0.00";
         private const string NegativeNumberFormat = "[>=0]#,##0{0}_);[RED][<0]-#,##0{1}";
         private const string NormalNumberFormat = "#,##0{0}_);-#,##0{1}";
@@ -334,7 +334,7 @@ namespace SaveBetsBusiness.Extensions
         /// </summary>
         /// <param name="cellStyle">The cell style.</param>
         /// <returns>The style of cell.</returns>
-        private static ICellStyle SetBorderToCell(ICellStyle cellStyle)
+        public static ICellStyle SetBorderToCell(ICellStyle cellStyle)
         {
             cellStyle.BorderBottom = BorderStyle.Thin;
             cellStyle.BorderLeft = BorderStyle.Thin;
@@ -354,7 +354,7 @@ namespace SaveBetsBusiness.Extensions
         /// </summary>
         /// <param name="cell">The cell of row.</param>
         /// <param name="cellValue">The cell value.</param>
-        private static void SetCellValue(ICell cell, object cellValue)
+        public static void SetCellValue(ICell cell, object cellValue)
         {
             if (cellValue is string)
             {

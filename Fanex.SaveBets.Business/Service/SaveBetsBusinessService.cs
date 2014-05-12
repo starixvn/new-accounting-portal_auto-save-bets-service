@@ -10,118 +10,156 @@
 namespace SaveBetsBusiness.Service
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
-    using SaveBetsBusiness.Common;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Linq;
+    using Fanex.Common;
+    using NPOI.HSSF.UserModel;
     using SaveBetsBusiness.Criteria;
-    using SaveBetsBusiness.Enums;
-    using SaveBetsBusiness.Model;
-    using SaveBetsBusiness.Repositories.Implement;
-    using SaveBetsBusiness.Repositories.Interface;
+    using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Service.Implement;
     using SaveBetsBusiness.Service.Interface;
-    using System.Collections.Generic;
-    using System.Linq;
-    using NPOI.HSSF.UserModel;
 
     /// <summary>
     /// TODO: Update summary.
     /// </summary>
     public class SaveBetsBusinessService
     {
-        private IProcessSaveBets processSaveBets = null;
-        private ISaveBetsBusinessExportDataService _saveBetsBusinessExportDataService = null;
-        private List<DataRow> jobs = null;
+        private IProcessSaveBets _processSaveBets = null;
+        private ExportSaveBetDataService _exportSaveBetDataService = null;
+        private List<DataRow> _jobs = null;
 
         public SaveBetsBusinessService()
         {
-            processSaveBets = new ProcessSaveBets();
-            _saveBetsBusinessExportDataService = new SaveBetsBusinessExportDataService();
-            jobs = new List<DataRow>();
+            _processSaveBets = new ProcessSaveBets();
+            _jobs = new List<DataRow>();
+            _exportSaveBetDataService = new ExportSaveBetDataService();
         }
 
-        private void RenderSUMSheet(ref HSSFWorkbook excelFile)
-        {
-            var matchInfo = processSaveBets.MatchInfo;
-            var turnovers = processSaveBets.Turnovers;
-            var winlosses = processSaveBets.WinLosses;
-            //// your code should be put here
-        }
-
-        private void RenderDeadTB_LiveTBSheet(ref HSSFWorkbook excelFile)
-        {
-            GetTotalBetCriteria criteria = new GetTotalBetCriteria();
-            var bettypes = processSaveBets.Bettypes_TB;
-            var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
-
-            foreach (var liveIndicator in liveIndicators)
-            {
-                var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
-
-                foreach (var bettype in bettypesByLiveIndicator)
-                {
-                    criteria.MatchId = processSaveBets.MatchId;
-                    criteria.LiveIndicator = bettype.LiveIndicator;
-                    criteria.Bettype = bettype.Bettype;
-
-                    var rows = processSaveBets.GetTotalBets(criteria);
-                    //Render Dead-TB/Live-TB Sheet depend on the value of liveIndicator = true or false
-                }
-            }
-        }
-
-        private void RenderEachBettypeLiveIndicatorSheet(ref HSSFWorkbook excelFile)
-        {
-            GetBetTicketsCriteria criteria = new GetBetTicketsCriteria();
-            var bettypes = processSaveBets.Bettypes_Bets;
-            var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
-
-            foreach (var liveIndicator in liveIndicators)
-            {
-                var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
-
-                foreach (var bettype in bettypesByLiveIndicator)
-                {
-                    criteria.MatchId = processSaveBets.MatchId;
-                    criteria.LiveIndicator = bettype.LiveIndicator;
-                    criteria.Bettype = bettype.Bettype;
-
-                    var rows = processSaveBets.GetBetTickets(criteria);
-                    //Render each bettype a Sheet depend on the value of liveIndicator = true or false
-                }
-            }
-        }
-
+        /// <summary>
+        /// Processes the save bets.
+        /// </summary>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         public void ProcessSaveBets()
         {
+            FileStream fileStream = null;
+
             try
             {
-                jobs = processSaveBets.Jobs;
-                var matchId = processSaveBets.MatchId;
+                _jobs = _processSaveBets.Jobs;
+                var matchId = _processSaveBets.MatchId;
+                var matchInfo = _processSaveBets.MatchInfo;
+                DateTime eventDate = Converter.ToDateTime(matchInfo["eventdate"]);
 
-                if (jobs.Count == 0 || matchId == 0)
+                if (_jobs.Count == 0 || matchId == 0)
                 {
                     ////Jobs are empty, so the service does nothing.
                     return;
                 }
 
-                HSSFWorkbook excelFile = new HSSFWorkbook(); 
+                HSSFWorkbook excelFile = new HSSFWorkbook();
 
-                ////1. SUM - Render data excel file at Summary: Top Left, Top Right and Bottom                
-                RenderSUMSheet(ref excelFile);               
+                ////1. SUM - Render data excel file at Summary: Top Left, Top Right and Bottom
+                RenderSUMSheet(ref excelFile);
 
-                ////2. TB - Render data excel file at sheet Dead-TB/Live-TB 
-                RenderDeadTB_LiveTBSheet(ref excelFile);
+                ////2. TB - Render data excel file at sheet Dead-TB/Live-TB
+                ////RenderDeadTB_LiveTBSheet(ref excelFile);
 
                 ////3.Bets - Render each bettype a Sheet
-                RenderEachBettypeLiveIndicatorSheet(ref excelFile);
-               
+                ////RenderEachBettypeLiveIndicatorSheet(ref excelFile);
+
+                string reportDirectory = _exportSaveBetDataService.CreateSaveBetReportDataDirectory(eventDate);
+                string reportName = string.Format(
+                    "{0}_{1}_{2}.{3}",
+                    matchInfo.ItemArray[3],
+                    Converter.ToDateTime(matchInfo.ItemArray[2]).ToShortFormatedDateWithSlash().Replace("/", "-"),
+                    matchInfo.ItemArray[1],
+                    "xls");
+
+                string reportPath = Path.Combine(reportDirectory, reportName);
+
+                fileStream = new FileStream(
+                    reportPath,
+                    FileMode.Create,
+                    FileAccess.Write);
+
+                excelFile.Write(fileStream);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            finally
+            {
+                fileStream.Close();
+                fileStream.Dispose();
+            }
         }
 
-        
+        private void RenderSUMSheet(ref HSSFWorkbook excelFile)
+        {
+            var matchInfo = _processSaveBets.MatchInfo;
+            var turnovers = _processSaveBets.Turnovers;
+            var winlosses = _processSaveBets.WinLosses;
+            //// your code should be put here
+
+            _exportSaveBetDataService.ExportSummarySheet(excelFile, matchInfo, turnovers, winlosses);
+        }
+
+        /// <summary>
+        /// Renders the dead total bet and live total bet sheet.
+        /// </summary>
+        /// <param name="excelFile">The excel file.</param>
+        private void RenderDeadTB_LiveTBSheet(ref HSSFWorkbook excelFile)
+        {
+            GetTotalBetCriteria criteria = new GetTotalBetCriteria();
+            var bettypes = _processSaveBets.Bettypes_TB;
+            var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
+
+            foreach (var liveIndicator in liveIndicators)
+            {
+                var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
+
+                foreach (var bettype in bettypesByLiveIndicator)
+                {
+                    criteria.MatchId = _processSaveBets.MatchId;
+                    criteria.LiveIndicator = bettype.LiveIndicator;
+                    criteria.Bettype = bettype.Bettype;
+
+                    var rows = _processSaveBets.GetTotalBets(criteria);
+                    ////Render Dead-TB/Live-TB Sheet depend on the value of liveIndicator = true or false
+                }
+            }
+        }
+
+        /// <summary>
+        /// Renders the each bet type live indicator sheet.
+        /// </summary>
+        /// <param name="excelFile">The excel file.</param>
+        private void RenderEachBettypeLiveIndicatorSheet(ref HSSFWorkbook excelFile)
+        {
+            GetBetTicketsCriteria criteria = new GetBetTicketsCriteria();
+            var bettypes = _processSaveBets.Bettypes_Bets;
+            var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
+
+            foreach (var liveIndicator in liveIndicators)
+            {
+                var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
+
+                foreach (var bettype in bettypesByLiveIndicator)
+                {
+                    criteria.MatchId = _processSaveBets.MatchId;
+                    criteria.LiveIndicator = bettype.LiveIndicator;
+                    criteria.Bettype = bettype.Bettype;
+
+                    var rows = _processSaveBets.GetBetTickets(criteria);
+                    ////Render each bettype a Sheet depend on the value of liveIndicator = true or false
+                }
+            }
+        }
     }
 }

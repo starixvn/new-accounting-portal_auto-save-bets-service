@@ -18,20 +18,20 @@ namespace SaveBetsBusiness.Service.Interface
     {
         int MatchId { get; }
 
-        List<DataRow> Jobs  { get; }
+        List<DataRow> Jobs { get; }
 
-        List<DataRow> Turnovers { get; }
+        DataRow Turnovers { get; }
 
         List<DataRow> WinLosses { get; }
 
         DataRow MatchInfo { get; }
 
-        IDataReader GetTotalBets(GetTotalBetCriteria criteria);
-
-        IDataReader GetBetTickets(GetBetTicketsCriteria criteria);
-
         List<BettypeInfo> Bettypes_TB { get; }
 
         List<BettypeInfo> Bettypes_Bets { get; }
+
+        IDataReader GetTotalBets(GetTotalBetCriteria criteria);
+
+        IDataReader GetBetTickets(GetBetTicketsCriteria criteria);
     }
 }

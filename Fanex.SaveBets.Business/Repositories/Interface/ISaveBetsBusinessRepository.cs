@@ -18,14 +18,14 @@ namespace SaveBetsBusiness.Repositories.Interface
     {
         DataTable GetSaveGetJobs();
 
-        DataTable GetTurnover(int MatchId);
+        DataTable GetTurnover(int matchId);
 
-        DataTable GetWinLoss(int MatchId);
+        DataTable GetWinLoss(int matchId);
 
-        DataTable GetMatchInfo(int MatchId);
+        DataTable GetMatchInfo(int matchId);
 
         IDataReader GetTotalBet(GetTotalBetCriteria criteria);
 
-        IDataReader GetBetTikets(GetBetTicketsCriteria criteria);
+        IDataReader GetBetTickets(GetBetTicketsCriteria criteria);
     }
 }
