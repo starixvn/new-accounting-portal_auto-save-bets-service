@@ -17,6 +17,7 @@ namespace SaveBetsBusiness.Service
     using System.Linq;
     using Fanex.Common;
     using NPOI.HSSF.UserModel;
+    using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Criteria;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Service.Implement;
@@ -28,14 +29,13 @@ namespace SaveBetsBusiness.Service
     public class SaveBetsBusinessService
     {
         private IProcessSaveBets _processSaveBets = null;
-        private ExportSaveBetDataService _exportSaveBetDataService = null;
+        private ExportSummaryDataService _exportSummaryService = null;
         private List<DataRow> _jobs = null;
 
         public SaveBetsBusinessService()
         {
             _processSaveBets = new ProcessSaveBets();
             _jobs = new List<DataRow>();
-            _exportSaveBetDataService = new ExportSaveBetDataService();
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace SaveBetsBusiness.Service
                 ////3.Bets - Render each bettype a Sheet
                 ////RenderEachBettypeLiveIndicatorSheet(ref excelFile);
 
-                string reportDirectory = _exportSaveBetDataService.CreateSaveBetReportDataDirectory(eventDate);
+                string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
                 string reportName = string.Format(
                     "{0}_{1}_{2}.{3}",
                     matchInfo.ItemArray[3],
@@ -100,14 +100,29 @@ namespace SaveBetsBusiness.Service
             }
         }
 
+        /// <summary>
+        /// Renders the summary sheet.
+        /// </summary>
+        /// <param name="excelFile">The excel file.</param>
         private void RenderSUMSheet(ref HSSFWorkbook excelFile)
         {
-            var matchInfo = _processSaveBets.MatchInfo;
-            var turnovers = _processSaveBets.Turnovers;
-            var winlosses = _processSaveBets.WinLosses;
-            //// your code should be put here
-
-            _exportSaveBetDataService.ExportSummarySheet(excelFile, matchInfo, turnovers, winlosses);
+            try
+            {
+                var matchInfo = _processSaveBets.MatchInfo;
+                var turnovers = _processSaveBets.Turnovers;
+                var winlosses = _processSaveBets.WinLosses;
+                //// your code should be put here
+                _exportSummaryService = new ExportSummaryDataService();
+                _exportSummaryService.ExportSummarySheet(excelFile, matchInfo, turnovers, winlosses);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _exportSummaryService.Dispose();
+            }
         }
 
         /// <summary>

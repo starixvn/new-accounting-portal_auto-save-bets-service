@@ -1,5 +1,5 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="ExportSaveBetDataService.cs" company="Nexcel Solutions Vietnam">
+// <copyright file="ExportSummaryDataService.cs" company="Nexcel Solutions Vietnam">
 // Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
@@ -21,11 +21,12 @@ namespace SaveBetsBusiness.Service.Implement
     using NPOI.SS.Util;
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Extensions;
+    using SaveBetsBusiness.Service.Interface;
 
     /// <summary>
-    /// Export save bet report data.
+    /// Export summary sheet.
     /// </summary>
-    public partial class ExportSaveBetDataService
+    public class ExportSummaryDataService : IDisposable
     {
         private const string PositiveNumberFormat = "[Red]#,##0.00;-#,##0.00;\"-\"";
 
@@ -216,6 +217,12 @@ namespace SaveBetsBusiness.Service.Implement
             DirectoryExtensions.CheckAndCreateDirectory(directoryByYearAndMonthPath);
 
             return directoryByYearAndMonthPath;
+        }
+
+        public void Dispose()
+        {
+            this.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         /// <summary>
@@ -535,21 +542,6 @@ namespace SaveBetsBusiness.Service.Implement
         {
             currentRow++;
             currentColumn = newCurrentColumn;
-        }
-
-        private void RenderSpecialCell(
-            ref ISheet worksheet,
-            ref IRow row,
-            int currentRow,
-            ref int currentColumn,
-            int endRow,
-            int endColumn,
-            object cellValue,
-            ICellStyle cellStyle)
-        {
-            if (Converter.ToDecimal(cellValue) == 0)
-            {
-            }
         }
     }
 }

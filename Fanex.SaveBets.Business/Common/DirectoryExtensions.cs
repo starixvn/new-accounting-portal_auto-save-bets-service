@@ -9,6 +9,7 @@
 
 namespace SaveBetsBusiness.Common
 {
+    using System;
     using System.IO;
 
     /// <summary>
@@ -43,6 +44,27 @@ namespace SaveBetsBusiness.Common
                     Directory.Delete(directory);
                 }
             }
+        }
+
+        /// <summary>
+        /// Creates the save bet report data directory.
+        /// </summary>
+        /// <param name="eventDate">The event date.</param>
+        /// <returns>Create save bet report data directory.</returns>
+        public static string CreateSaveBetReportDataDirectory(DateTime eventDate)
+        {
+            string reportDataDirectory = AppSettings.ExportDataDirectory;
+
+            CheckAndCreateDirectory(reportDataDirectory);
+
+            string directoryByYearAndMonth = string.Format(
+                "{0}{1}",
+                eventDate.ToString("yyyy"),
+                eventDate.ToString("MM"));
+            string directoryByYearAndMonthPath = Path.Combine(reportDataDirectory, directoryByYearAndMonth);
+            CheckAndCreateDirectory(directoryByYearAndMonthPath);
+
+            return directoryByYearAndMonthPath;
         }
     }
 }
