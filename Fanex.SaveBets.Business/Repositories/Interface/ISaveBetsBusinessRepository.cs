@@ -27,5 +27,7 @@ namespace SaveBetsBusiness.Repositories.Interface
         IDataReader GetTotalBet(GetTotalBetCriteria criteria);
 
         IDataReader GetBetTickets(GetBetTicketsCriteria criteria);
+
+        void ExecuteEndMatchJob(ExecuteEndMatchJobCriteria criteria);
     }
 }

@@ -26,6 +26,7 @@ namespace SaveBetsBusiness.Service.Implement
         private int _matchId = 0;
         private List<BettypeInfo> _bettypes_tb = null;
         private List<BettypeInfo> _bettypes_bets = null;
+        private bool _endMatch = false;
 
         public ProcessSaveBets()
         {
@@ -67,6 +68,11 @@ namespace SaveBetsBusiness.Service.Implement
                     })
                     .ToList();
 
+                _endMatch = jobsByMatch.AsEnumerable()
+                    .Where(m => m["JobType"].ToString().ToLower() == KeyConstants.End.ToLower()).ToList().Count > 0 ?
+                    true : 
+                    false;
+
                 return jobsByMatch;
             }
         }
@@ -103,6 +109,14 @@ namespace SaveBetsBusiness.Service.Implement
             }
         }
 
+        public bool IsEndMatch
+        {
+            get
+            {
+                return _endMatch;
+            }
+        }
+
         public List<BettypeInfo> Bettypes_TB
         {
             get { return _bettypes_tb; }
@@ -121,6 +135,11 @@ namespace SaveBetsBusiness.Service.Implement
         public IDataReader GetBetTickets(GetBetTicketsCriteria criteria)
         {
             return _repository.GetBetTickets(criteria);
+        }
+
+        public void ExecuteEndMatchJob(ExecuteEndMatchJobCriteria criteria)
+        {
+            _repository.ExecuteEndMatchJob(criteria);
         }
     }
 }

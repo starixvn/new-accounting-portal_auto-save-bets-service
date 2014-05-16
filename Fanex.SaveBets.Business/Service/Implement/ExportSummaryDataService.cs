@@ -18,10 +18,9 @@ namespace SaveBetsBusiness.Service.Implement
     using NPOI.HSSF.UserModel;
     using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;
-    using NPOI.SS.Util;
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Extensions;
-    using SaveBetsBusiness.Service.Interface;
+    using SaveBetsBusiness.Resources;
 
     /// <summary>
     /// Export summary sheet.
@@ -47,7 +46,7 @@ namespace SaveBetsBusiness.Service.Implement
             List<DataRow> winLossInfo)
         {
             string sheetName = "Summary";
-            ISheet worksheet = excelFile.CreateSheet(sheetName);
+            ISheet worksheet = excelFile.GetSheet(sheetName) ?? excelFile.CreateSheet(sheetName);
             this.InitColumnWidth_SummarySheet(worksheet);
 
             ICellStyle textStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, false, NpoiExcelExtensions.Alignment.Left);
@@ -61,31 +60,39 @@ namespace SaveBetsBusiness.Service.Implement
             currentRow++;
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["sportname"]), textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["sportname"]), textStyle);
             currentColumn = 13;
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
             startMergeColumn = currentColumn - 2;
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, "Actual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref startMergeColumn,
+                currentRow,
+                currentColumn - 1,
+                SaveBetsBusinessLabel.ActualRate,
+                centerBoldTextStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow);
 
             string eventDate = Converter.ToDateTime(matchInfo["eventdate"]).ToShortFormatedDateWithSlash().Replace("/", "-");
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, eventDate, textStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["matchid"]), centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, eventDate, textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["matchid"]), centerBoldTextStyle);
             currentColumn = 13;
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Total", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalA"]), decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalA"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["matchcode"]), textStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["matchcode"]), textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
             startMergeColumn = currentColumn - 2;
-            this.RenderMergeCell(
+            NpoiExcelExtensions.RenderMergeCell(
                 ref worksheet,
                 ref row,
                 currentRow,
@@ -95,88 +102,96 @@ namespace SaveBetsBusiness.Service.Implement
                 Converter.ToString2(matchInfo["leaguename"]),
                 textStyle);
             currentColumn = 13;
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Super", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["SuperA"]), decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Super, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["SuperA"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
             string match = string.Format(
                 "{0}-vs-{1}",
                 matchInfo["Home"],
                 matchInfo["Away"]);
             startMergeColumn = currentColumn - 3;
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, match, boldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, match, boldTextStyle);
             currentColumn = 13;
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Master", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["MasterA"]), decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Master, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["MasterA"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, matchInfo["FT"], textStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, matchInfo["FG"], textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, matchInfo["FT"], textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, matchInfo["FG"], textStyle);
             currentColumn = 13;
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Agent", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["AgentA"]), decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Agent, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["AgentA"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["HT"]), textStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["LG"]), textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["HT"]), textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["LG"]), textStyle);
             currentColumn = 13;
             var ibcTurnOver =
                Converter.ToDecimal(turnOverInfo["TotalA"]) -
                Converter.ToDecimal(turnOverInfo["SuperA"]) -
                Converter.ToDecimal(turnOverInfo["MasterA"]) -
                Converter.ToDecimal(turnOverInfo["AgentA"]);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "IBC", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, ibcTurnOver, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.IBC, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, ibcTurnOver, decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["Goal"]), textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["Goal"]), textStyle);
             currentColumn = 13;
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerTextStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
             startMergeColumn = currentColumn - 2;
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, "Virtual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref startMergeColumn,
+                currentRow,
+                currentColumn - 1,
+                SaveBetsBusinessLabel.VirtualRate,
+                centerBoldTextStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Total", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalV"]), decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalV"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Super", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["SuperV"]), decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Super, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["SuperV"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Master", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["MasterV"]), decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Master, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["MasterV"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
             row = worksheet.CreateRow(currentRow);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Agent", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["AgentV"]), decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Agent, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["AgentV"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
             row = worksheet.CreateRow(currentRow);
 
@@ -185,12 +200,20 @@ namespace SaveBetsBusiness.Service.Implement
                 Converter.ToDecimal(turnOverInfo["SuperV"]) -
                 Converter.ToDecimal(turnOverInfo["MasterV"]) -
                 Converter.ToDecimal(turnOverInfo["AgentV"]);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "TurnOver", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "IBC", centerTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualIbcTurnOver, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.IBC, centerTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualIbcTurnOver, decimalNumberStyle);
             currentColumn = 13;
             startMergeRow = currentRow - 12;
-            this.RenderMergeCell(ref worksheet, ref row, startMergeRow, ref currentColumn, currentRow, currentColumn, "TurnOver", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(
+                ref worksheet,
+                ref row, 
+                startMergeRow,
+                ref currentColumn, 
+                currentRow,
+                currentColumn, 
+                SaveBetsBusinessLabel.TurnOver,
+                centerBoldTextStyle);
             currentRow += 2;
 
             this.ExportWinLossInfo(excelFile, worksheet, winLossInfo, currentRow);
@@ -223,6 +246,14 @@ namespace SaveBetsBusiness.Service.Implement
         {
             GC.SuppressFinalize(this);
             GC.Collect();
+        }
+
+        public void InitColumnWidth_SummarySheet(ISheet worksheet)
+        {
+            for (int i = 0; i < 19; i++)
+            {
+                worksheet.SetColumnWidth(i, 170 * NpoiExcelExtensions.FontWidth);
+            }
         }
 
         /// <summary>
@@ -281,84 +312,84 @@ namespace SaveBetsBusiness.Service.Implement
 
                 //// export data.
                 row = worksheet.CreateRow(currentRow);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(dataRow["typename"]), leftTextStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["bettype"]), intNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(dataRow["Live"]), centerTextStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(dataRow["typename"]), leftTextStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["bettype"]), intNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(dataRow["Live"]), centerTextStyle);
 
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["winlosta"]), decimalNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["agenta"]), decimalNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["comma"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["winlosta"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["agenta"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["comma"]), decimalNumberStyle);
 
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["winlostv"]), decimalNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["agentv"]), decimalNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["commv"]), decimalNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["FC"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["winlostv"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["agentv"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["commv"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["FC"]), decimalNumberStyle);
 
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["BetCount"]), intNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["Reject"]), intNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["Void"]), intNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["BetCount"]), intNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["Reject"]), intNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["Void"]), intNumberStyle);
 
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["HomeA"]), decimalNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["AwayA"]), decimalNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["DiffA"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["HomeA"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["AwayA"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["DiffA"]), decimalNumberStyle);
 
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["HomeV"]), decimalNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["AwayV"]), decimalNumberStyle);
-                this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["DiffV"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["HomeV"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["AwayV"]), decimalNumberStyle);
+                NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["DiffV"]), decimalNumberStyle);
                 currentRow++;
                 currentColumn = 0;
             }
 
             currentColumn = 3;
             row = worksheet.CreateRow(currentRow);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actualRateWinLossTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actualRateAgentTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actutalRateCommTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actualRateWinLossTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actualRateAgentTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actutalRateCommTotal, decimalNumberStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateWinLossTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateAgentTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateCommTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateWinLossTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateAgentTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateCommTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalBetCount, intNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalRejectTicket, intNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalVoidTicket, intNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalBetCount, intNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalRejectTicket, intNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalVoidTicket, intNumberStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, homeActualRateTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, awayActualRateTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, homeActualRateTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, awayActualRateTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, homeVirtualRateTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, awayVirtualRateTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, homeVirtualRateTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, awayVirtualRateTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
 
             currentRow++;
             currentColumn = 4;
             row = worksheet.CreateRow(currentRow);
             decimal actualRateWinLossAndAgentTotal = Convert.ToDecimal(actualRateWinLossTotal + actualRateAgentTotal);
             decimal virtualRateWinLossAndAgentTotal = Convert.ToDecimal(virtualRateWinLossTotal + virtualRateAgentTotal);
-            this.RenderCell(
+            NpoiExcelExtensions.RenderCell(
                 ref worksheet,
                 ref row,
                 currentRow,
                 ref currentColumn,
                 actualRateWinLossAndAgentTotal,
                 decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actutalRateCommTotal, decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
-            this.RenderCell(
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actutalRateCommTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
+            NpoiExcelExtensions.RenderCell(
                 ref worksheet,
                 ref row,
                 currentRow,
                 ref currentColumn,
                 virtualRateWinLossAndAgentTotal,
                 decimalNumberStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateCommTotal, decimalNumberStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateCommTotal, decimalNumberStyle);
 
             currentRow++;
             row = worksheet.CreateRow(currentRow);
             currentColumn = 4;
-            this.RenderCell(
+            NpoiExcelExtensions.RenderCell(
                 ref worksheet,
                 ref row,
                 currentRow,
@@ -366,7 +397,7 @@ namespace SaveBetsBusiness.Service.Implement
                 Convert.ToDecimal(actualRateWinLossAndAgentTotal + actutalRateCommTotal),
                 boldDecimalNumberStyle);
             currentColumn = 7;
-            this.RenderCell(
+            NpoiExcelExtensions.RenderCell(
                 ref worksheet,
                 ref row,
                 currentRow,
@@ -374,7 +405,7 @@ namespace SaveBetsBusiness.Service.Implement
                 Convert.ToDecimal(virtualRateWinLossAndAgentTotal + virtualRateCommTotal),
                 boldDecimalNumberStyle);
             currentColumn = 15;
-            this.RenderCell(
+            NpoiExcelExtensions.RenderCell(
                 ref worksheet,
                 ref row,
                 currentRow,
@@ -382,7 +413,7 @@ namespace SaveBetsBusiness.Service.Implement
                 Convert.ToDecimal(homeActualRateTotal + awayActualRateTotal),
                 boldDecimalNumberStyle);
             currentColumn = 18;
-            this.RenderCell(
+            NpoiExcelExtensions.RenderCell(
                 ref worksheet,
                 ref row,
                 currentRow,
@@ -408,131 +439,118 @@ namespace SaveBetsBusiness.Service.Implement
             row = worksheet.CreateRow(currentRow);
             int currentColumn = 0, startMergeColumn = 0;
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Actual Rate", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Actual Rate", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Actual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.ActualRate, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.ActualRate, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.ActualRate, centerBoldTextStyle);
             startMergeColumn = currentColumn - 3;
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, "Actual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref startMergeColumn,
+                currentRow,
+                currentColumn - 1,
+                SaveBetsBusinessLabel.ActualRate,
+                centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Virtual Rate", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Virtual Rate", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Virtual Rate", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Virtual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.VirtualRate, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.VirtualRate, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.VirtualRate, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.VirtualRate, centerBoldTextStyle);
             startMergeColumn = currentColumn - 4;
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, "Virtual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref startMergeColumn,
+                currentRow,
+                currentColumn - 1,
+                SaveBetsBusinessLabel.VirtualRate,
+                centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Bet Count", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Bet Count", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Bet Count", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.BetCount, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.BetCount, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.BetCount, centerBoldTextStyle);
             startMergeColumn = currentColumn - 3;
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, "Bet Count", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref startMergeColumn,
+                currentRow,
+                currentColumn - 1,
+                SaveBetsBusinessLabel.BetCount,
+                centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Actual Rate", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Actual Rate", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Actual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.ActualRate, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.ActualRate, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.ActualRate, centerBoldTextStyle);
             startMergeColumn = currentColumn - 3;
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, "Actual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref startMergeColumn,
+                currentRow,
+                currentColumn - 1,
+                SaveBetsBusinessLabel.ActualRate,
+                centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Virtual Rate", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Virtual Rate", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Virtual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.VirtualRate, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.VirtualRate, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.VirtualRate, centerBoldTextStyle);
             startMergeColumn = currentColumn - 3;
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, "Virtual Rate", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref startMergeColumn,
+                currentRow,
+                currentColumn - 1,
+                SaveBetsBusinessLabel.VirtualRate,
+                centerBoldTextStyle);
 
             currentRow++;
             currentColumn = 0;
             row = worksheet.CreateRow(currentRow);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "BetType", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "BetType", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "BetType", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.BetType, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.BetType, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.BetType, centerBoldTextStyle);
             startMergeColumn = currentColumn - 3;
-            this.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, "BetType", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderMergeCell(
+                ref worksheet,
+                ref row,
+                currentRow,
+                ref startMergeColumn,
+                currentRow,
+                currentColumn - 1,
+                SaveBetsBusinessLabel.BetType,
+                centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "WinLost", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Agent", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Comm", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.WinLost, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Agent, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Comm, centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "WinLost", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Agent", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Comm", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "FC", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.WinLost, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Agent, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Comm, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.FC, centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Total", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Reject", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Void", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Reject, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Void, centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Home", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Away", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Total", centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Home, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Away, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, centerBoldTextStyle);
 
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Home", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Away", centerBoldTextStyle);
-            this.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "Total", centerBoldTextStyle);
-        }
-
-        private void InitColumnWidth_SummarySheet(ISheet worksheet)
-        {
-            for (int i = 0; i < 19; i++)
-            {
-                worksheet.SetColumnWidth(i, 170 * NpoiExcelExtensions.FontWidth);
-            }
-        }
-
-        /// <summary>
-        /// Renders the cell.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of report.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="cellValue">The cell value.</param>
-        /// <param name="cellStyle">The cell style.</param>
-        private void RenderCell(
-            ref ISheet worksheet,
-            ref IRow row,
-            int currentRow,
-            ref int currentColumn,
-            object cellValue,
-            ICellStyle cellStyle)
-        {
-            ICell cell = row.CreateCell(currentColumn);
-            NpoiExcelExtensions.SetCellValue(cell, cellValue);
-            cell.CellStyle = cellStyle;
-            currentColumn += 1;
-        }
-
-        /// <summary>
-        /// Renders the merge cell.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="row">The row of sheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="endRow">The end row.</param>
-        /// <param name="endColumn">The end column.</param>
-        /// <param name="cellValue">The cell value.</param>
-        /// <param name="cellStyle">The cell style.</param>
-        private void RenderMergeCell(
-            ref ISheet worksheet,
-            ref IRow row,
-            int currentRow,
-            ref int currentColumn,
-            int endRow,
-            int endColumn,
-            object cellValue,
-            ICellStyle cellStyle)
-        {
-            ICell cell = row.CreateCell(currentColumn);
-
-            NpoiExcelExtensions.SetCellValue(cell, cellValue);
-
-            cell.CellStyle = cellStyle;
-            worksheet.AddMergedRegion(new CellRangeAddress(currentRow, endRow, currentColumn, endColumn));
-            currentColumn = endColumn + 1;
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Home, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Away, centerBoldTextStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, centerBoldTextStyle);
         }
 
         private void IncreaseRowAndResetColumnIndex(

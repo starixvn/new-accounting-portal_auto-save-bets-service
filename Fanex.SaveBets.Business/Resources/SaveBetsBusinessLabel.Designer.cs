@@ -61,29 +61,236 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Month to Date.
+        ///   Looks up a localized string similar to Account.
         /// </summary>
-        internal static string MonthtoDate {
+        internal static string Account {
             get {
-                return ResourceManager.GetString("MonthtoDate", resourceCulture);
+                return ResourceManager.GetString("Account", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Product.
+        ///   Looks up a localized string similar to Actual Rate.
         /// </summary>
-        internal static string Product {
+        internal static string ActualRate {
             get {
-                return ResourceManager.GetString("Product", resourceCulture);
+                return ResourceManager.GetString("ActualRate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sportsbook Total.
+        ///   Looks up a localized string similar to Agent.
         /// </summary>
-        internal static string Sportsbook_Total {
+        internal static string Agent {
             get {
-                return ResourceManager.GetString("Sportsbook_Total", resourceCulture);
+                return ResourceManager.GetString("Agent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount.
+        /// </summary>
+        internal static string Amount {
+            get {
+                return ResourceManager.GetString("Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Away.
+        /// </summary>
+        internal static string Away {
+            get {
+                return ResourceManager.GetString("Away", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Balance.
+        /// </summary>
+        internal static string Balance {
+            get {
+                return ResourceManager.GetString("Balance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bet Count.
+        /// </summary>
+        internal static string BetCount {
+            get {
+                return ResourceManager.GetString("BetCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BetId.
+        /// </summary>
+        internal static string BetId {
+            get {
+                return ResourceManager.GetString("BetId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BetType.
+        /// </summary>
+        internal static string BetType {
+            get {
+                return ResourceManager.GetString("BetType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comm.
+        /// </summary>
+        internal static string Comm {
+            get {
+                return ResourceManager.GetString("Comm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creator.
+        /// </summary>
+        internal static string Creator {
+            get {
+                return ResourceManager.GetString("Creator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cur.
+        /// </summary>
+        internal static string Cur {
+            get {
+                return ResourceManager.GetString("Cur", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dead.
+        /// </summary>
+        internal static string Dead {
+            get {
+                return ResourceManager.GetString("Dead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FC.
+        /// </summary>
+        internal static string FC {
+            get {
+                return ResourceManager.GetString("FC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hdp.
+        /// </summary>
+        internal static string Hdp {
+            get {
+                return ResourceManager.GetString("Hdp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hdp1.
+        /// </summary>
+        internal static string Hdp1 {
+            get {
+                return ResourceManager.GetString("Hdp1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hdp2.
+        /// </summary>
+        internal static string Hdp2 {
+            get {
+                return ResourceManager.GetString("Hdp2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IBC.
+        /// </summary>
+        internal static string IBC {
+            get {
+                return ResourceManager.GetString("IBC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Live.
+        /// </summary>
+        internal static string Live {
+            get {
+                return ResourceManager.GetString("Live", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master.
+        /// </summary>
+        internal static string Master {
+            get {
+                return ResourceManager.GetString("Master", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odds.
+        /// </summary>
+        internal static string Odds {
+            get {
+                return ResourceManager.GetString("Odds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reject.
+        /// </summary>
+        internal static string Reject {
+            get {
+                return ResourceManager.GetString("Reject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score.
+        /// </summary>
+        internal static string Score {
+            get {
+                return ResourceManager.GetString("Score", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Super.
+        /// </summary>
+        internal static string Super {
+            get {
+                return ResourceManager.GetString("Super", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team.
+        /// </summary>
+        internal static string Team {
+            get {
+                return ResourceManager.GetString("Team", resourceCulture);
             }
         }
         
@@ -97,11 +304,47 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Win/Loss.
+        ///   Looks up a localized string similar to Trans.Time.
         /// </summary>
-        internal static string Win_Loss {
+        internal static string Trans_Time {
             get {
-                return ResourceManager.GetString("Win_Loss", resourceCulture);
+                return ResourceManager.GetString("Trans_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TurnOver.
+        /// </summary>
+        internal static string TurnOver {
+            get {
+                return ResourceManager.GetString("TurnOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Virtual Rate.
+        /// </summary>
+        internal static string VirtualRate {
+            get {
+                return ResourceManager.GetString("VirtualRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Void.
+        /// </summary>
+        internal static string Void {
+            get {
+                return ResourceManager.GetString("Void", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WinLost.
+        /// </summary>
+        internal static string WinLost {
+            get {
+                return ResourceManager.GetString("WinLost", resourceCulture);
             }
         }
     }

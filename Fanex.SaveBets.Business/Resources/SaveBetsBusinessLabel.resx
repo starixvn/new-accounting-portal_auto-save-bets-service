@@ -117,19 +117,100 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MonthtoDate" xml:space="preserve">
-    <value>Month to Date</value>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
   </data>
-  <data name="Product" xml:space="preserve">
-    <value>Product</value>
+  <data name="ActualRate" xml:space="preserve">
+    <value>Actual Rate</value>
   </data>
-  <data name="Sportsbook_Total" xml:space="preserve">
-    <value>Sportsbook Total</value>
+  <data name="Agent" xml:space="preserve">
+    <value>Agent</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Away" xml:space="preserve">
+    <value>Away</value>
+  </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
+  <data name="BetCount" xml:space="preserve">
+    <value>Bet Count</value>
+  </data>
+  <data name="BetId" xml:space="preserve">
+    <value>BetId</value>
+  </data>
+  <data name="BetType" xml:space="preserve">
+    <value>BetType</value>
+  </data>
+  <data name="Comm" xml:space="preserve">
+    <value>Comm</value>
+  </data>
+  <data name="Creator" xml:space="preserve">
+    <value>Creator</value>
+  </data>
+  <data name="Cur" xml:space="preserve">
+    <value>Cur</value>
+  </data>
+  <data name="Dead" xml:space="preserve">
+    <value>Dead</value>
+  </data>
+  <data name="FC" xml:space="preserve">
+    <value>FC</value>
+  </data>
+  <data name="Hdp" xml:space="preserve">
+    <value>Hdp</value>
+  </data>
+  <data name="Hdp1" xml:space="preserve">
+    <value>Hdp1</value>
+  </data>
+  <data name="Hdp2" xml:space="preserve">
+    <value>Hdp2</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="IBC" xml:space="preserve">
+    <value>IBC</value>
+  </data>
+  <data name="Live" xml:space="preserve">
+    <value>Live</value>
+  </data>
+  <data name="Master" xml:space="preserve">
+    <value>Master</value>
+  </data>
+  <data name="Odds" xml:space="preserve">
+    <value>Odds</value>
+  </data>
+  <data name="Reject" xml:space="preserve">
+    <value>Reject</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="Super" xml:space="preserve">
+    <value>Super</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>Team</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
-  <data name="Win_Loss" xml:space="preserve">
-    <value>Win/Loss</value>
+  <data name="Trans_Time" xml:space="preserve">
+    <value>Trans.Time</value>
+  </data>
+  <data name="TurnOver" xml:space="preserve">
+    <value>TurnOver</value>
+  </data>
+  <data name="VirtualRate" xml:space="preserve">
+    <value>Virtual Rate</value>
+  </data>
+  <data name="Void" xml:space="preserve">
+    <value>Void</value>
+  </data>
+  <data name="WinLost" xml:space="preserve">
+    <value>WinLost</value>
   </data>
 </root>

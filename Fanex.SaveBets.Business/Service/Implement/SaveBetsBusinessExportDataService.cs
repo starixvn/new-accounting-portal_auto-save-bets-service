@@ -114,7 +114,7 @@ namespace SaveBetsBusiness.Service.Implement
                 ref currentColumn,
                 currentRow,
                 currentColumn,
-                SaveBetsBusinessLabel.Product,
+                SaveBetsBusinessLabel.Score,
                 headerStyle);
             NpoiExcelExtensions.RenderCell(
                 ref worksheet,
@@ -123,7 +123,7 @@ namespace SaveBetsBusiness.Service.Implement
                 ref currentColumn,
                 currentRow,
                 currentColumn,
-                SaveBetsBusinessLabel.Win_Loss,
+                SaveBetsBusinessLabel.Odds,
                 headerStyle);
             NpoiExcelExtensions.RenderCell(
                 ref worksheet,
@@ -132,7 +132,7 @@ namespace SaveBetsBusiness.Service.Implement
                 ref currentColumn,
                 currentRow,
                 currentColumn,
-                SaveBetsBusinessLabel.MonthtoDate,
+                SaveBetsBusinessLabel.Hdp,
                 headerStyle);
             currentRow++;
         }

@@ -26,6 +26,8 @@ namespace SaveBetsBusiness.Service.Interface
 
         DataRow MatchInfo { get; }
 
+        bool IsEndMatch { get; }
+
         List<BettypeInfo> Bettypes_TB { get; }
 
         List<BettypeInfo> Bettypes_Bets { get; }
@@ -33,5 +35,7 @@ namespace SaveBetsBusiness.Service.Interface
         IDataReader GetTotalBets(GetTotalBetCriteria criteria);
 
         IDataReader GetBetTickets(GetBetTicketsCriteria criteria);
+
+        void ExecuteEndMatchJob(ExecuteEndMatchJobCriteria criteria);
     }
 }

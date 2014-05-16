@@ -7,5 +7,6 @@
     <Setting Key="Save_GetWinLost" SpName="NAP_Acc_GetWinLost" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0"/>
     <Setting Key="Save_GetTB" SpName="NAP_Acc_GetTB" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0"/>
     <Setting Key="Save_GetBets" SpName="NAP_Acc_GetBets" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0"/>
+    <Setting Key="Save_EndMatch" SpName="NAP_Acc_UpdateJobCompleted" DbName="DBACC.bodb02.bodbAdminNet" Timeout="0"/>
   </Function>
 </Functions>

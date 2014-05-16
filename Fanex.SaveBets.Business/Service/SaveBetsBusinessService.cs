@@ -17,6 +17,7 @@ namespace SaveBetsBusiness.Service
     using System.Linq;
     using Fanex.Common;
     using NPOI.HSSF.UserModel;
+    using NPOI.SS.UserModel;
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Criteria;
     using SaveBetsBusiness.Extensions;
@@ -29,7 +30,6 @@ namespace SaveBetsBusiness.Service
     public class SaveBetsBusinessService
     {
         private IProcessSaveBets _processSaveBets = null;
-        private ExportSummaryDataService _exportSummaryService = null;
         private List<DataRow> _jobs = null;
 
         public SaveBetsBusinessService()
@@ -47,11 +47,13 @@ namespace SaveBetsBusiness.Service
         public void ProcessSaveBets()
         {
             FileStream fileStream = null;
-
+            HSSFWorkbook excelFile = null;
+            bool isEndMatch = false;
+            int matchId = 0;
             try
             {
                 _jobs = _processSaveBets.Jobs;
-                var matchId = _processSaveBets.MatchId;
+                matchId = _processSaveBets.MatchId;
                 var matchInfo = _processSaveBets.MatchInfo;
                 DateTime eventDate = Converter.ToDateTime(matchInfo["eventdate"]);
 
@@ -61,22 +63,22 @@ namespace SaveBetsBusiness.Service
                     return;
                 }
 
-                HSSFWorkbook excelFile = new HSSFWorkbook();
+                excelFile = new HSSFWorkbook();
 
                 ////1. SUM - Render data excel file at Summary: Top Left, Top Right and Bottom
                 RenderSUMSheet(ref excelFile);
 
                 ////2. TB - Render data excel file at sheet Dead-TB/Live-TB
-                ////RenderDeadTB_LiveTBSheet(ref excelFile);
+                RenderDeadTB_LiveTBSheet(ref excelFile);
 
                 ////3.Bets - Render each bettype a Sheet
-                ////RenderEachBettypeLiveIndicatorSheet(ref excelFile);
+                RenderEachBettypeLiveIndicatorSheet(ref excelFile);
 
                 string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
                 string reportName = string.Format(
                     "{0}_{1}_{2}.{3}",
                     matchInfo.ItemArray[3],
-                    Converter.ToDateTime(matchInfo.ItemArray[2]).ToShortFormatedDateWithSlash().Replace("/", "-"),
+                    Converter.ToDateTime(matchInfo.ItemArray[2]).ToShortFormatedDateWithSlash().Replace("/", "_"),
                     matchInfo.ItemArray[1],
                     "xls");
 
@@ -88,6 +90,7 @@ namespace SaveBetsBusiness.Service
                     FileAccess.Write);
 
                 excelFile.Write(fileStream);
+                isEndMatch = _processSaveBets.IsEndMatch;
             }
             catch (Exception ex)
             {
@@ -95,6 +98,13 @@ namespace SaveBetsBusiness.Service
             }
             finally
             {
+                if (isEndMatch)
+                {
+                    ExecuteEndMatchJobCriteria criteria = new ExecuteEndMatchJobCriteria();
+                    criteria.MatchId = matchId;
+                    _processSaveBets.ExecuteEndMatchJob(criteria);
+                }
+
                 fileStream.Close();
                 fileStream.Dispose();
             }
@@ -106,6 +116,7 @@ namespace SaveBetsBusiness.Service
         /// <param name="excelFile">The excel file.</param>
         private void RenderSUMSheet(ref HSSFWorkbook excelFile)
         {
+            ExportSummaryDataService _exportSummaryService = null;
             try
             {
                 var matchInfo = _processSaveBets.MatchInfo;
@@ -131,23 +142,46 @@ namespace SaveBetsBusiness.Service
         /// <param name="excelFile">The excel file.</param>
         private void RenderDeadTB_LiveTBSheet(ref HSSFWorkbook excelFile)
         {
+            ExportDeadAndLiveTotalBetService _exportDeadAndLiveTotalBetService = null;
+            IDataReader reader = null;
+            int currentRow = 0;
             GetTotalBetCriteria criteria = new GetTotalBetCriteria();
             var bettypes = _processSaveBets.Bettypes_TB;
             var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
 
-            foreach (var liveIndicator in liveIndicators)
+            try
             {
-                var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
+                _exportDeadAndLiveTotalBetService = new ExportDeadAndLiveTotalBetService();
 
-                foreach (var bettype in bettypesByLiveIndicator)
+                foreach (var liveIndicator in liveIndicators)
                 {
-                    criteria.MatchId = _processSaveBets.MatchId;
-                    criteria.LiveIndicator = bettype.LiveIndicator;
-                    criteria.Bettype = bettype.Bettype;
+                    string sheetName = liveIndicator ? "Live-TB" : "Dead-TB";
+                    ISheet worksheet = excelFile.GetSheet(sheetName) ?? excelFile.CreateSheet(sheetName);
+                    _exportDeadAndLiveTotalBetService.InitColumnWidth(worksheet);
+                    currentRow = 0;
+                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
 
-                    var rows = _processSaveBets.GetTotalBets(criteria);
-                    ////Render Dead-TB/Live-TB Sheet depend on the value of liveIndicator = true or false
+                    foreach (var bettype in bettypesByLiveIndicator)
+                    {
+                        criteria.MatchId = _processSaveBets.MatchId;
+                        criteria.LiveIndicator = bettype.LiveIndicator;
+                        criteria.Bettype = bettype.Bettype;
+
+                        reader = _processSaveBets.GetTotalBets(criteria);
+                        ////Render Dead-TB/Live-TB Sheet depend on the value of liveIndicator = true or false
+                        _exportDeadAndLiveTotalBetService.ExportDeadAndLiveTBSheet(excelFile, ref worksheet, ref currentRow, reader, criteria.Bettype);
+                    }
                 }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _exportDeadAndLiveTotalBetService.Dispose();
             }
         }
 
@@ -157,23 +191,41 @@ namespace SaveBetsBusiness.Service
         /// <param name="excelFile">The excel file.</param>
         private void RenderEachBettypeLiveIndicatorSheet(ref HSSFWorkbook excelFile)
         {
+            ExportDataByBetTypeService _exportDataByBetTypeService = null;
+            IDataReader reader = null;
             GetBetTicketsCriteria criteria = new GetBetTicketsCriteria();
-            var bettypes = _processSaveBets.Bettypes_Bets;
-            var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
 
-            foreach (var liveIndicator in liveIndicators)
+            try
             {
-                var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
+                _exportDataByBetTypeService = new ExportDataByBetTypeService();
+                var bettypes = _processSaveBets.Bettypes_Bets;
+                var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
 
-                foreach (var bettype in bettypesByLiveIndicator)
+                foreach (var liveIndicator in liveIndicators)
                 {
-                    criteria.MatchId = _processSaveBets.MatchId;
-                    criteria.LiveIndicator = bettype.LiveIndicator;
-                    criteria.Bettype = bettype.Bettype;
+                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
 
-                    var rows = _processSaveBets.GetBetTickets(criteria);
-                    ////Render each bettype a Sheet depend on the value of liveIndicator = true or false
+                    foreach (var bettype in bettypesByLiveIndicator)
+                    {
+                        criteria.MatchId = _processSaveBets.MatchId;
+                        criteria.LiveIndicator = bettype.LiveIndicator;
+                        criteria.Bettype = bettype.Bettype;
+
+                        reader = _processSaveBets.GetBetTickets(criteria);
+                        ////Render each bettype a Sheet depend on the value of liveIndicator = true or false
+                        _exportDataByBetTypeService.ExportDataByBetTypeAndLiveIndicator(excelFile, reader, criteria.Bettype, criteria.LiveIndicator);
+                    }
                 }
+
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                _exportDataByBetTypeService.Dispose();
             }
         }
     }

@@ -320,6 +320,59 @@ namespace SaveBetsBusiness.Extensions
             currentColumn = endColumn + 1;
         }
 
+        /// <summary>
+        /// Renders the cell.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="row">The row of report.</param>
+        /// <param name="currentRow">The current row.</param>
+        /// <param name="currentColumn">The current column.</param>
+        /// <param name="cellValue">The cell value.</param>
+        /// <param name="cellStyle">The cell style.</param>
+        public static void RenderCell(
+            ref ISheet worksheet,
+            ref IRow row,
+            int currentRow,
+            ref int currentColumn,
+            object cellValue,
+            ICellStyle cellStyle)
+        {
+            ICell cell = row.CreateCell(currentColumn);
+            SetCellValue(cell, cellValue);
+            cell.CellStyle = cellStyle;
+            currentColumn += 1;
+        }
+
+        /// <summary>
+        /// Renders the merge cell.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="row">The row of sheet.</param>
+        /// <param name="currentRow">The current row.</param>
+        /// <param name="currentColumn">The current column.</param>
+        /// <param name="endRow">The end row.</param>
+        /// <param name="endColumn">The end column.</param>
+        /// <param name="cellValue">The cell value.</param>
+        /// <param name="cellStyle">The cell style.</param>
+        public static void RenderMergeCell(
+            ref ISheet worksheet,
+            ref IRow row,
+            int currentRow,
+            ref int currentColumn,
+            int endRow,
+            int endColumn,
+            object cellValue,
+            ICellStyle cellStyle)
+        {
+            ICell cell = row.CreateCell(currentColumn);
+
+            SetCellValue(cell, cellValue);
+
+            cell.CellStyle = cellStyle;
+            worksheet.AddMergedRegion(new CellRangeAddress(currentRow, endRow, currentColumn, endColumn));
+            currentColumn = endColumn + 1;
+        }
+
         public static void ResponseStreamExcel(this IWorkbook workbook, string fileName)
         {
             var response = HttpContext.Current.Response;

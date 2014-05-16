@@ -156,13 +156,9 @@ namespace SaveBetsBusiness.Repositories.Implement
             IDataReader reader = null;
             try
             {
-                using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    var parameters = criteria.GetSpParams();
-                    db.AssignParamValues(parameters);
-
-                    reader = db.ExecuteReader(parameters);
-                }
+                ObjectDb db = new ObjectDb(criteria.GetSettingKey());
+                var parameters = criteria.GetSpParams();
+                reader = db.ExecuteReader(parameters);
             }
             catch (Exception ex)
             {
@@ -182,13 +178,9 @@ namespace SaveBetsBusiness.Repositories.Implement
             IDataReader reader = null;
             try
             {
-                using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    var parameters = criteria.GetSpParams();
-                    db.AssignParamValues(parameters);
-
-                    reader = db.ExecuteReader(parameters);
-                }
+                ObjectDb db = new ObjectDb(criteria.GetSettingKey());
+                var parameters = criteria.GetSpParams();
+                reader = db.ExecuteReader(parameters);
             }
             catch (Exception ex)
             {
@@ -196,6 +188,26 @@ namespace SaveBetsBusiness.Repositories.Implement
             }
 
             return reader;
+        }
+
+        /// <summary>
+        /// Executes the end match job.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        public void ExecuteEndMatchJob(ExecuteEndMatchJobCriteria criteria)
+        {
+            try
+            {
+                using (var db = new ObjectDb(criteria.GetSettingKey()))
+                {
+                    var parameters = criteria.GetSpParams();
+                    db.ExecuteNonQuery(parameters);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
