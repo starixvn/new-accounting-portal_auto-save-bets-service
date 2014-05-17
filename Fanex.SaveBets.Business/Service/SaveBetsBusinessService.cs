@@ -77,9 +77,9 @@ namespace SaveBetsBusiness.Service
                 string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
                 string reportName = string.Format(
                     "{0}_{1}_{2}.{3}",
-                    matchInfo.ItemArray[3],
-                    Converter.ToDateTime(matchInfo.ItemArray[2]).ToShortFormatedDateWithSlash().Replace("/", "_"),
-                    matchInfo.ItemArray[1],
+                    matchInfo["matchid"],
+                    eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
+                    matchInfo["SportType"],
                     "xls");
 
                 string reportPath = Path.Combine(reportDirectory, reportName);

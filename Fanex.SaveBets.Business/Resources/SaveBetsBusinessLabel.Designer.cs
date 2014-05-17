@@ -61,6 +61,24 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1HFG.
+        /// </summary>
+        internal static string _1HFG {
+            get {
+                return ResourceManager.GetString("_1HFG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1HLG.
+        /// </summary>
+        internal static string _1HLG {
+            get {
+                return ResourceManager.GetString("_1HLG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account.
         /// </summary>
         internal static string Account {

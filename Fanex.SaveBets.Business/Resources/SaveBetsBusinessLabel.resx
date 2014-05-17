@@ -213,4 +213,10 @@
   <data name="WinLost" xml:space="preserve">
     <value>WinLost</value>
   </data>
+  <data name="_1HFG" xml:space="preserve">
+    <value>1HFG</value>
+  </data>
+  <data name="_1HLG" xml:space="preserve">
+    <value>1HLG</value>
+  </data>
 </root>

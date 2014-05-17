@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Email_Notification_Content" xml:space="preserve">
-    <value>Dear DBA Teammate,&lt;br /&gt;&lt;br /&gt;The store procedure Acc_Rpt_AllProductWLAutomail has been returned not enough data to send email to users.&lt;br /&gt;So can you please have a check.&lt;br /&gt;&lt;br /&gt;Regards.&lt;br /&gt;&lt;br /&gt;Notes : Please be notified there is no reason stated for negative balance found in the report. &lt;br/&gt; This is an auto-mail. Please do not reply.</value>
-  </data>
-  <data name="SaveBetsBusiness_ReportName" xml:space="preserve">
-    <value>Products_Win_Loss_Report_{0}</value>
-  </data>
-  <data name="SaveBetsBusiness_ReportTitle" xml:space="preserve">
-    <value>Products Win Loss Report - {0}</value>
-  </data>
-  <data name="SaveBetsBusiness_SheetName" xml:space="preserve">
-    <value>Win_Loss_By_Products</value>
+  <data name="Summary_SheetName" xml:space="preserve">
+    <value>Summary</value>
   </data>
 </root>

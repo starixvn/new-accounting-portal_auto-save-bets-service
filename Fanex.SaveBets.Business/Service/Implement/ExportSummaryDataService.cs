@@ -19,6 +19,7 @@ namespace SaveBetsBusiness.Service.Implement
     using NPOI.HSSF.Util;
     using NPOI.SS.UserModel;
     using SaveBetsBusiness.Common;
+    using SaveBetsBusiness.Constants;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Resources;
 
@@ -28,6 +29,9 @@ namespace SaveBetsBusiness.Service.Implement
     public class ExportSummaryDataService : IDisposable
     {
         private const string PositiveNumberFormat = "[Red]#,##0.00;-#,##0.00;\"-\"";
+        private const int SoccerSportType = 1;
+        private const string BetHomeTeam = "1";
+        private const string BetAwayTeam = "2";
 
         /// <summary>
         /// Exports the summary sheet.
@@ -45,7 +49,7 @@ namespace SaveBetsBusiness.Service.Implement
             DataRow turnOverInfo,
             List<DataRow> winLossInfo)
         {
-            string sheetName = "Summary";
+            string sheetName = SaveBetsBusinessResource.Summary_SheetName;
             ISheet worksheet = excelFile.GetSheet(sheetName) ?? excelFile.CreateSheet(sheetName);
             this.InitColumnWidth_SummarySheet(worksheet);
 
@@ -54,6 +58,14 @@ namespace SaveBetsBusiness.Service.Implement
             ICellStyle boldTextStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, true, NpoiExcelExtensions.Alignment.Left);
             ICellStyle centerBoldTextStyle = NpoiExcelExtensions.TextStyle(excelFile, HSSFColor.White.Index, true, NpoiExcelExtensions.Alignment.Center);
             ICellStyle decimalNumberStyle = NpoiExcelExtensions.DecimalStyle(excelFile, HSSFColor.White.Index, false);
+
+            string firstGoalLastGoal = string.Empty, _1HFirstGoalLastGoal = string.Empty, _1HFirstGoal = string.Empty, _1HLastGoal = string.Empty;
+
+            if (Converter.ToInt(matchInfo["SportType"]) == SoccerSportType)
+            {
+                string status = Converter.ToString2(matchInfo["betstatus"]);
+                this.GetFirstLastGoalInformation(out _1HFirstGoal, out _1HLastGoal, out firstGoalLastGoal, out _1HFirstGoalLastGoal, status);
+            }
 
             int currentRow = 0, currentColumn = 0, startMergeColumn = 0, startMergeRow = 0;
             IRow row = worksheet.CreateRow(currentRow);
@@ -124,8 +136,9 @@ namespace SaveBetsBusiness.Service.Implement
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow);
 
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, matchInfo["FT"], textStyle);
-            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, matchInfo["FG"], textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["FT"]), textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["FG"]), textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HFirstGoal, textStyle);
             currentColumn = 13;
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Agent, centerTextStyle);
@@ -135,6 +148,7 @@ namespace SaveBetsBusiness.Service.Implement
 
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["HT"]), textStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["LG"]), textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HLastGoal, textStyle);
             currentColumn = 13;
             var ibcTurnOver =
                Converter.ToDecimal(turnOverInfo["TotalA"]) -
@@ -148,6 +162,8 @@ namespace SaveBetsBusiness.Service.Implement
             row = worksheet.CreateRow(currentRow);
 
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["Goal"]), textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, firstGoalLastGoal, textStyle);
+            NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HFirstGoalLastGoal, textStyle);
             currentColumn = 13;
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerTextStyle);
             NpoiExcelExtensions.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerTextStyle);
@@ -207,11 +223,11 @@ namespace SaveBetsBusiness.Service.Implement
             startMergeRow = currentRow - 12;
             NpoiExcelExtensions.RenderMergeCell(
                 ref worksheet,
-                ref row, 
+                ref row,
                 startMergeRow,
-                ref currentColumn, 
+                ref currentColumn,
                 currentRow,
-                currentColumn, 
+                currentColumn,
                 SaveBetsBusinessLabel.TurnOver,
                 centerBoldTextStyle);
             currentRow += 2;
@@ -560,6 +576,81 @@ namespace SaveBetsBusiness.Service.Implement
         {
             currentRow++;
             currentColumn = newCurrentColumn;
+        }
+
+        /// <summary>
+        /// Gets the first last goal information.
+        /// </summary>
+        /// <param name="firstHalfFirstGoal">The first half first goal.</param>
+        /// <param name="firstHalfLastGoal">The first half last goal.</param>
+        /// <param name="firstGoalLastGoal">The first goal last goal.</param>
+        /// <param name="firstHalfFirstGoalLastGoal">The first half first goal last goal.</param>
+        /// <param name="status">The status.</param>
+        private void GetFirstLastGoalInformation(
+            out string firstHalfFirstGoal,
+            out string firstHalfLastGoal,
+            out string firstGoalLastGoal,
+            out string firstHalfFirstGoalLastGoal,
+            string status)
+        {
+            firstHalfFirstGoal = string.Empty;
+            firstHalfLastGoal = string.Empty;
+            firstGoalLastGoal = string.Empty;
+            firstHalfFirstGoalLastGoal = string.Empty;
+
+            bool statusIsNullOrEmpty = string.IsNullOrEmpty(status);
+
+            if (statusIsNullOrEmpty)
+            {
+                return;
+            }
+            else
+            {
+                string[] bettypes = status.Split(new char[] { ';' });
+                foreach (string bettype in bettypes)
+                {
+                    if (bettype.StartsWith(BetTypeConstants.FirstHalfFirstGoalLastGoal))
+                    {
+                        firstHalfFirstGoalLastGoal = bettype;
+                        string[] bettypeNameAndValue = bettype.Split(new char[] { ':' });
+                        string[] betValues = bettypeNameAndValue[1].Split(new char[] { '-' });
+                        string firstHalfFirstGoalTeam = this.GetTeamFromBetValue(betValues[0]);
+                        string firstHalfLastGoalTeam = this.GetTeamFromBetValue(betValues[1]);
+
+                        firstHalfFirstGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel._1HFG, firstHalfFirstGoalTeam);
+                        firstHalfLastGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel._1HLG, firstHalfLastGoalTeam);
+                    }
+                    else if (bettype.StartsWith(BetTypeConstants.FirstGoalLastGoal))
+                    {
+                        firstGoalLastGoal = bettype;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the team from bet value.
+        /// </summary>
+        /// <param name="betValue">The bet value.</param>
+        /// <returns>The team name.</returns>
+        private string GetTeamFromBetValue(string betValue)
+        {
+            string teamName = string.Empty;
+
+            if (betValue == BetHomeTeam)
+            {
+                teamName = SaveBetsBusinessLabel.Home;
+            }
+            else if (betValue == BetAwayTeam)
+            {
+                teamName = SaveBetsBusinessLabel.Away;
+            }
+            else
+            {
+                teamName = string.Empty;
+            }
+
+            return teamName;
         }
     }
 }

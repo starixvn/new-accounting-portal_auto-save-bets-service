@@ -15,7 +15,7 @@ namespace SaveBetsBusiness.Constants
     using System.Text;
 
     /// <summary>
-    /// TODO: Update summary.
+    /// Bet type constant.
     /// </summary>
     public static class BetTypeConstants
     {
@@ -47,5 +47,8 @@ namespace SaveBetsBusiness.Constants
         public const int CleanSheet = 13;
         public const int DoubleChange = 24;
         public const int BothOneNeitherTeamToScore = 26;
+
+        public const string FirstHalfFirstGoalLastGoal = "1FL";
+        public const string FirstGoalLastGoal = "FL";
     }
 }

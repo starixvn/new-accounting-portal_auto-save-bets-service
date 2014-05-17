@@ -61,38 +61,11 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dear DBA Teammate,&lt;br /&gt;&lt;br /&gt;The store procedure Acc_Rpt_AllProductWLAutomail has been returned not enough data to send email to users.&lt;br /&gt;So can you please have a check.&lt;br /&gt;&lt;br /&gt;Regards.&lt;br /&gt;&lt;br /&gt;Notes : Please be notified there is no reason stated for negative balance found in the report. &lt;br/&gt; This is an auto-mail. Please do not reply..
+        ///   Looks up a localized string similar to Summary.
         /// </summary>
-        internal static string Email_Notification_Content {
+        internal static string Summary_SheetName {
             get {
-                return ResourceManager.GetString("Email_Notification_Content", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Products_Win_Loss_Report_{0}.
-        /// </summary>
-        internal static string SaveBetsBusiness_ReportName {
-            get {
-                return ResourceManager.GetString("SaveBetsBusiness_ReportName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Products Win Loss Report - {0}.
-        /// </summary>
-        internal static string SaveBetsBusiness_ReportTitle {
-            get {
-                return ResourceManager.GetString("SaveBetsBusiness_ReportTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Win_Loss_By_Products.
-        /// </summary>
-        internal static string SaveBetsBusiness_SheetName {
-            get {
-                return ResourceManager.GetString("SaveBetsBusiness_SheetName", resourceCulture);
+                return ResourceManager.GetString("Summary_SheetName", resourceCulture);
             }
         }
     }
