@@ -173,7 +173,10 @@ namespace SaveBetsBusiness.Service
                     }
                 }
 
-                reader.Close();
+                if (reader != null)
+                {
+                    reader.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -217,7 +220,10 @@ namespace SaveBetsBusiness.Service
                     }
                 }
 
-                reader.Close();
+                if (reader != null)
+                {
+                    reader.Close();
+                }
             }
             catch (Exception ex)
             {
