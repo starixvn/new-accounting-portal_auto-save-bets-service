@@ -46,8 +46,24 @@
     <Reference Include="Fanex.NAP.Framework">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\Fanex.NAP.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI">
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="RemotingRef">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\RemotingRef.dll</HintPath>
@@ -76,6 +92,7 @@
     <Compile Include="Common\CacheRef.cs" />
     <Compile Include="Common\DirectoryExtensions.cs" />
     <Compile Include="Common\LogExtensions.cs" />
+    <Compile Include="Common\NPOIExcelUtility.cs" />
     <Compile Include="Constants\BetTypeConstants.cs" />
     <Compile Include="Constants\CombinationTypeConstants.cs" />
     <Compile Include="Constants\DateTimeFormatConstants.cs" />

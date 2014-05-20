@@ -23,6 +23,7 @@ namespace SaveBetsBusiness.Service
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Service.Implement;
     using SaveBetsBusiness.Service.Interface;
+    using NPOI.XSSF.UserModel;
 
     /// <summary>
     /// TODO: Update summary.
@@ -47,7 +48,7 @@ namespace SaveBetsBusiness.Service
         public void ProcessSaveBets()
         {
             FileStream fileStream = null;
-            HSSFWorkbook excelFile = null;
+            XSSFWorkbook excelFile = null;
             bool isEndMatch = false;
             int matchId = 0;
             try
@@ -63,7 +64,7 @@ namespace SaveBetsBusiness.Service
                     return;
                 }
 
-                excelFile = new HSSFWorkbook();
+                excelFile = new XSSFWorkbook();
 
                 ////1. SUM - Render data excel file at Summary: Top Left, Top Right and Bottom
                 RenderSUMSheet(ref excelFile);
@@ -80,7 +81,7 @@ namespace SaveBetsBusiness.Service
                     matchInfo["matchid"],
                     eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
                     matchInfo["SportType"],
-                    "xls");
+                    "xlsx");
 
                 string reportPath = Path.Combine(reportDirectory, reportName);
 
@@ -114,7 +115,7 @@ namespace SaveBetsBusiness.Service
         /// Renders the summary sheet.
         /// </summary>
         /// <param name="excelFile">The excel file.</param>
-        private void RenderSUMSheet(ref HSSFWorkbook excelFile)
+        private void RenderSUMSheet(ref XSSFWorkbook excelFile)
         {
             ExportSummaryDataService _exportSummaryService = null;
             try
@@ -140,7 +141,7 @@ namespace SaveBetsBusiness.Service
         /// Renders the dead total bet and live total bet sheet.
         /// </summary>
         /// <param name="excelFile">The excel file.</param>
-        private void RenderDeadTB_LiveTBSheet(ref HSSFWorkbook excelFile)
+        private void RenderDeadTB_LiveTBSheet(ref XSSFWorkbook excelFile)
         {
             ExportDeadAndLiveTotalBetService _exportDeadAndLiveTotalBetService = null;
             IDataReader reader = null;
@@ -156,7 +157,7 @@ namespace SaveBetsBusiness.Service
                 foreach (var liveIndicator in liveIndicators)
                 {
                     string sheetName = liveIndicator ? "Live-TB" : "Dead-TB";
-                    ISheet worksheet = excelFile.GetSheet(sheetName) ?? excelFile.CreateSheet(sheetName);
+                    XSSFSheet worksheet = excelFile.GetSheet(sheetName) as XSSFSheet ?? excelFile.CreateSheet(sheetName) as XSSFSheet;
                     _exportDeadAndLiveTotalBetService.InitColumnWidth(worksheet);
                     currentRow = 0;
                     var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
@@ -192,7 +193,7 @@ namespace SaveBetsBusiness.Service
         /// Renders the each bet type live indicator sheet.
         /// </summary>
         /// <param name="excelFile">The excel file.</param>
-        private void RenderEachBettypeLiveIndicatorSheet(ref HSSFWorkbook excelFile)
+        private void RenderEachBettypeLiveIndicatorSheet(ref XSSFWorkbook excelFile)
         {
             ExportDataByBetTypeService _exportDataByBetTypeService = null;
             IDataReader reader = null;
