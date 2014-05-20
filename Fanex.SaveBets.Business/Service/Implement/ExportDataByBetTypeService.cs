@@ -68,6 +68,7 @@ namespace SaveBetsBusiness.Service.Implement
         private void ExportHeaderByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, int bettype)
         {
             XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(textStyle);
             int currentRow = 0, currentColumn = 0;
             XSSFRow row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
             switch (bettype)
@@ -113,7 +114,9 @@ namespace SaveBetsBusiness.Service.Implement
         private void ExportHeaderGroup(XSSFWorkbook excelFile, XSSFSheet worksheet, ref int currentRow, ref int currentColumn, int bettype)
         {
             XSSFCellStyle headerStyle = NPOIExcelUtility.HeaderStyle(excelFile);
+            NPOIExcelUtility.SetBorderToCell(headerStyle);
             XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(textStyle);
             int startMergeColumn = 0;
             XSSFRow row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
@@ -204,11 +207,16 @@ namespace SaveBetsBusiness.Service.Implement
         private void ExportThreeSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow)
         {
             XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(textStyle);
             XSSFCellStyle boldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(boldTextStyle);
             XSSFCellStyle redBoldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Red);
+            NPOIExcelUtility.SetBorderToCell(redBoldTextStyle);
             XSSFCellStyle decimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(decimalNumberStyle);
             decimalNumberStyle.Alignment = HorizontalAlignment.Center;
             XSSFCellStyle blueBoldDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, true, Color.Blue);
+            NPOIExcelUtility.SetBorderToCell(blueBoldDecimalNumberStyle);
             blueBoldDecimalNumberStyle.Alignment = HorizontalAlignment.Center;
             int currentBetTwoRowIndex = 1, currentBetXRowIndex = 1, currentColumn = 0;
             XSSFRow row = null;
@@ -287,11 +295,16 @@ namespace SaveBetsBusiness.Service.Implement
         private void ExportTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow)
         {
             XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(textStyle);
             XSSFCellStyle boldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(boldTextStyle);
             XSSFCellStyle redBoldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Red);
+            NPOIExcelUtility.SetBorderToCell(redBoldTextStyle);
             XSSFCellStyle decimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(decimalNumberStyle);
             decimalNumberStyle.Alignment = HorizontalAlignment.Center;
             XSSFCellStyle blueBoldDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, true, Color.Blue);
+            NPOIExcelUtility.SetBorderToCell(blueBoldDecimalNumberStyle);
             blueBoldDecimalNumberStyle.Alignment = HorizontalAlignment.Center;
             int currentBetAwayTeamRowIndex = 1, currentColumn = 0;
             XSSFRow row = null;
@@ -360,11 +373,16 @@ namespace SaveBetsBusiness.Service.Implement
         private void ExportOneSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow, int bettype)
         {
             XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(textStyle);
             XSSFCellStyle boldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.White);
+            NPOIExcelUtility.SetBorderToCell(boldTextStyle);
             XSSFCellStyle redBoldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Red);
+            NPOIExcelUtility.SetBorderToCell(redBoldTextStyle);
             XSSFCellStyle decimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(decimalNumberStyle);
             decimalNumberStyle.Alignment = HorizontalAlignment.Center;
             XSSFCellStyle blueBoldDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, true, Color.Blue);
+            NPOIExcelUtility.SetBorderToCell(blueBoldDecimalNumberStyle);
             blueBoldDecimalNumberStyle.Alignment = HorizontalAlignment.Center;
             int currentColumn = 0;
             XSSFRow row = null;

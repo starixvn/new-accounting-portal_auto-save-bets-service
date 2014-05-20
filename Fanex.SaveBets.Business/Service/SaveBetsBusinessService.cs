@@ -16,14 +16,12 @@ namespace SaveBetsBusiness.Service
     using System.IO;
     using System.Linq;
     using Fanex.Common;
-    using NPOI.HSSF.UserModel;
-    using NPOI.SS.UserModel;
+    using NPOI.XSSF.UserModel;
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Criteria;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Service.Implement;
     using SaveBetsBusiness.Service.Interface;
-    using NPOI.XSSF.UserModel;
 
     /// <summary>
     /// TODO: Update summary.

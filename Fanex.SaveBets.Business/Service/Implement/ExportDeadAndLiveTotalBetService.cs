@@ -26,6 +26,7 @@ namespace SaveBetsBusiness.Service.Implement
     public class ExportDeadAndLiveTotalBetService : IDisposable
     {
         private const string PositiveNumberFormat = "[Red]#,##0.00;-#,##0.00;\"-\"";
+        private Color _borderColor = NPOIExcelUtility.BorderColor;
 
         /// <summary>
         /// Exports the dead and live tb sheet.
@@ -56,21 +57,34 @@ namespace SaveBetsBusiness.Service.Implement
 
             XSSFCellStyle headerStyle = NPOIExcelUtility.HeaderStyle(excelFile);
             NPOIExcelUtility.SetBorderToCell(headerStyle);
+
             XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
             NPOIExcelUtility.SetBorderToCell(textStyle);
+
             XSSFCellStyle boldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Black);
-            NPOIExcelUtility.SetBorderToCell(boldTextStyle);
+            NPOIExcelUtility.SetBorderToCell(boldTextStyle, Color.Black, _borderColor, _borderColor, Color.Black);
+
             XSSFCellStyle boldDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, true, Color.Black);
             NPOIExcelUtility.SetBorderToCell(boldDecimalNumberStyle);
             boldDecimalNumberStyle.Alignment = HorizontalAlignment.Center;
             boldDecimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
+
             XSSFCellStyle decimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
             NPOIExcelUtility.SetBorderToCell(decimalNumberStyle);
             decimalNumberStyle.Alignment = HorizontalAlignment.Center;
+
             XSSFCellStyle yellowBoldDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, true, Color.Black);
-            NPOIExcelUtility.SetBorderToCell(yellowBoldDecimalNumberStyle);
+            NPOIExcelUtility.SetBorderToCell(yellowBoldDecimalNumberStyle, Color.Black, _borderColor, _borderColor, Color.Black);
             yellowBoldDecimalNumberStyle.Alignment = HorizontalAlignment.Center;
             yellowBoldDecimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
+
+            XSSFCellStyle totalDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, true, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(totalDecimalNumberStyle, Color.Black, _borderColor, _borderColor, Color.Black);
+            totalDecimalNumberStyle.Alignment = HorizontalAlignment.Center;
+            totalDecimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
+
+            XSSFCellStyle totalTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(totalTextStyle, Color.Black, _borderColor, _borderColor, Color.Black);
 
             string bettypeName = CacheRef.GetBettype(bettype);
             row = worksheet.CreateRow(currentRow) as XSSFRow;
@@ -204,18 +218,18 @@ namespace SaveBetsBusiness.Service.Implement
                     currentColumn - 1,
                     SaveBetsBusinessLabel.Total,
                     boldTextStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, oddTotalByBetType, boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_p3Total, boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_p2Total, boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_p1Total, boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, oddTotalByBetType, totalDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_p3Total, totalDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_p2Total, totalDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_p1Total, totalDecimalNumberStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_p0Total, yellowBoldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_m1Total, boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_m2Total, boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_m3Total, boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_m1Total, totalDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_m2Total, totalDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_m3Total, totalDecimalNumberStyle);
                 string totalBalanceByBetType = string.Format("{0} - {1}", homeTotalByBetType, awayTotalByBetType);
                 decimal totalByBetType = homeTotalByBetType - awayTotalByBetType;
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalBalanceByBetType, textStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalByBetType, boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalBalanceByBetType, totalTextStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalByBetType, totalDecimalNumberStyle);
                 currentRow++;
 
                 int bettypeHeaderRowIndex = currentRow - numberBetTypeElements - 2;
@@ -229,8 +243,12 @@ namespace SaveBetsBusiness.Service.Implement
         {
             for (int i = 0; i < 12; i++)
             {
-                worksheet.SetColumnWidth(i, 170 * NpoiExcelExtensions.FontWidth);
+                worksheet.SetColumnWidth(i, 150 * NpoiExcelExtensions.FontWidth);
             }
+
+            worksheet.SetColumnWidth(0, 120 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(1, 120 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(2, 120 * NpoiExcelExtensions.FontWidth);
         }
 
         public void Dispose()

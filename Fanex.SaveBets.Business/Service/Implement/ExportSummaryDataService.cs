@@ -32,6 +32,7 @@ namespace SaveBetsBusiness.Service.Implement
         private const int SoccerSportType = 1;
         private const string BetHomeTeam = "1";
         private const string BetAwayTeam = "2";
+        private Color _borderColor = NPOIExcelUtility.BorderColor;
 
         /// <summary>
         /// Exports the summary sheet.
@@ -53,198 +54,69 @@ namespace SaveBetsBusiness.Service.Implement
             XSSFSheet worksheet = excelFile.GetSheet(sheetName) as XSSFSheet ?? excelFile.CreateSheet(sheetName) as XSSFSheet;
             this.InitColumnWidth_SummarySheet(worksheet);
 
-            //XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Left, Color.Black);
-            //NPOIExcelUtility.SetBorderToCell(textStyle);
-            //XSSFCellStyle centerTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
-            //NPOIExcelUtility.SetBorderToCell(centerTextStyle);
-            //XSSFCellStyle boldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Left, Color.Black);
-            //NPOIExcelUtility.SetBorderToCell(boldTextStyle);
-            //XSSFCellStyle centerBoldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Black);
-            //NPOIExcelUtility.SetBorderToCell(centerBoldTextStyle);
-            //XSSFCellStyle decimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
-            //NPOIExcelUtility.SetBorderToCell(decimalNumberStyle);
-
-            //string firstGoalLastGoal = string.Empty, _1HFirstGoalLastGoal = string.Empty, _1HFirstGoal = string.Empty, _1HLastGoal = string.Empty;
-
-            //if (Converter.ToInt(matchInfo["SportType"]) == SoccerSportType)
-            //{
-            //    string status = Converter.ToString2(matchInfo["betstatus"]);
-            //    this.GetFirstLastGoalInformation(out _1HFirstGoal, out _1HLastGoal, out firstGoalLastGoal, out _1HFirstGoalLastGoal, status);
-            //}
-
             int currentRow = 0;
             XSSFRow row = worksheet.CreateRow(currentRow) as XSSFRow;
-            currentRow++;
-            row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["sportname"]), textStyle);
-            //currentColumn = 13;
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            //startMergeColumn = currentColumn - 2;
-            //NPOIExcelUtility.RenderMergeCell(
-            //    ref worksheet,
-            //    ref row,
-            //    currentRow,
-            //    ref startMergeColumn,
-            //    currentRow,
-            //    currentColumn - 1,
-            //    SaveBetsBusinessLabel.ActualRate,
-            //    centerBoldTextStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //string eventDate = Converter.ToDateTime(matchInfo["eventdate"]).ToShortFormatedDateWithSlash().Replace("/", "-");
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, eventDate, textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["matchid"]), centerBoldTextStyle);
-            //currentColumn = 13;
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalA"]), decimalNumberStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["matchcode"]), textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-            //startMergeColumn = currentColumn - 2;
-            //NPOIExcelUtility.RenderMergeCell(
-            //    ref worksheet,
-            //    ref row,
-            //    currentRow,
-            //    ref startMergeColumn,
-            //    currentRow,
-            //    currentColumn - 1,
-            //    Converter.ToString2(matchInfo["leaguename"]),
-            //    textStyle);
-            //currentColumn = 13;
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Super, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["SuperA"]), decimalNumberStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-            //string match = string.Format(
-            //    "{0}-vs-{1}",
-            //    matchInfo["Home"],
-            //    matchInfo["Away"]);
-            //startMergeColumn = currentColumn - 3;
-            //NPOIExcelUtility.RenderMergeCell(ref worksheet, ref row, currentRow, ref startMergeColumn, currentRow, currentColumn - 1, match, boldTextStyle);
-            //currentColumn = 13;
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Master, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["MasterA"]), decimalNumberStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["FT"]), textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["FG"]), textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HFirstGoal, textStyle);
-            //currentColumn = 13;
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Agent, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["AgentA"]), decimalNumberStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["HT"]), textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["LG"]), textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HLastGoal, textStyle);
-            //currentColumn = 13;
-            //var ibcTurnOver =
-            //   Converter.ToDecimal(turnOverInfo["TotalA"]) -
-            //   Converter.ToDecimal(turnOverInfo["SuperA"]) -
-            //   Converter.ToDecimal(turnOverInfo["MasterA"]) -
-            //   Converter.ToDecimal(turnOverInfo["AgentA"]);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.IBC, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, ibcTurnOver, decimalNumberStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["Goal"]), textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, firstGoalLastGoal, textStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HFirstGoalLastGoal, textStyle);
-            //currentColumn = 13;
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerTextStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            //startMergeColumn = currentColumn - 2;
-            //NPOIExcelUtility.RenderMergeCell(
-            //    ref worksheet,
-            //    ref row,
-            //    currentRow,
-            //    ref startMergeColumn,
-            //    currentRow,
-            //    currentColumn - 1,
-            //    SaveBetsBusinessLabel.VirtualRate,
-            //    centerBoldTextStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalV"]), decimalNumberStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Super, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["SuperV"]), decimalNumberStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Master, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["MasterV"]), decimalNumberStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Agent, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["AgentV"]), decimalNumberStyle);
-            //this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
-            //row = worksheet.CreateRow(currentRow) as XSSFRow;
-
-            //var virtualIbcTurnOver =
-            //    Converter.ToDecimal(turnOverInfo["TotalV"]) -
-            //    Converter.ToDecimal(turnOverInfo["SuperV"]) -
-            //    Converter.ToDecimal(turnOverInfo["MasterV"]) -
-            //    Converter.ToDecimal(turnOverInfo["AgentV"]);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, centerBoldTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.IBC, centerTextStyle);
-            //NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualIbcTurnOver, decimalNumberStyle);
-            //currentColumn = 13;
-            //startMergeRow = currentRow - 12;
-            //NPOIExcelUtility.RenderMergeCell(
-            //    ref worksheet,
-            //    ref row,
-            //    startMergeRow,
-            //    ref currentColumn,
-            //    currentRow,
-            //    currentColumn,
-            //    SaveBetsBusinessLabel.TurnOver,
-            //    centerBoldTextStyle);
-
             this.ExportMatchInfo(excelFile, worksheet, matchInfo);
             this.ExportTurnOverInfo(excelFile, worksheet, turnOverInfo);
             currentRow = 15;
-
             this.ExportWinLossInfo(excelFile, worksheet, winLossInfo, currentRow);
-
             worksheet.CreateFreezePane(3, 0, 3, 0);
         }
 
+        /// <summary>
+        /// Creates the save bet report data directory.
+        /// </summary>
+        /// <param name="eventDate">The event date.</param>
+        /// <returns>Create save bet report data directory.</returns>
+        public string CreateSaveBetReportDataDirectory(DateTime eventDate)
+        {
+            string reportDataDirectory = AppSettings.ExportDataDirectory;
+
+            DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
+
+            string directoryByYearAndMonth = string.Format(
+                "{0}{1}",
+                eventDate.ToString("yyyy"),
+                eventDate.ToString("MM"));
+            string directoryByYearAndMonthPath = Path.Combine(reportDataDirectory, directoryByYearAndMonth);
+            DirectoryExtensions.CheckAndCreateDirectory(directoryByYearAndMonthPath);
+
+            return directoryByYearAndMonthPath;
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+            GC.Collect();
+        }
+
+        /// <summary>
+        /// Initializes the column width for summary sheet.
+        /// </summary>
+        /// <param name="worksheet">The worksheet.</param>
+        public void InitColumnWidth_SummarySheet(ISheet worksheet)
+        {
+            for (int i = 0; i < 19; i++)
+            {
+                worksheet.SetColumnWidth(i, 150 * NpoiExcelExtensions.FontWidth);
+            }
+
+            worksheet.SetColumnWidth(1, 120 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(2, 120 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(10, 120 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(11, 120 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(12, 120 * NpoiExcelExtensions.FontWidth);
+        }
+
+        /// <summary>
+        /// Exports the match information.
+        /// </summary>
+        /// <param name="excelFile">The excel file.</param>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="matchInfo">The match information.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportMatchInfo(
             XSSFWorkbook excelFile,
             XSSFSheet worksheet,
@@ -324,6 +196,15 @@ namespace SaveBetsBusiness.Service.Implement
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HFirstGoalLastGoal, textStyle);
         }
 
+        /// <summary>
+        /// Exports the turn over information.
+        /// </summary>
+        /// <param name="excelFile">The excel file.</param>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="turnOverInfo">The turn over information.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTurnOverInfo(
             XSSFWorkbook excelFile,
             XSSFSheet worksheet,
@@ -334,11 +215,13 @@ namespace SaveBetsBusiness.Service.Implement
             XSSFCellStyle centerTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
             NPOIExcelUtility.SetBorderToCell(centerTextStyle);
             XSSFCellStyle decimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
-            NPOIExcelUtility.SetBorderToCell(decimalNumberStyle, NPOIExcelUtility.BorderColor, NPOIExcelUtility.BorderColor, Color.Black, NPOIExcelUtility.BorderColor);
-            XSSFCellStyle iBCTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
-            NPOIExcelUtility.SetDoubleBorderBottomToCell(iBCTextStyle, Color.Black, Color.Black, NPOIExcelUtility.BorderColor, Color.Black);
-            XSSFCellStyle iBCDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
-            NPOIExcelUtility.SetDoubleBorderBottomToCell(iBCDecimalNumberStyle, Color.Black, NPOIExcelUtility.BorderColor, Color.Black, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(decimalNumberStyle, _borderColor, _borderColor, Color.Black, _borderColor);
+            XSSFCellStyle ibcTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetDoubleBorderBottomToCell(ibcTextStyle, Color.Black, Color.Black, _borderColor, Color.Black);
+            XSSFCellStyle ibcDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetDoubleBorderBottomToCell(ibcDecimalNumberStyle, Color.Black, _borderColor, Color.Black, Color.Black);
+            XSSFCellStyle totalDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(totalDecimalNumberStyle, _borderColor, _borderColor, Color.Black, Color.Black);
 
             XSSFRow row = null;
             int currentRow = 1, currentColumn = 13, startMergeColumn = 0, startMergeRow = 0;
@@ -362,7 +245,7 @@ namespace SaveBetsBusiness.Service.Implement
             row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, headerTextStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, centerTextStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalA"]), decimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalA"]), totalDecimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
             row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
@@ -381,15 +264,15 @@ namespace SaveBetsBusiness.Service.Implement
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Agent, centerTextStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["AgentA"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
-            row = worksheet.CreateRow(currentRow) as XSSFRow;
+            row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
             var ibcTurnOver =
                Converter.ToDecimal(turnOverInfo["TotalA"]) -
                Converter.ToDecimal(turnOverInfo["SuperA"]) -
                Converter.ToDecimal(turnOverInfo["MasterA"]) -
                Converter.ToDecimal(turnOverInfo["AgentA"]);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, headerTextStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.IBC, iBCTextStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, ibcTurnOver, iBCDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.IBC, ibcTextStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, ibcTurnOver, ibcDecimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
             row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
@@ -417,7 +300,7 @@ namespace SaveBetsBusiness.Service.Implement
 
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, headerTextStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, centerTextStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalV"]), decimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["TotalV"]), totalDecimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
             row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
@@ -437,7 +320,7 @@ namespace SaveBetsBusiness.Service.Implement
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Agent, centerTextStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(turnOverInfo["AgentV"]), decimalNumberStyle);
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 13);
-            row = worksheet.CreateRow(currentRow) as XSSFRow;
+            row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
             var virtualIbcTurnOver =
                 Converter.ToDecimal(turnOverInfo["TotalV"]) -
@@ -445,8 +328,8 @@ namespace SaveBetsBusiness.Service.Implement
                 Converter.ToDecimal(turnOverInfo["MasterV"]) -
                 Converter.ToDecimal(turnOverInfo["AgentV"]);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.TurnOver, headerTextStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.IBC, iBCTextStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualIbcTurnOver, iBCDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.IBC, ibcTextStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualIbcTurnOver, ibcDecimalNumberStyle);
             currentColumn = 13;
             startMergeRow = currentRow - 12;
             NPOIExcelUtility.RenderMergeCell(
@@ -458,41 +341,6 @@ namespace SaveBetsBusiness.Service.Implement
                 currentColumn,
                 SaveBetsBusinessLabel.TurnOver,
                 headerTextStyle);
-        }
-
-        /// <summary>
-        /// Creates the save bet report data directory.
-        /// </summary>
-        /// <param name="eventDate">The event date.</param>
-        /// <returns>Create save bet report data directory.</returns>
-        public string CreateSaveBetReportDataDirectory(DateTime eventDate)
-        {
-            string reportDataDirectory = AppSettings.ExportDataDirectory;
-
-            DirectoryExtensions.CheckAndCreateDirectory(reportDataDirectory);
-
-            string directoryByYearAndMonth = string.Format(
-                "{0}{1}",
-                eventDate.ToString("yyyy"),
-                eventDate.ToString("MM"));
-            string directoryByYearAndMonthPath = Path.Combine(reportDataDirectory, directoryByYearAndMonth);
-            DirectoryExtensions.CheckAndCreateDirectory(directoryByYearAndMonthPath);
-
-            return directoryByYearAndMonthPath;
-        }
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-            GC.Collect();
-        }
-
-        public void InitColumnWidth_SummarySheet(ISheet worksheet)
-        {
-            for (int i = 0; i < 19; i++)
-            {
-                worksheet.SetColumnWidth(i, 170 * NpoiExcelExtensions.FontWidth);
-            }
         }
 
         /// <summary>
@@ -518,18 +366,51 @@ namespace SaveBetsBusiness.Service.Implement
 
             XSSFCellStyle leftTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Left, Color.Black);
             NPOIExcelUtility.SetBorderToCell(leftTextStyle);
+
             XSSFCellStyle centerTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
             NPOIExcelUtility.SetBorderToCell(centerTextStyle);
+
             XSSFCellStyle rightTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Right, Color.Black);
             NPOIExcelUtility.SetBorderToCell(rightTextStyle);
+
             XSSFCellStyle decimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
             NPOIExcelUtility.SetBorderToCell(decimalNumberStyle);
             decimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
+
             XSSFCellStyle boldDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.Yellow, true, Color.Black);
-            NPOIExcelUtility.SetBorderToCell(boldDecimalNumberStyle);
+            NPOIExcelUtility.SetBoldBorderBottomToCell(boldDecimalNumberStyle, _borderColor, _borderColor, _borderColor, Color.Black);
             boldDecimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
+
             XSSFCellStyle intNumberStyle = NPOIExcelUtility.IntStyle(excelFile, Color.White, false, Color.Black);
             NPOIExcelUtility.SetBorderToCell(intNumberStyle);
+
+            XSSFCellStyle rightBorderDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(rightBorderDecimalNumberStyle, _borderColor, _borderColor, Color.Black, _borderColor);
+            rightBorderDecimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
+
+            XSSFCellStyle rightBorderIntNumberStyle = NPOIExcelUtility.IntStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(rightBorderIntNumberStyle, _borderColor, _borderColor, Color.Black, _borderColor);
+
+            XSSFCellStyle doubleBorderBottomDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, true, Color.Black);
+            doubleBorderBottomDecimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
+            NPOIExcelUtility.SetDoubleBorderBottomToCell(doubleBorderBottomDecimalNumberStyle, _borderColor, _borderColor, _borderColor, Color.Black);
+
+            XSSFCellStyle topBorderTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Left, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(topBorderTextStyle, Color.Black, _borderColor, _borderColor, _borderColor);
+
+            XSSFCellStyle totalDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(totalDecimalNumberStyle, Color.Black, _borderColor, _borderColor, Color.Black);
+            totalDecimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
+
+            XSSFCellStyle totalIntNumberStyle = NPOIExcelUtility.IntStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(totalIntNumberStyle, Color.Black, _borderColor, _borderColor, Color.Black);
+
+            XSSFCellStyle totalRightBorderIntNumberStyle = NPOIExcelUtility.IntStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(totalRightBorderIntNumberStyle, Color.Black, _borderColor, Color.Black, Color.Black);
+
+            XSSFCellStyle totalRightBorderDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(totalRightBorderDecimalNumberStyle, Color.Black, _borderColor, Color.Black, Color.Black);
+            totalRightBorderDecimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
 
             this.ExportWinLossInfoHeader(excelFile, worksheet, ref currentRow);
             currentRow++;
@@ -563,50 +444,52 @@ namespace SaveBetsBusiness.Service.Implement
 
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["winlosta"]), decimalNumberStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["agenta"]), decimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["comma"]), decimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["comma"]), rightBorderDecimalNumberStyle);
 
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["winlostv"]), decimalNumberStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["agentv"]), decimalNumberStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["commv"]), decimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["FC"]), decimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["FC"]), rightBorderDecimalNumberStyle);
 
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["BetCount"]), intNumberStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["Reject"]), intNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["Void"]), intNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["Void"]), rightBorderIntNumberStyle);
 
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["HomeA"]), decimalNumberStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["AwayA"]), decimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["DiffA"]), decimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["DiffA"]), rightBorderDecimalNumberStyle);
 
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["HomeV"]), decimalNumberStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["AwayV"]), decimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["DiffV"]), decimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["DiffV"]), rightBorderDecimalNumberStyle);
                 currentRow++;
                 currentColumn = 0;
             }
 
-            currentColumn = 3;
             row = worksheet.CreateRow(currentRow) as XSSFRow;
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actualRateWinLossTotal, decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actualRateAgentTotal, decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actutalRateCommTotal, decimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, topBorderTextStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, topBorderTextStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, topBorderTextStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actualRateWinLossTotal, totalDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actualRateAgentTotal, totalDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actutalRateCommTotal, totalRightBorderDecimalNumberStyle);
 
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateWinLossTotal, decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateAgentTotal, decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateCommTotal, decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateWinLossTotal, totalDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateAgentTotal, totalDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateCommTotal, totalDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, totalRightBorderDecimalNumberStyle);
 
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalBetCount, intNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalRejectTicket, intNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalVoidTicket, intNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalBetCount, totalIntNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalRejectTicket, totalIntNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalVoidTicket, totalRightBorderIntNumberStyle);
 
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, homeActualRateTotal, decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, awayActualRateTotal, decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, homeActualRateTotal, totalDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, awayActualRateTotal, totalDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, totalRightBorderDecimalNumberStyle);
 
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, homeVirtualRateTotal, decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, awayVirtualRateTotal, decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, homeVirtualRateTotal, totalDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, awayVirtualRateTotal, totalDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, totalRightBorderDecimalNumberStyle);
 
             currentRow++;
             currentColumn = 4;
@@ -619,8 +502,8 @@ namespace SaveBetsBusiness.Service.Implement
                 currentRow,
                 ref currentColumn,
                 actualRateWinLossAndAgentTotal,
-                decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actutalRateCommTotal, decimalNumberStyle);
+                doubleBorderBottomDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, actutalRateCommTotal, doubleBorderBottomDecimalNumberStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, rightTextStyle);
             NPOIExcelUtility.RenderCell(
                 ref worksheet,
@@ -628,8 +511,8 @@ namespace SaveBetsBusiness.Service.Implement
                 currentRow,
                 ref currentColumn,
                 virtualRateWinLossAndAgentTotal,
-                decimalNumberStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateCommTotal, decimalNumberStyle);
+                doubleBorderBottomDecimalNumberStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, virtualRateCommTotal, doubleBorderBottomDecimalNumberStyle);
 
             currentRow++;
             row = worksheet.CreateRow(currentRow) as XSSFRow;
@@ -684,11 +567,7 @@ namespace SaveBetsBusiness.Service.Implement
 
             row = worksheet.CreateRow(currentRow) as XSSFRow;
             int currentColumn = 0, startMergeColumn = 0;
-
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, centerBoldTextStyle);
-
+            currentColumn = 3;
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.ActualRate, centerBoldTextStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.ActualRate, centerBoldTextStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.ActualRate, centerBoldTextStyle);

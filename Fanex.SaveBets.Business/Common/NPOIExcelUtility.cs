@@ -1,8 +1,11 @@
 ﻿// -----------------------------------------------------------------------
-// <copyright file="NPOIExcelUtility.cs" company="">
-// TODO: Update copyright text.
+// <copyright file="NPOIExcelUtility.cs" company="Nexcel Solutions Vietnam">
+// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
 // </copyright>
 // -----------------------------------------------------------------------
+// <history>
+//   <change who="Franklin.Nguyen" date="2014.04.21">Created</change>
+// </history>
 
 namespace SaveBetsBusiness.Common
 {
@@ -61,10 +64,19 @@ namespace SaveBetsBusiness.Common
             cellStyle.Alignment = HorizontalAlignment.Center;
             cellStyle.VerticalAlignment = VerticalAlignment.Center;
             cellStyle.SetFont(font);
-            //cellStyle = SetBorderToCell(cellStyle);
+
             return cellStyle;
         }
 
+        /// <summary>
+        /// Texts the style.
+        /// </summary>
+        /// <param name="excelFile">The excel file.</param>
+        /// <param name="cellColor">Color of the cell.</param>
+        /// <param name="bold">Set font is bold or not.</param>
+        /// <param name="align">The align.</param>
+        /// <param name="fontColor">Color of the font.</param>
+        /// <returns>The text style.</returns>
         public static XSSFCellStyle TextStyle(
            XSSFWorkbook excelFile,
            Color cellColor,
@@ -89,7 +101,7 @@ namespace SaveBetsBusiness.Common
             cellStyle.Alignment = align;
             cellStyle.VerticalAlignment = VerticalAlignment.Center;
             cellStyle.SetFont(font);
-            //cellStyle = SetBorderToCell(cellStyle);
+
             return cellStyle;
         }
 
@@ -126,7 +138,7 @@ namespace SaveBetsBusiness.Common
             cellStyle.VerticalAlignment = VerticalAlignment.Center;
             cellStyle.DataFormat = dataFormat.GetFormat(TwoDecimalDigitNumber);
             cellStyle.SetFont(font);
-            //cellStyle = SetBorderToCell(cellStyle);
+
             return cellStyle;
         }
 
@@ -163,7 +175,7 @@ namespace SaveBetsBusiness.Common
             cellStyle.VerticalAlignment = VerticalAlignment.Center;
             cellStyle.DataFormat = dataFormat.GetFormat(IntNumberFormat);
             cellStyle.SetFont(font);
-            //cellStyle = SetBorderToCell(cellStyle);
+
             return cellStyle;
         }
 
@@ -202,7 +214,7 @@ namespace SaveBetsBusiness.Common
             cellStyle.VerticalAlignment = VerticalAlignment.Center;
             cellStyle.DataFormat = dataFormat.GetFormat(IntNumberFormat);
             cellStyle.SetFont(font);
-            //cellStyle = SetBorderToCell(cellStyle);
+
             return cellStyle;
         }
 
@@ -288,10 +300,19 @@ namespace SaveBetsBusiness.Common
             return cellStyle;
         }
 
+        /// <summary>
+        /// Sets the border to cell.
+        /// </summary>
+        /// <param name="cellStyle">The cell style.</param>
+        /// <param name="topBorderColor">Color of the top border.</param>
+        /// <param name="leftBorderColor">Color of the left border.</param>
+        /// <param name="rightBorderColor">Color of the right border.</param>
+        /// <param name="bottomBorderColor">Color of the bottom border.</param>
+        /// <returns>Cell style.</returns>
         public static XSSFCellStyle SetBorderToCell(
             XSSFCellStyle cellStyle,
             Color topBorderColor,
-            Color leftBoderColor,
+            Color leftBorderColor,
             Color rightBorderColor,
             Color bottomBorderColor)
         {
@@ -301,17 +322,26 @@ namespace SaveBetsBusiness.Common
             cellStyle.BorderTop = BorderStyle.Thin;
 
             cellStyle.SetBorderColor(BorderSide.BOTTOM, new XSSFColor(bottomBorderColor));
-            cellStyle.SetBorderColor(BorderSide.LEFT, new XSSFColor(leftBoderColor));
+            cellStyle.SetBorderColor(BorderSide.LEFT, new XSSFColor(leftBorderColor));
             cellStyle.SetBorderColor(BorderSide.RIGHT, new XSSFColor(rightBorderColor));
             cellStyle.SetBorderColor(BorderSide.TOP, new XSSFColor(topBorderColor));
 
             return cellStyle;
         }
 
+        /// <summary>
+        /// Sets the double border bottom to cell.
+        /// </summary>
+        /// <param name="cellStyle">The cell style.</param>
+        /// <param name="topBorderColor">Color of the top border.</param>
+        /// <param name="leftBorderColor">Color of the left border.</param>
+        /// <param name="rightBorderColor">Color of the right border.</param>
+        /// <param name="bottomBorderColor">Color of the bottom border.</param>
+        /// <returns>Cell style.</returns>
         public static XSSFCellStyle SetDoubleBorderBottomToCell(
             XSSFCellStyle cellStyle,
             Color topBorderColor,
-            Color leftBoderColor,
+            Color leftBorderColor,
             Color rightBorderColor,
             Color bottomBorderColor)
         {
@@ -321,7 +351,36 @@ namespace SaveBetsBusiness.Common
             cellStyle.BorderTop = BorderStyle.Thin;
 
             cellStyle.SetBorderColor(BorderSide.BOTTOM, new XSSFColor(bottomBorderColor));
-            cellStyle.SetBorderColor(BorderSide.LEFT, new XSSFColor(leftBoderColor));
+            cellStyle.SetBorderColor(BorderSide.LEFT, new XSSFColor(leftBorderColor));
+            cellStyle.SetBorderColor(BorderSide.RIGHT, new XSSFColor(rightBorderColor));
+            cellStyle.SetBorderColor(BorderSide.TOP, new XSSFColor(topBorderColor));
+
+            return cellStyle;
+        }
+
+        /// <summary>
+        /// Sets the bold border bottom to cell.
+        /// </summary>
+        /// <param name="cellStyle">The cell style.</param>
+        /// <param name="topBorderColor">Color of the top border.</param>
+        /// <param name="leftBorderColor">Color of the left border.</param>
+        /// <param name="rightBorderColor">Color of the right border.</param>
+        /// <param name="bottomBorderColor">Color of the bottom border.</param>
+        /// <returns>Cell style.</returns>
+        public static XSSFCellStyle SetBoldBorderBottomToCell(
+            XSSFCellStyle cellStyle,
+            Color topBorderColor,
+            Color leftBorderColor,
+            Color rightBorderColor,
+            Color bottomBorderColor)
+        {
+            cellStyle.BorderBottom = BorderStyle.Medium;
+            cellStyle.BorderLeft = BorderStyle.Thin;
+            cellStyle.BorderRight = BorderStyle.Thin;
+            cellStyle.BorderTop = BorderStyle.Thin;
+
+            cellStyle.SetBorderColor(BorderSide.BOTTOM, new XSSFColor(bottomBorderColor));
+            cellStyle.SetBorderColor(BorderSide.LEFT, new XSSFColor(leftBorderColor));
             cellStyle.SetBorderColor(BorderSide.RIGHT, new XSSFColor(rightBorderColor));
             cellStyle.SetBorderColor(BorderSide.TOP, new XSSFColor(topBorderColor));
 
@@ -365,6 +424,14 @@ namespace SaveBetsBusiness.Common
             }
         }
 
+        /// <summary>
+        /// Creates the font.
+        /// </summary>
+        /// <param name="excelFile">The excel file.</param>
+        /// <param name="fontColor">Color of the font.</param>
+        /// <param name="bold">Set font is bold or not.</param>
+        /// <param name="underlineType">Type of the underline.</param>
+        /// <returns>The font data.</returns>
         public static XSSFFont CreateFont(XSSFWorkbook excelFile, Color fontColor, bool bold, FontUnderlineType underlineType)
         {
             XSSFFont font = excelFile.CreateFont() as XSSFFont;
