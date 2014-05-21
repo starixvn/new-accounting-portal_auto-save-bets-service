@@ -53,43 +53,55 @@ namespace SaveBetsBusiness.Service
             {
                 _jobs = _processSaveBets.Jobs;
                 matchId = _processSaveBets.MatchId;
+
                 var matchInfo = _processSaveBets.MatchInfo;
-                DateTime eventDate = Converter.ToDateTime(matchInfo["eventdate"]);
 
-                if (_jobs.Count == 0 || matchId == 0)
+                if (matchInfo == null)
                 {
-                    ////Jobs are empty, so the service does nothing.
-                    return;
+                    if (matchId != AppSettings.MatchId)
+                    {
+                        Mailing.MatchEmptyDataEmailNotification(matchId);
+                    }
                 }
+                else
+                {
+                    DateTime eventDate = Converter.ToDateTime(matchInfo["eventdate"]);
 
-                excelFile = new XSSFWorkbook();
+                    if (_jobs.Count == 0 || matchId == 0)
+                    {
+                        ////Jobs are empty, so the service does nothing.
+                        return;
+                    }
 
-                ////1. SUM - Render data excel file at Summary: Top Left, Top Right and Bottom
-                RenderSUMSheet(ref excelFile);
+                    excelFile = new XSSFWorkbook();
 
-                ////2. TB - Render data excel file at sheet Dead-TB/Live-TB
-                RenderDeadTB_LiveTBSheet(ref excelFile);
+                    ////1. SUM - Render data excel file at Summary: Top Left, Top Right and Bottom
+                    RenderSUMSheet(ref excelFile);
 
-                ////3.Bets - Render each bettype a Sheet
-                RenderEachBettypeLiveIndicatorSheet(ref excelFile);
+                    ////2. TB - Render data excel file at sheet Dead-TB/Live-TB
+                    RenderDeadTB_LiveTBSheet(ref excelFile);
 
-                string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
-                string reportName = string.Format(
-                    "{0}_{1}_{2}.{3}",
-                    matchInfo["matchid"],
-                    eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
-                    matchInfo["SportType"],
-                    "xlsx");
+                    ////3.Bets - Render each bettype a Sheet
+                    RenderEachBettypeLiveIndicatorSheet(ref excelFile);
 
-                string reportPath = Path.Combine(reportDirectory, reportName);
+                    string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
+                    string reportName = string.Format(
+                        "{0}_{1}_{2}.{3}",
+                        matchInfo["matchid"],
+                        eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
+                        matchInfo["SportType"],
+                        "xlsx");
 
-                fileStream = new FileStream(
-                    reportPath,
-                    FileMode.Create,
-                    FileAccess.Write);
+                    string reportPath = Path.Combine(reportDirectory, reportName);
 
-                excelFile.Write(fileStream);
-                isEndMatch = _processSaveBets.IsEndMatch;
+                    fileStream = new FileStream(
+                        reportPath,
+                        FileMode.Create,
+                        FileAccess.Write);
+
+                    excelFile.Write(fileStream);
+                    isEndMatch = _processSaveBets.IsEndMatch;
+                }
             }
             catch (Exception ex)
             {
@@ -104,6 +116,7 @@ namespace SaveBetsBusiness.Service
                     _processSaveBets.ExecuteEndMatchJob(criteria);
                 }
 
+                AppSettings.MatchId = matchId;
                 fileStream.Close();
                 fileStream.Dispose();
             }

@@ -127,21 +127,6 @@ namespace SaveBetsBusiness
             }
         }
 
-        /// <summary>
-        /// Gets connection string.
-        /// </summary>
-        /// <value>
-        /// The Minute.
-        /// </value>
-        public static string ConnectionString
-        {
-            get
-            {
-                var val = ConfigurationManager.AppSettings["SQLiteDBPath"];
-                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["SQLiteDBPath"]);
-            }
-        }
-
         public static string ExportDataDirectory
         {
             get
@@ -203,6 +188,12 @@ namespace SaveBetsBusiness
                 var val = ConfigurationManager.AppSettings["AdminEmail"];
                 return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["AdminEmail"]);
             }
+        }
+
+        public static int MatchId
+        {
+            get;
+            set;
         }
     }
 }
