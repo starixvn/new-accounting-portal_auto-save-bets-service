@@ -49,6 +49,9 @@
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\_Dependencies\Entlib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
     <Reference Include="NPOI, Version=2.0.6.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\_Dependencies\Fanex.NAP.Framework\NPOI.dll</HintPath>

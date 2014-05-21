@@ -69,9 +69,7 @@ namespace SaveBetsBusiness.Service.Implement
                     .ToList();
 
                 _endMatch = jobsByMatch.AsEnumerable()
-                    .Where(m => m["JobType"].ToString().ToLower() == KeyConstants.End.ToLower()).ToList().Count > 0 ?
-                    true : 
-                    false;
+                    .Where(m => m["JobType"].ToString().ToLower() == KeyConstants.End.ToLower()).ToList().Count > 0;
 
                 return jobsByMatch;
             }
