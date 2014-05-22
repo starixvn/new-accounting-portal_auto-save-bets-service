@@ -19,7 +19,9 @@ namespace SaveBetsBusiness.Common
             string message = ex.Message +
                               "<br>\r\nSOURCE: " + ex.Source +
                               "<br>\r\nTARGETSITE: " + ex.TargetSite +
-                              "<br>\r\nSTACKTRACE: " + ex.StackTrace;
+                              "<br>\r\nSTACKTRACE: " + ex.StackTrace +
+                              "<br>\r\nINNEREXCEPTION: " + ex.InnerException +
+                              "<br>\r\nMESSAGE: " + ex.Message;
             Logger.Log.Error(message);
         }
     }

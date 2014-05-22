@@ -117,8 +117,11 @@ namespace SaveBetsBusiness.Service
                 }
 
                 AppSettings.MatchId = matchId;
-                fileStream.Close();
-                fileStream.Dispose();
+                if (fileStream != null)
+                {
+                    fileStream.Close();
+                    fileStream.Dispose();
+                }
             }
         }
 
