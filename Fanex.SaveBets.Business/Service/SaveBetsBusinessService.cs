@@ -47,12 +47,13 @@ namespace SaveBetsBusiness.Service
         {
             FileStream fileStream = null;
             XSSFWorkbook excelFile = null;
-            bool isEndMatch = false;
             int matchId = 0;
             try
             {
                 _jobs = _processSaveBets.Jobs;
                 matchId = _processSaveBets.MatchId;
+                ExecuteEndMatchJobCriteria endMatchCriteria = new ExecuteEndMatchJobCriteria();
+                endMatchCriteria.MatchId = matchId;
 
                 var matchInfo = _processSaveBets.MatchInfo;
 
@@ -100,22 +101,17 @@ namespace SaveBetsBusiness.Service
                         FileAccess.Write);
 
                     excelFile.Write(fileStream);
-                    isEndMatch = _processSaveBets.IsEndMatch;
                 }
+
+                _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
             finally
             {
-                if (isEndMatch)
-                {
-                    ExecuteEndMatchJobCriteria criteria = new ExecuteEndMatchJobCriteria();
-                    criteria.MatchId = matchId;
-                    _processSaveBets.ExecuteEndMatchJob(criteria);
-                }
-
                 AppSettings.MatchId = matchId;
                 if (fileStream != null)
                 {
@@ -143,7 +139,8 @@ namespace SaveBetsBusiness.Service
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
             finally
             {
@@ -195,7 +192,8 @@ namespace SaveBetsBusiness.Service
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
             finally
             {
@@ -242,7 +240,8 @@ namespace SaveBetsBusiness.Service
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
             finally
             {

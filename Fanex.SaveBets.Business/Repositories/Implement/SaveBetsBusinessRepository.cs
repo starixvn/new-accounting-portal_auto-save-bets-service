@@ -11,6 +11,7 @@ namespace SaveBetsBusiness.Repositories.Implement
     using Fanex.Data;
     using SaveBetsBusiness.Criteria;
     using SaveBetsBusiness.Repositories.Interface;
+    using SaveBetsBusiness.Common;
 
     /// <summary>
     /// TODO: Update summary.
@@ -41,7 +42,8 @@ namespace SaveBetsBusiness.Repositories.Implement
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
 
             return dataTable;
@@ -74,7 +76,8 @@ namespace SaveBetsBusiness.Repositories.Implement
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
 
             return dataTable;
@@ -107,7 +110,8 @@ namespace SaveBetsBusiness.Repositories.Implement
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
 
             return dataTable;
@@ -140,7 +144,8 @@ namespace SaveBetsBusiness.Repositories.Implement
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
 
             return dataTable;
@@ -162,7 +167,8 @@ namespace SaveBetsBusiness.Repositories.Implement
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
 
             return reader;
@@ -184,7 +190,8 @@ namespace SaveBetsBusiness.Repositories.Implement
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
 
             return reader;
@@ -206,7 +213,8 @@ namespace SaveBetsBusiness.Repositories.Implement
             }
             catch (Exception ex)
             {
-                throw ex;
+                LogExtensions.ExceptionHandler(ex);
+                throw;
             }
         }
     }
