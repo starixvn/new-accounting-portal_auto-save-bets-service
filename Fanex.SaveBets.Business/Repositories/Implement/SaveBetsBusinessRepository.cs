@@ -7,12 +7,12 @@
 namespace SaveBetsBusiness.Repositories.Implement
 {
     using System;
+    using System.Collections;
     using System.Data;
     using Fanex.Data;
+    using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Criteria;
     using SaveBetsBusiness.Repositories.Interface;
-    using SaveBetsBusiness.Common;
-    using System.Collections;
 
     /// <summary>
     /// TODO: Update summary.
