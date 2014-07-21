@@ -57,7 +57,7 @@ namespace SaveBetsBusiness.Service
 
                 var matchInfo = _processSaveBets.MatchInfo;
 
-                if (_jobs.Count == 0 || matchId == 0)
+                if (_jobs.Count == 0 || matchId == 0 || matchInfo == null)
                 {
                     ////Jobs are empty, so the service does nothing.
                     if (matchId != AppSettings.MatchId)
