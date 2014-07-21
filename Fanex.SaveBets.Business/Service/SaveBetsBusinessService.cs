@@ -62,9 +62,12 @@ namespace SaveBetsBusiness.Service
                     ////Jobs are empty, so the service does nothing.
                     if (matchId != AppSettings.MatchId)
                     {
-                        Mailing.MatchEmptyDataEmailNotification(matchId);
-                        return;
-                    }                    
+                        Mailing.MatchEmptyDataEmailNotification(matchId);                       
+                    }
+
+                    _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
+
+                    return;
                 }
 
                 DateTime eventDate = Converter.ToDateTime(matchInfo["eventdate"]);                  
