@@ -195,5 +195,14 @@ namespace SaveBetsBusiness
             get;
             set;
         }
+
+        public static int ForceRunningWithMatchId
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["ForceRunning.MatchId"];
+                return val == null ? 0 : Convert.ToInt32(ConfigurationManager.AppSettings["ForceRunning.MatchId"]);
+            }
+        }
     }
 }

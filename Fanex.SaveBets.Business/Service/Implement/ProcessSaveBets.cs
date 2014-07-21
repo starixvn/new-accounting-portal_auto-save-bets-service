@@ -42,7 +42,7 @@ namespace SaveBetsBusiness.Service.Implement
                 List<DataRow> jobsByMatch = new List<DataRow>();
 
                 var jobs = _repository.GetSaveGetJobs();
-                if (jobs == null)
+                if (jobs == null || jobs.Rows.Count == 0)
                 {
                     return jobsByMatch;
                 }

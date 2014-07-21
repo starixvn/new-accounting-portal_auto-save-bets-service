@@ -12,6 +12,7 @@ namespace SaveBetsBusiness.Repositories.Implement
     using SaveBetsBusiness.Criteria;
     using SaveBetsBusiness.Repositories.Interface;
     using SaveBetsBusiness.Common;
+    using System.Collections;
 
     /// <summary>
     /// TODO: Update summary.
@@ -33,6 +34,13 @@ namespace SaveBetsBusiness.Repositories.Implement
             {
                 using (ObjectDb db = new ObjectDb("Save_GetJobs"))
                 {
+                    if (AppSettings.ForceRunning && AppSettings.ForceRunningOnProcessing)
+                    {
+                        Hashtable param = new Hashtable();
+                        param.Add("matchid", AppSettings.ForceRunningWithMatchId);
+                        db.AssignParamValues(param);
+                    }
+
                     var dataSet = db.ExecuteDataSet();
                     if (dataSet != null && dataSet.Tables.Count > 0)
                     {

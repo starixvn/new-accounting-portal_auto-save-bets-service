@@ -80,8 +80,15 @@ namespace AutoSaveBetsService
                 if (!AppSettings.OnProcessing)
                 {
                     AppSettings.OnProcessing = true;
+
+                    if (AppSettings.ForceRunning && !AppSettings.ForceRunningOnProcessing)
+                    {
+                        AppSettings.ForceRunningOnProcessing = true;
+                    }
+
                     service.ProcessSaveBets();
-                    AppSettings.OnProcessing = false;
+
+                    AppSettings.OnProcessing = false;                    
                 }              
             }
             catch (Exception ex)
