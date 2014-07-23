@@ -54,6 +54,7 @@ namespace SaveBetsBusiness.Service.Implement
             bool isHaveLoseTicket = false;
             decimal oddTotalByBetType = 0, fc_p3Total = 0, fc_p2Total = 0, fc_p1Total = 0, fc_p0Total = 0, fc_m1Total = 0, fc_m2Total = 0, fc_m3Total = 0;
             decimal homeTotalByBetType = 0, awayTotalByBetType = 0;
+            decimal fc_pXTotal = 0, fc_mXTotal = 0;
 
             XSSFCellStyle headerStyle = NPOIExcelUtility.HeaderStyle(excelFile);
             NPOIExcelUtility.SetBorderToCell(headerStyle);
@@ -73,7 +74,7 @@ namespace SaveBetsBusiness.Service.Implement
             NPOIExcelUtility.SetBorderToCell(decimalNumberStyle);
             decimalNumberStyle.Alignment = HorizontalAlignment.Center;
 
-            XSSFCellStyle yellowBoldDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, true, Color.Black);
+            XSSFCellStyle yellowBoldDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.Yellow, true, Color.Black);
             NPOIExcelUtility.SetBorderToCell(yellowBoldDecimalNumberStyle, Color.Black, _borderColor, _borderColor, Color.Black);
             yellowBoldDecimalNumberStyle.Alignment = HorizontalAlignment.Center;
             yellowBoldDecimalNumberStyle.DataFormat = dataFormat.GetFormat(PositiveNumberFormat);
@@ -116,15 +117,17 @@ namespace SaveBetsBusiness.Service.Implement
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, reader["hdp"], decimalNumberStyle);
                 string score = string.Format("{0}-{1}", reader["livehomescore"], reader["liveawayscore"]);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, score, textStyle);
-                decimal odds = Converter.ToDecimal(reader["FC_m3"]) == 0 ?
+                decimal odds = Converter.ToDecimal(reader["FC_mX"]) == 0 ?
                     0 :
                     Converter.ToDecimal(
-                    Converter.ToDecimal(reader["FC_p3"]) /
-                    Converter.ToDecimal(reader["FC_m3"]));
+                    Converter.ToDecimal(reader["FC_pX"]) /
+                    Converter.ToDecimal(reader["FC_mX"]));
+                fc_pXTotal += Converter.ToDecimal(reader["FC_pX"]);
                 fc_p3Total += Converter.ToDecimal(reader["FC_p3"]);
                 fc_p2Total += Converter.ToDecimal(reader["FC_p2"]);
                 fc_p1Total += Converter.ToDecimal(reader["FC_p1"]);
                 fc_p0Total += Converter.ToDecimal(reader["FC_p0"]);
+                fc_mXTotal += Converter.ToDecimal(reader["FC_mX"]);
                 fc_m1Total += Converter.ToDecimal(reader["FC_m1"]);
                 fc_m2Total += Converter.ToDecimal(reader["FC_m2"]);
                 fc_m3Total += Converter.ToDecimal(reader["FC_m3"]);
@@ -203,7 +206,7 @@ namespace SaveBetsBusiness.Service.Implement
 
             if (numberBetTypeElements > 0)
             {
-                oddTotalByBetType = fc_m3Total == 0 ? 0 : fc_p3Total / fc_m3Total;
+                oddTotalByBetType = fc_mXTotal == 0 ? 0 : fc_pXTotal / fc_mXTotal;
                 row = worksheet.CreateRow(currentRow) as XSSFRow;
                 currentColumn = 0;
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Total, boldTextStyle);
