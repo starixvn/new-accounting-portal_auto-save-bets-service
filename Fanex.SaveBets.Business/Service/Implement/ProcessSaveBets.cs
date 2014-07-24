@@ -44,6 +44,7 @@ namespace SaveBetsBusiness.Service.Implement
                 var jobs = _repository.GetSaveGetJobs();
                 if (jobs == null || jobs.Rows.Count == 0)
                 {
+                    _matchId = 0;
                     return jobsByMatch;
                 }
 
