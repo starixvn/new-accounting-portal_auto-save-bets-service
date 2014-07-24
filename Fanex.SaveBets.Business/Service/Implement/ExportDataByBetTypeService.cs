@@ -435,19 +435,19 @@ namespace SaveBetsBusiness.Service.Implement
 
             bool isNotShowTeamAndHdpColumn = this.IsNotShowTeamAndHdpColumnByBettype(bettype);
 
-            worksheet.SetColumnWidth(0, 200 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(2, 170 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(4, 250 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(0, 170 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(2, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(4, 220 * NPOIExcelUtility.FontWidth);
 
             if (isNotShowTeamAndHdpColumn)
             {
-                worksheet.SetColumnWidth(8, 250 * NPOIExcelUtility.FontWidth);
-                worksheet.SetColumnWidth(9, 170 * NPOIExcelUtility.FontWidth);
+                worksheet.SetColumnWidth(8, 220 * NPOIExcelUtility.FontWidth);
+                worksheet.SetColumnWidth(9, 150 * NPOIExcelUtility.FontWidth);
             }
             else
             {
-                worksheet.SetColumnWidth(11, 250 * NPOIExcelUtility.FontWidth);
-                worksheet.SetColumnWidth(12, 170 * NPOIExcelUtility.FontWidth);
+                worksheet.SetColumnWidth(11, 220 * NPOIExcelUtility.FontWidth);
+                worksheet.SetColumnWidth(12, 150 * NPOIExcelUtility.FontWidth);
             }
         }
 
@@ -462,17 +462,17 @@ namespace SaveBetsBusiness.Service.Implement
                 worksheet.SetColumnWidth(i, 80 * NpoiExcelExtensions.FontWidth);
             }
 
-            worksheet.SetColumnWidth(0, 200 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(2, 170 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(4, 250 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(9, 250 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(10, 170 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(0, 170 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(2, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(4, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(9, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(10, 150 * NPOIExcelUtility.FontWidth);
 
-            worksheet.SetColumnWidth(12, 200 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(14, 170 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(16, 250 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(21, 250 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(22, 170 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(12, 170 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(14, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(16, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(21, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(22, 150 * NPOIExcelUtility.FontWidth);
         }
 
         /// <summary>
@@ -486,23 +486,23 @@ namespace SaveBetsBusiness.Service.Implement
                 worksheet.SetColumnWidth(i, 80 * NpoiExcelExtensions.FontWidth);
             }
 
-            worksheet.SetColumnWidth(0, 200 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(2, 170 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(4, 250 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(6, 250 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(7, 170 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(0, 170 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(2, 150 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(4, 220 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(6, 220 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(7, 150 * NpoiExcelExtensions.FontWidth);
 
-            worksheet.SetColumnWidth(9, 200 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(11, 170 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(13, 250 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(15, 250 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(16, 170 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(9, 170 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(11, 150 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(13, 220 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(15, 220 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(16, 150 * NpoiExcelExtensions.FontWidth);
 
-            worksheet.SetColumnWidth(18, 200 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(20, 170 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(22, 250 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(24, 250 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(25, 170 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(18, 170 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(20, 150 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(22, 220 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(24, 220 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(25, 150 * NpoiExcelExtensions.FontWidth);
         }
 
         /// <summary>

@@ -56,7 +56,11 @@ namespace SaveBetsBusiness.Service
                 ExecuteEndMatchJobCriteria endMatchCriteria = new ExecuteEndMatchJobCriteria();
                 endMatchCriteria.MatchId = matchId;
 
-                if (_jobs.Count == 0)
+                if (matchId == 0)
+                {
+                    return;
+                }
+
                 {
                     ////Jobs are empty, so the service does nothing.
                     if (matchId != AppSettings.MatchId && matchId != 0)

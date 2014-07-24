@@ -133,6 +133,11 @@ namespace SaveBetsBusiness.Repositories.Implement
         public DataTable GetMatchInfo(int matchId)
         {
             DataTable dataTable = new DataTable();
+            if (matchId == 0)
+            {
+                return dataTable;
+            }
+
             try
             {
                 GetMatchInfoCriteria criteria = new GetMatchInfoCriteria();

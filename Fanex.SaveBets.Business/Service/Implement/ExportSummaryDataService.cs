@@ -98,8 +98,16 @@ namespace SaveBetsBusiness.Service.Implement
         {
             for (int i = 0; i < 19; i++)
             {
-                worksheet.SetColumnWidth(i, 120 * NpoiExcelExtensions.FontWidth);
+                worksheet.SetColumnWidth(i, 90 * NpoiExcelExtensions.FontWidth);
             }
+
+            worksheet.SetColumnWidth(0, 100 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(1, 100 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(2, 100 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(10, 80 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(11, 80 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(12, 80 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(15, 120 * NpoiExcelExtensions.FontWidth);
         }
 
         /// <summary>

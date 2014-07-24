@@ -246,12 +246,12 @@ namespace SaveBetsBusiness.Service.Implement
         {
             for (int i = 0; i < 12; i++)
             {
-                worksheet.SetColumnWidth(i, 150 * NpoiExcelExtensions.FontWidth);
+                worksheet.SetColumnWidth(i, 120 * NpoiExcelExtensions.FontWidth);
             }
 
-            worksheet.SetColumnWidth(0, 120 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(1, 120 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(2, 120 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(0, 90 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(1, 90 * NpoiExcelExtensions.FontWidth);
+            worksheet.SetColumnWidth(2, 90 * NpoiExcelExtensions.FontWidth);
         }
 
         public void Dispose()
