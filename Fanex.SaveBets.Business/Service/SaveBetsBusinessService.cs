@@ -30,6 +30,7 @@ namespace SaveBetsBusiness.Service
     {
         private IProcessSaveBets _processSaveBets = null;
         private List<DataRow> _jobs = null;
+        private DataRow _matchInfo = null;
 
         public SaveBetsBusinessService()
         {
@@ -61,9 +62,9 @@ namespace SaveBetsBusiness.Service
                     return;
                 }
 
-                var matchInfo = _processSaveBets.MatchInfo;
+                _matchInfo = _processSaveBets.MatchInfo;
 
-                if (_jobs.Count == 0 || matchInfo == null)
+                if (_jobs.Count == 0 || _matchInfo == null)
                 {
                     ////Jobs are empty, so the service does nothing.
                     if (matchId != AppSettings.MatchId)
@@ -76,7 +77,7 @@ namespace SaveBetsBusiness.Service
                     return;
                 }
 
-                DateTime eventDate = Converter.ToDateTime(matchInfo["eventdate"]);                  
+                DateTime eventDate = Converter.ToDateTime(_matchInfo["eventdate"]);                  
 
                 excelFile = new XSSFWorkbook();
 
@@ -92,9 +93,9 @@ namespace SaveBetsBusiness.Service
                 string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
                 string reportName = string.Format(
                     "{0}_{1}_{2}.{3}",
-                    matchInfo["matchid"],
+                    _matchInfo["matchid"],
                     eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
-                    matchInfo["SportType"],
+                    _matchInfo["SportType"],
                     "xlsx");
 
                 string reportPath = Path.Combine(reportDirectory, reportName);
@@ -133,12 +134,11 @@ namespace SaveBetsBusiness.Service
             ExportSummaryDataService _exportSummaryService = null;
             try
             {
-                var matchInfo = _processSaveBets.MatchInfo;
                 var turnovers = _processSaveBets.Turnovers;
                 var winlosses = _processSaveBets.WinLosses;
                 //// your code should be put here
                 _exportSummaryService = new ExportSummaryDataService();
-                _exportSummaryService.ExportSummarySheet(excelFile, matchInfo, turnovers, winlosses);
+                _exportSummaryService.ExportSummarySheet(excelFile, _matchInfo, turnovers, winlosses);
             }
             catch (Exception ex)
             {
