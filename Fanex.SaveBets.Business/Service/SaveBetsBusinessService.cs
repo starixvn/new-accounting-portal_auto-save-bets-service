@@ -52,12 +52,18 @@ namespace SaveBetsBusiness.Service
             {
                 _jobs = _processSaveBets.Jobs;
                 matchId = _processSaveBets.MatchId;
+
                 ExecuteEndMatchJobCriteria endMatchCriteria = new ExecuteEndMatchJobCriteria();
                 endMatchCriteria.MatchId = matchId;
 
+                if (matchId == 0)
+                {
+                    return;
+                }
+
                 var matchInfo = _processSaveBets.MatchInfo;
 
-                if (_jobs.Count == 0 || matchId == 0 || matchInfo == null)
+                if (_jobs.Count == 0 || matchInfo == null)
                 {
                     ////Jobs are empty, so the service does nothing.
                     if (matchId != AppSettings.MatchId)
