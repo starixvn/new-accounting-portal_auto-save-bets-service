@@ -57,22 +57,17 @@ namespace SaveBetsBusiness.Service
                 ExecuteEndMatchJobCriteria endMatchCriteria = new ExecuteEndMatchJobCriteria();
                 endMatchCriteria.MatchId = matchId;
 
-                if (matchId == 0)
-                {
-                    return;
-                }
-                
-                if (_jobs.Count == 0 || _matchInfo == null)
+                if (_jobs.Count == 0)
                 {
                     ////Jobs are empty, so the service does nothing.
                     if (matchId != AppSettings.MatchId && matchId != 0)
                     {
                         Mailing.MatchEmptyDataEmailNotification(matchId);
                         _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
-                    }                   
+                    }
 
                     return;
-                }                
+                }
 
                 var matchInfo = _processSaveBets.MatchInfo;
                 if (matchInfo == null)
@@ -85,7 +80,7 @@ namespace SaveBetsBusiness.Service
                     return;
                 }
 
-                DateTime eventDate = Converter.ToDateTime(_matchInfo["eventdate"]);                  
+                DateTime eventDate = Converter.ToDateTime(matchInfo["eventdate"]);
 
                 excelFile = new XSSFWorkbook();
 
@@ -101,9 +96,9 @@ namespace SaveBetsBusiness.Service
                 string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
                 string reportName = string.Format(
                     "{0}_{1}_{2}.{3}",
-                    _matchInfo["matchid"],
+                    matchInfo["matchid"],
                     eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
-                    _matchInfo["SportType"],
+                    matchInfo["SportType"],
                     "xlsx");
 
                 string reportPath = Path.Combine(reportDirectory, reportName);
@@ -114,7 +109,7 @@ namespace SaveBetsBusiness.Service
                     FileAccess.Write);
 
                 excelFile.Write(fileStream);
-               
+
                 _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
             }
             catch (Exception ex)
