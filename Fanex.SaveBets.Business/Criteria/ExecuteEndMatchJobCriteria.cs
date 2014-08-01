@@ -29,7 +29,7 @@ namespace SaveBetsBusiness.Criteria
 
         public override string GetSettingKey()
         {
-            return "Save_EndMatch";
+            return "NAP_SaveBet_EndMatch";
         }
     }
 }
