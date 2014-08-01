@@ -93,13 +93,12 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="SQLiteDatabase\AutoMail-WinLossByProducts.s3db" />
     <None Include="Templates\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DBACC.bodb02.bodbAdminNet.xml">
+    <Content Include="App_Data\DBACC.bodb_ACC.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

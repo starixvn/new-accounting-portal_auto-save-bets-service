@@ -32,7 +32,7 @@ namespace SaveBetsBusiness.Repositories.Implement
             DataTable dataTable = new DataTable();
             try
             {
-                using (ObjectDb db = new ObjectDb("Save_GetJobs"))
+                using (ObjectDb db = new ObjectDb("NAP_SaveBet_GetJob"))
                 {
                     if (AppSettings.ForceRunning && AppSettings.ForceRunningOnProcessing)
                     {

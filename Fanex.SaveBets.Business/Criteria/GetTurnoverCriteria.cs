@@ -24,7 +24,7 @@ namespace SaveBetsBusiness.Criteria
 
         public override string GetSettingKey()
         {
-            return "Save_GetTurnOver";
+            return "NAP_SaveBet_GetTurnOver";
         }
 
         public override bool IsValid()

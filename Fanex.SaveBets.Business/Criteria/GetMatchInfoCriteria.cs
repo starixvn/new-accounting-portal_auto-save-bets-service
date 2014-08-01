@@ -24,7 +24,7 @@ namespace SaveBetsBusiness.Criteria
 
         public override string GetSettingKey()
         {
-            return "Save_GetMatchInfo";
+            return "NAP_SaveBet_GetMatchInfo";
         }
 
         public override bool IsValid()
