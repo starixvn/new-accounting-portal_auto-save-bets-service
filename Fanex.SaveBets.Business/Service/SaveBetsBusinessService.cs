@@ -61,8 +61,7 @@ namespace SaveBetsBusiness.Service
                 {
                     return;
                 }
-
-                _matchInfo = _processSaveBets.MatchInfo;
+                
                 if (_jobs.Count == 0 || _matchInfo == null)
                 {
                     ////Jobs are empty, so the service does nothing.
