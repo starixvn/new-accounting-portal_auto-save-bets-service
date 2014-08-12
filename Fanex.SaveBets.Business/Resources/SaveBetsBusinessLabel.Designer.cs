@@ -205,6 +205,15 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Goal.
+        /// </summary>
+        internal static string Goal {
+            get {
+                return ResourceManager.GetString("Goal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hdp.
         /// </summary>
         internal static string Hdp {

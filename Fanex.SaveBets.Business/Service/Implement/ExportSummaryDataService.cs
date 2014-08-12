@@ -193,7 +193,8 @@ namespace SaveBetsBusiness.Service.Implement
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow) as XSSFRow;
 
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["Goal"]), textStyle);
+            string goal = string.Format("{0}: {1}", SaveBetsBusinessLabel.Goal, Converter.ToString2(matchInfo["Goal"]));
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, goal, textStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, firstGoalLastGoal, textStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HFirstGoalLastGoal, textStyle);
         }

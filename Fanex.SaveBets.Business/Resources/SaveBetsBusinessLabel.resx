@@ -159,6 +159,9 @@
   <data name="FC" xml:space="preserve">
     <value>FC</value>
   </data>
+  <data name="Goal" xml:space="preserve">
+    <value>Goal</value>
+  </data>
   <data name="Hdp" xml:space="preserve">
     <value>Hdp</value>
   </data>
