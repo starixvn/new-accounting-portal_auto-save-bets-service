@@ -69,8 +69,8 @@ namespace SaveBetsBusiness.Service
                     return;
                 }
 
-                var matchInfo = _processSaveBets.MatchInfo;
-                if (matchInfo == null)
+                _matchInfo = _processSaveBets.MatchInfo;
+                if (_matchInfo == null)
                 {
                     if (matchId != AppSettings.MatchId && matchId != 0)
                     {
@@ -80,7 +80,7 @@ namespace SaveBetsBusiness.Service
                     return;
                 }
 
-                DateTime eventDate = Converter.ToDateTime(matchInfo["eventdate"]);
+                DateTime eventDate = Converter.ToDateTime(_matchInfo["eventdate"]);
 
                 excelFile = new XSSFWorkbook();
 
@@ -96,9 +96,9 @@ namespace SaveBetsBusiness.Service
                 string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
                 string reportName = string.Format(
                     "{0}_{1}_{2}.{3}",
-                    matchInfo["matchid"],
+                    _matchInfo["matchid"],
                     eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
-                    matchInfo["SportType"],
+                    _matchInfo["SportType"],
                     "xlsx");
 
                 string reportPath = Path.Combine(reportDirectory, reportName);
