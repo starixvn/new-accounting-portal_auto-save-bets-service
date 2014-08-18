@@ -15,7 +15,9 @@ namespace SaveBetsBusiness.Service
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
+    using System.Net;
     using Fanex.Common;
+    using Fanex.ServiceManagement.Utility;
     using NPOI.XSSF.UserModel;
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Criteria;
@@ -31,11 +33,21 @@ namespace SaveBetsBusiness.Service
         private IProcessSaveBets _processSaveBets = null;
         private List<DataRow> _jobs = null;
         private DataRow _matchInfo = null;
+        private Impersonate _impersonate;
+        private NetworkCredential _networkCredential;
+        private string _ip;
+        private string _userName;
+        private string _password;
 
-        public SaveBetsBusinessService()
+        public SaveBetsBusinessService(string ip, string username, string password)
         {
             _processSaveBets = new ProcessSaveBets();
             _jobs = new List<DataRow>();
+            this._ip = ip;
+            this._userName = username;
+            this._password = password;
+            this._networkCredential = new NetworkCredential(username, password);
+            this._impersonate = new Impersonate(string.Empty, this._userName, this._password);
         }
 
         /// <summary>
@@ -93,22 +105,26 @@ namespace SaveBetsBusiness.Service
                 ////3.Bets - Render each bettype a Sheet
                 RenderEachBettypeLiveIndicatorSheet(ref excelFile);
 
-                string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
-                string reportName = string.Format(
-                    "{0}_{1}_{2}.{3}",
-                    _matchInfo["matchid"],
-                    eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
-                    _matchInfo["SportType"],
-                    "xlsx");
+                ////.Write Excel File
+                using (new NetworkConnection(@"\\" + this._ip, this._networkCredential))
+                {
+                    string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
+                    string reportName = string.Format(
+                        "{0}_{1}_{2}.{3}",
+                        _matchInfo["matchid"],
+                        eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
+                        _matchInfo["SportType"],
+                        "xlsx");
 
-                string reportPath = Path.Combine(reportDirectory, reportName);
+                    string reportPath = Path.Combine(reportDirectory, reportName);
 
-                fileStream = new FileStream(
-                    reportPath,
-                    FileMode.Create,
-                    FileAccess.Write);
+                    fileStream = new FileStream(
+                        reportPath,
+                        FileMode.Create,
+                        FileAccess.Write);
 
-                excelFile.Write(fileStream);
+                    excelFile.Write(fileStream);
+                }
 
                 _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
             }

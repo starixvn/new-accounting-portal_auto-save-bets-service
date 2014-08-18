@@ -13,6 +13,7 @@ namespace AutoSaveBetsService
     using System.IO;
     using System.ServiceProcess;
     using System.Timers;
+    using Fanex.Common;
     using Fanex.Data.Configuration;
     using SaveBetsBusiness;
     using SaveBetsBusiness.Common;
@@ -53,7 +54,16 @@ namespace AutoSaveBetsService
             AppSettings.OnProcessing = false;
             AppSettings.ForceRunningOnProcessing = false;
 
-            service = new SaveBetsBusinessService();
+            string ip = AppSettings.IP;
+            string username = AppSettings.UserName;
+            string password = AppSettings.Password;
+
+            if (AppSettings.IsEncryptPassword)
+            {
+                password = Cryptography.CfsDeCrypt(password);
+            }
+
+            service = new SaveBetsBusinessService(ip, username, password);
         }
 
         protected override void OnStop()

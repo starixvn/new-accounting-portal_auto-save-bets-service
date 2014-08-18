@@ -144,6 +144,8 @@
     </Compile>
     <Compile Include="Service\Implement\Mailing.cs" />
     <Compile Include="Service\SaveBetsBusinessService.cs" />
+    <Compile Include="Utility\Impersonate.cs" />
+    <Compile Include="Utility\NetworkConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Labels.resx">
