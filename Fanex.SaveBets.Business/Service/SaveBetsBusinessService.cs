@@ -106,7 +106,7 @@ namespace SaveBetsBusiness.Service
                 RenderEachBettypeLiveIndicatorSheet(ref excelFile);
 
                 ////.Write Excel File
-                using (new NetworkConnection(@"\\" + this._ip, this._networkCredential))
+               // using (new NetworkConnection(@"\\" + this._ip, this._networkCredential))
                 {
                     string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
                     string reportName = string.Format(
@@ -193,7 +193,7 @@ namespace SaveBetsBusiness.Service
                     XSSFSheet worksheet = excelFile.GetSheet(sheetName) as XSSFSheet ?? excelFile.CreateSheet(sheetName) as XSSFSheet;
                     _exportDeadAndLiveTotalBetService.InitColumnWidth(worksheet);
                     currentRow = 0;
-                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
+                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator).OrderBy(b => b.Bettype);
 
                     foreach (var bettype in bettypesByLiveIndicator)
                     {
@@ -241,7 +241,7 @@ namespace SaveBetsBusiness.Service
 
                 foreach (var liveIndicator in liveIndicators)
                 {
-                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator);
+                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator).OrderBy(b => b.Bettype);
 
                     foreach (var bettype in bettypesByLiveIndicator)
                     {
