@@ -57,14 +57,15 @@ namespace SaveBetsBusiness.Common
 
             CheckAndCreateDirectory(reportDataDirectory);
 
-            string directoryByYearAndMonth = string.Format(
-                "{0}{1}",
+            string directoryDate = string.Format(
+                "{0}{1}{2}",
                 eventDate.ToString("yyyy"),
-                eventDate.ToString("MM"));
-            string directoryByYearAndMonthPath = Path.Combine(reportDataDirectory, directoryByYearAndMonth);
-            CheckAndCreateDirectory(directoryByYearAndMonthPath);
+                eventDate.ToString("MM"),
+                eventDate.ToString("dd"));
+            string directoryPath = Path.Combine(reportDataDirectory, directoryDate);
+            CheckAndCreateDirectory(directoryPath);
 
-            return directoryByYearAndMonthPath;
+            return directoryPath;
         }
     }
 }

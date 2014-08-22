@@ -106,7 +106,7 @@ namespace SaveBetsBusiness.Service
                 RenderEachBettypeLiveIndicatorSheet(ref excelFile);
 
                 ////.Write Excel File
-               // using (new NetworkConnection(@"\\" + this._ip, this._networkCredential))
+                using (new NetworkConnection(@"\\" + this._ip, this._networkCredential))
                 {
                     string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
                     string reportName = string.Format(
