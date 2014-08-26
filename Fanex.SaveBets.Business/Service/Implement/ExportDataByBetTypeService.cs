@@ -243,7 +243,7 @@ namespace SaveBetsBusiness.Service.Implement
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["creator"]), textStyle);
                     currentRow++;
                 }
-                else if (Converter.ToString2(reader["betteam"]).ToLower() == "2")
+                else if (Converter.ToString2(reader["betteam"]).ToLower() == "x")
                 {
                     row = worksheet.GetRow(currentBetTwoRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetTwoRowIndex) as XSSFRow;
                     currentColumn = 9;
@@ -263,7 +263,7 @@ namespace SaveBetsBusiness.Service.Implement
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetTwoRowIndex, ref currentColumn, Converter.ToString2(reader["creator"]), textStyle);
                     currentBetTwoRowIndex++;
                 }
-                else if (Converter.ToString2(reader["betteam"]).ToLower() == "x")
+                else if (Converter.ToString2(reader["betteam"]).ToLower() == "2")
                 {
                     row = worksheet.GetRow(currentBetXRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetXRowIndex) as XSSFRow;
                     currentColumn = 18;
@@ -317,7 +317,7 @@ namespace SaveBetsBusiness.Service.Implement
                     Math.Round(Converter.ToDecimal(reader["cpstake"]), 2),
                     Math.Round(Converter.ToDecimal(reader["stake"]), 2));
 
-                if (Converter.ToString2(reader["betteam"]).ToLower() == "a")
+                if (Converter.ToString2(reader["betteam"]).ToLower() == "h")
                 {
                     row = worksheet.CreateRow(currentRow) as XSSFRow;
 
