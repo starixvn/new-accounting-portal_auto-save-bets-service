@@ -231,7 +231,7 @@ namespace SaveBetsBusiness.Service.Implement
 
                 if (Converter.ToString2(reader["betteam"]).ToLower() == "1")
                 {
-                    row = worksheet.CreateRow(currentRow) as XSSFRow;
+                    row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
@@ -319,7 +319,7 @@ namespace SaveBetsBusiness.Service.Implement
 
                 if (Converter.ToString2(reader["betteam"]).ToLower() == "h")
                 {
-                    row = worksheet.CreateRow(currentRow) as XSSFRow;
+                    row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
