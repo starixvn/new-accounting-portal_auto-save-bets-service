@@ -145,7 +145,7 @@ namespace SaveBetsBusiness.Service.Implement
                 decimal homeTotal = Converter.ToDecimal(reader["HomeTotal"]);
                 decimal awayTotal = Converter.ToDecimal(reader["AwayTotal"]);
                 homeTotalByBetType += homeTotal;
-                awayTotalByBetType += awayTotalByBetType;
+                awayTotalByBetType += awayTotal;
                 string balance = string.Format(
                         "{0} - {1}",
                         Math.Round(homeTotal, 2) == 0 ? 0 : Math.Round(homeTotal, 2),
