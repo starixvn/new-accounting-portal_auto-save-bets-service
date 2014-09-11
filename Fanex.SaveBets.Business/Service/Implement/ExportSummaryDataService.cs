@@ -133,12 +133,13 @@ namespace SaveBetsBusiness.Service.Implement
             XSSFCellStyle centerBoldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Black);
             NPOIExcelUtility.SetBorderToCell(centerBoldTextStyle);
 
-            string firstGoalLastGoal = string.Empty, _1HFirstGoalLastGoal = string.Empty, _1HFirstGoal = string.Empty, _1HLastGoal = string.Empty;
+            string _1HFirstGoal = string.Empty, _1HLastGoal = string.Empty, firstGoal = string.Empty, lastGoal = string.Empty;
+            int sportType = Converter.ToInt(matchInfo["SportType"]);
+            string status = Converter.ToString2(matchInfo["betstatus"]);
 
-            if (Converter.ToInt(matchInfo["SportType"]) == SoccerSportType)
+            if (sportType == SoccerSportType)
             {
-                string status = Converter.ToString2(matchInfo["betstatus"]);
-                this.GetFirstLastGoalInformation(out _1HFirstGoal, out _1HLastGoal, out firstGoalLastGoal, out _1HFirstGoalLastGoal, status);
+                this.GetFirstLastGoalInformation(out _1HFirstGoal, out _1HLastGoal, out firstGoal, out lastGoal, status);
             }
 
             row = worksheet.CreateRow(currentRow) as XSSFRow;
@@ -182,21 +183,28 @@ namespace SaveBetsBusiness.Service.Implement
             row = worksheet.CreateRow(currentRow) as XSSFRow;
 
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["FT"]), textStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["FG"]), textStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HFirstGoal, textStyle);
+            if (sportType == SoccerSportType)
+            {
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, firstGoal, textStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HFirstGoal, textStyle);
+            }
+
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow) as XSSFRow;
 
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["HT"]), textStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["LG"]), textStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HLastGoal, textStyle);
+            if (sportType == SoccerSportType)
+            {
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, lastGoal, textStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HLastGoal, textStyle);
+            }
+
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow) as XSSFRow;
 
             string goal = string.Format("{0}: {1}", SaveBetsBusinessLabel.Goal, Converter.ToString2(matchInfo["Goal"]));
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, goal, textStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, firstGoalLastGoal, textStyle);
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, _1HFirstGoalLastGoal, textStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, status, textStyle);
         }
 
         /// <summary>
@@ -695,47 +703,52 @@ namespace SaveBetsBusiness.Service.Implement
         /// </summary>
         /// <param name="firstHalfFirstGoal">The first half first goal.</param>
         /// <param name="firstHalfLastGoal">The first half last goal.</param>
-        /// <param name="firstGoalLastGoal">The first goal last goal.</param>
-        /// <param name="firstHalfFirstGoalLastGoal">The first half first goal last goal.</param>
+        /// <param name="firstGoal">The first goal.</param>
+        /// <param name="lastGoal">The last goal.</param>
         /// <param name="status">The status.</param>
         private void GetFirstLastGoalInformation(
             out string firstHalfFirstGoal,
             out string firstHalfLastGoal,
-            out string firstGoalLastGoal,
-            out string firstHalfFirstGoalLastGoal,
+            out string firstGoal,
+            out string lastGoal,
             string status)
         {
             firstHalfFirstGoal = string.Empty;
             firstHalfLastGoal = string.Empty;
-            firstGoalLastGoal = string.Empty;
-            firstHalfFirstGoalLastGoal = string.Empty;
-
+            firstGoal = string.Empty;
+            lastGoal = string.Empty;
             bool statusIsNullOrEmpty = string.IsNullOrEmpty(status);
+            string[] bettypeNameAndValue;
+            string[] betValues;
 
             if (statusIsNullOrEmpty)
             {
                 return;
             }
-            else
-            {
-                string[] bettypes = status.Split(new char[] { ';' });
-                foreach (string bettype in bettypes)
-                {
-                    if (bettype.StartsWith(BetTypeConstants.FirstHalfFirstGoalLastGoal))
-                    {
-                        firstHalfFirstGoalLastGoal = bettype;
-                        string[] bettypeNameAndValue = bettype.Split(new char[] { ':' });
-                        string[] betValues = bettypeNameAndValue[1].Split(new char[] { '-' });
-                        string firstHalfFirstGoalTeam = this.GetTeamFromBetValue(betValues[0]);
-                        string firstHalfLastGoalTeam = this.GetTeamFromBetValue(betValues[1]);
 
-                        firstHalfFirstGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel._1HFG, firstHalfFirstGoalTeam);
-                        firstHalfLastGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel._1HLG, firstHalfLastGoalTeam);
-                    }
-                    else if (bettype.StartsWith(BetTypeConstants.FirstGoalLastGoal))
-                    {
-                        firstGoalLastGoal = bettype;
-                    }
+            string[] bettypes = status.Split(new char[] { ';' });
+            foreach (string bettype in bettypes)
+            {
+                if (bettype.StartsWith(BetTypeConstants.FirstHalfFirstGoalLastGoal))
+                {
+                    bettypeNameAndValue = bettype.Split(new char[] { ':' });
+                    betValues = bettypeNameAndValue[1].Split(new char[] { '-' });
+                   
+                    string firstHalfFirstGoalTeam = this.GetTeamFromBetValue(betValues[0]);
+                    string firstHalfLastGoalTeam = this.GetTeamFromBetValue(betValues[1]);
+                    firstHalfFirstGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel._1HFG, firstHalfFirstGoalTeam);
+                    firstHalfLastGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel._1HLG, firstHalfLastGoalTeam);
+                }
+
+                if (bettype.StartsWith(BetTypeConstants.FirstGoalLastGoal))
+                {
+                    bettypeNameAndValue = bettype.Split(new char[] { ':' });
+                    betValues = bettypeNameAndValue[1].Split(new char[] { '-' });
+
+                    string fulltimeFirstGoalTeam = this.GetTeamFromBetValue(betValues[0]);
+                    string fulltimeLastGoalTeam = this.GetTeamFromBetValue(betValues[1]);
+                    firstGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel.FG, fulltimeFirstGoalTeam);
+                    lastGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel.LG, fulltimeLastGoalTeam);
                 }
             }
         }

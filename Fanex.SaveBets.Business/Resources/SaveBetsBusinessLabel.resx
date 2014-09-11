@@ -159,6 +159,9 @@
   <data name="FC" xml:space="preserve">
     <value>FC</value>
   </data>
+  <data name="FG" xml:space="preserve">
+    <value>FG</value>
+  </data>
   <data name="Goal" xml:space="preserve">
     <value>Goal</value>
   </data>
@@ -177,14 +180,23 @@
   <data name="IBC" xml:space="preserve">
     <value>IBC</value>
   </data>
+  <data name="LG" xml:space="preserve">
+    <value>LG</value>
+  </data>
   <data name="Live" xml:space="preserve">
     <value>Live</value>
   </data>
   <data name="Master" xml:space="preserve">
     <value>Master</value>
   </data>
+  <data name="NoGoal" xml:space="preserve">
+    <value>No Goal</value>
+  </data>
   <data name="Odds" xml:space="preserve">
     <value>Odds</value>
+  </data>
+  <data name="Refund" xml:space="preserve">
+    <value>Refund</value>
   </data>
   <data name="Reject" xml:space="preserve">
     <value>Reject</value>

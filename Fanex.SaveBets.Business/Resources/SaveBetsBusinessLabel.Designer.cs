@@ -205,6 +205,15 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FG.
+        /// </summary>
+        internal static string FG {
+            get {
+                return ResourceManager.GetString("FG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Goal.
         /// </summary>
         internal static string Goal {
@@ -259,6 +268,15 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LG.
+        /// </summary>
+        internal static string LG {
+            get {
+                return ResourceManager.GetString("LG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Live.
         /// </summary>
         internal static string Live {
@@ -277,11 +295,29 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No Goal.
+        /// </summary>
+        internal static string NoGoal {
+            get {
+                return ResourceManager.GetString("NoGoal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Odds.
         /// </summary>
         internal static string Odds {
             get {
                 return ResourceManager.GetString("Odds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refund.
+        /// </summary>
+        internal static string Refund {
+            get {
+                return ResourceManager.GetString("Refund", resourceCulture);
             }
         }
         

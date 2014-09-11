@@ -229,7 +229,10 @@ namespace SaveBetsBusiness.Service.Implement
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_m1Total, totalDecimalNumberStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_m2Total, totalDecimalNumberStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, fc_m3Total, totalDecimalNumberStyle);
-                string totalBalanceByBetType = string.Format("{0} - {1}", homeTotalByBetType, awayTotalByBetType);
+                string totalBalanceByBetType = string.Format(
+                    "{0} - {1}",
+                    Math.Round(homeTotalByBetType, 2),
+                    Math.Round(awayTotalByBetType, 2));
                 decimal totalByBetType = homeTotalByBetType - awayTotalByBetType;
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalBalanceByBetType, totalTextStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, totalByBetType, totalDecimalNumberStyle);
