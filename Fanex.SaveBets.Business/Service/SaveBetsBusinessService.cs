@@ -87,6 +87,7 @@ namespace SaveBetsBusiness.Service
                     if (matchId != AppSettings.MatchId && matchId != 0)
                     {
                         Mailing.MatchEmptyDataEmailNotification(matchId);
+                        _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
                     }
 
                     return;
