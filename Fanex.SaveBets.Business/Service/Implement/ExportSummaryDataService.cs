@@ -736,8 +736,12 @@ namespace SaveBetsBusiness.Service.Implement
                    
                     string firstHalfFirstGoalTeam = this.GetTeamFromBetValue(betValues[0]);
                     string firstHalfLastGoalTeam = this.GetTeamFromBetValue(betValues[1]);
-                    firstHalfFirstGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel._1HFG, firstHalfFirstGoalTeam);
-                    firstHalfLastGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel._1HLG, firstHalfLastGoalTeam);
+                    firstHalfFirstGoal = string.IsNullOrEmpty(firstHalfFirstGoalTeam) ?
+                        string.Empty :
+                        string.Format("{0}:{1}", SaveBetsBusinessLabel._1HFG, firstHalfFirstGoalTeam);
+                    firstHalfLastGoal = string.IsNullOrEmpty(firstHalfLastGoalTeam) ?
+                        string.Empty :
+                        string.Format("{0}:{1}", SaveBetsBusinessLabel._1HLG, firstHalfLastGoalTeam);
                 }
 
                 if (bettype.StartsWith(BetTypeConstants.FirstGoalLastGoal))
@@ -747,8 +751,12 @@ namespace SaveBetsBusiness.Service.Implement
 
                     string fulltimeFirstGoalTeam = this.GetTeamFromBetValue(betValues[0]);
                     string fulltimeLastGoalTeam = this.GetTeamFromBetValue(betValues[1]);
-                    firstGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel.FG, fulltimeFirstGoalTeam);
-                    lastGoal = string.Format("{0}:{1}", SaveBetsBusinessLabel.LG, fulltimeLastGoalTeam);
+                    firstGoal = string.IsNullOrEmpty(fulltimeFirstGoalTeam) ?
+                        string.Empty :
+                        string.Format("{0}:{1}", SaveBetsBusinessLabel.FG, fulltimeFirstGoalTeam);
+                    lastGoal = string.IsNullOrEmpty(fulltimeLastGoalTeam) ? 
+                        string.Empty :
+                        string.Format("{0}:{1}", SaveBetsBusinessLabel.LG, fulltimeLastGoalTeam);
                 }
             }
         }
