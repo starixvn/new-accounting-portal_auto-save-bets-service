@@ -175,10 +175,10 @@ namespace SaveBetsBusiness.Service.Implement
                         string wonBalance = string.Format(
                             "{0} - {1}",
                             Math.Round(wonHomeTotal, 2) == 0 ? 0 : Math.Round(wonHomeTotal, 2),
-                            Math.Round(loseHomeTotal, 2) == 0 ? 0 : Math.Round(loseHomeTotal, 2));
+                            Math.Round(wonAwayTotal, 2) == 0 ? 0 : Math.Round(wonAwayTotal, 2));
                         string loseBalance = string.Format(
                             "{0} - {1}",
-                            Math.Round(wonAwayTotal, 2) == 0 ? 0 : Math.Round(wonAwayTotal, 2),
+                            Math.Round(loseHomeTotal, 2) == 0 ? 0 : Math.Round(loseHomeTotal, 2),
                             Math.Round(loseAwayTotal, 2) == 0 ? 0 : Math.Round(loseAwayTotal, 2));
                         decimal wonTotal = wonHomeTotal - loseHomeTotal;
                         decimal loseTotal = wonAwayTotal - loseAwayTotal;
