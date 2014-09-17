@@ -180,8 +180,8 @@ namespace SaveBetsBusiness.Service.Implement
                             "{0} - {1}",
                             Math.Round(loseHomeTotal, 2) == 0 ? 0 : Math.Round(loseHomeTotal, 2),
                             Math.Round(loseAwayTotal, 2) == 0 ? 0 : Math.Round(loseAwayTotal, 2));
-                        decimal wonTotal = wonHomeTotal - loseHomeTotal;
-                        decimal loseTotal = wonAwayTotal - loseAwayTotal;
+                        decimal wonTotal = wonHomeTotal - wonAwayTotal;
+                        decimal loseTotal = loseHomeTotal - loseAwayTotal;
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, wonBalance, textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, wonTotal, boldDecimalNumberStyle);
                         int previousRow = currentRow - 1;
