@@ -92,13 +92,34 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="_Fanex.AutoSaveBets.Service.UAT.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="_Fanex.AutoSaveBets.Service.PRO.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="deployment.ignore">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Templates\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Content Include="_Fanex.AutoSaveBets.Service.Local.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\DBACC.bodb_ACC.bodbAdminNet.xml">
+    <Content Include="App_Data\Local\DBACC.bodb_ACC.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="App_Data\PRO\DBACC.bodb_ACC.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\UAT\DBACC.bodb_ACC.bodbAdminNet.xml">
+      <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

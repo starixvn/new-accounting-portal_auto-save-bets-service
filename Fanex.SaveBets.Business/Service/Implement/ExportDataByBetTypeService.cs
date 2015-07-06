@@ -180,6 +180,10 @@ namespace SaveBetsBusiness.Service.Implement
                 case BetTypeConstants.OverUnder:
                 case BetTypeConstants._1stOverUnder:
                 case BetTypeConstants.MoneyLine:
+                case BetTypeConstants.MyanmarHandicap:
+                case BetTypeConstants.MyanmarOverUnder:
+                case BetTypeConstants._1stMyanmarHandicap:
+                case BetTypeConstants._1stMyanmarOverUnder:
                     this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
                     break;
 
@@ -520,7 +524,11 @@ namespace SaveBetsBusiness.Service.Implement
                 bettype == BetTypeConstants.OddEven ||
                 bettype == BetTypeConstants._1stOverUnder ||
                 bettype == BetTypeConstants.OverUnder ||
-                bettype == BetTypeConstants.MoneyLine)
+                bettype == BetTypeConstants.MoneyLine ||
+                bettype == BetTypeConstants.MyanmarHandicap ||
+                bettype == BetTypeConstants.MyanmarOverUnder ||
+                bettype == BetTypeConstants._1stMyanmarHandicap ||
+                bettype == BetTypeConstants._1stMyanmarOverUnder)
             {
                 isShow = true;
             }

@@ -50,5 +50,11 @@ namespace SaveBetsBusiness.Constants
 
         public const string FirstHalfFirstGoalLastGoal = "1FL";
         public const string FirstGoalLastGoal = "FL";
+
+        public const int MyanmarHandicap = 301;
+        public const int _1stMyanmarHandicap = 303;
+
+        public const int MyanmarOverUnder = 302;
+        public const int _1stMyanmarOverUnder = 304;
     }
 }
