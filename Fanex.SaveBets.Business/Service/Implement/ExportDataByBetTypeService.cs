@@ -80,6 +80,10 @@ namespace SaveBetsBusiness.Service.Implement
                 case BetTypeConstants.OverUnder:
                 case BetTypeConstants._1stOverUnder:
                 case BetTypeConstants.MoneyLine:
+                case BetTypeConstants.MyanmarHandicap:
+                case BetTypeConstants.MyanmarOverUnder:
+                case BetTypeConstants._1stMyanmarHandicap:
+                case BetTypeConstants._1stMyanmarOverUnder:
                     this.InitTwoSectionColumnWidth(worksheet);
                     this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
@@ -128,10 +132,18 @@ namespace SaveBetsBusiness.Service.Implement
             bool isNotShowTeamAndHdpColumn = this.IsNotShowTeamAndHdpColumnByBettype(bettype);
             bool isShowHdpColumn = this.IsShowHdpColumnByBettype(bettype);
             bool isNotShowScoreColumn = this.IsNotShowScoreColumnByBetType(bettype);
+            bool isMyanmarOddsBettype = this.IsMyanmarOddBettype(bettype);
 
             if (isShowHdpColumn)
             {
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Hdp.ToUpper(), headerStyle);
+                if (isMyanmarOddsBettype)
+                {
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Hdp_Percent_Odds, headerStyle);
+                }
+                else
+                {
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Hdp.ToUpper(), headerStyle);
+                }
             }
             else if (!isNotShowTeamAndHdpColumn)
             {
@@ -180,11 +192,15 @@ namespace SaveBetsBusiness.Service.Implement
                 case BetTypeConstants.OverUnder:
                 case BetTypeConstants._1stOverUnder:
                 case BetTypeConstants.MoneyLine:
+               
+                    this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
+                    break;
+
                 case BetTypeConstants.MyanmarHandicap:
                 case BetTypeConstants.MyanmarOverUnder:
                 case BetTypeConstants._1stMyanmarHandicap:
                 case BetTypeConstants._1stMyanmarOverUnder:
-                    this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
+                    this.ExportMyanmarOddsTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
                     break;
 
                 case BetTypeConstants._1x2:
@@ -573,6 +589,109 @@ namespace SaveBetsBusiness.Service.Implement
             }
 
             return isNotShow;
+        }
+
+        private bool IsMyanmarOddBettype(int bettype)
+        {
+            bool isMyanmarOddBettype = false;
+            if (bettype == BetTypeConstants.MyanmarHandicap ||
+                bettype == BetTypeConstants.MyanmarOverUnder ||
+                bettype == BetTypeConstants._1stMyanmarHandicap ||
+                bettype == BetTypeConstants._1stMyanmarOverUnder)
+            {
+                isMyanmarOddBettype = true;
+            }
+
+            return isMyanmarOddBettype;
+        }
+
+        /// <summary>
+        /// Exports the two section content by bet type.
+        /// </summary>
+        /// <param name="excelFile">The excel file.</param>
+        /// <param name="worksheet">The worksheet.</param>
+        /// <param name="reader">The reader.</param>
+        /// <param name="currentRow">The current row.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
+        private void ExportMyanmarOddsTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow)
+        {
+            XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(textStyle);
+            XSSFCellStyle rightTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Right, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(rightTextStyle);
+            XSSFCellStyle boldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(boldTextStyle);
+            XSSFCellStyle redBoldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Red);
+            NPOIExcelUtility.SetBorderToCell(redBoldTextStyle);
+            XSSFCellStyle decimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, false, Color.Black);
+            NPOIExcelUtility.SetBorderToCell(decimalNumberStyle);
+            decimalNumberStyle.Alignment = HorizontalAlignment.Center;
+            XSSFCellStyle blueBoldDecimalNumberStyle = NPOIExcelUtility.DecimalStyle(excelFile, Color.White, true, Color.Blue);
+            NPOIExcelUtility.SetBorderToCell(blueBoldDecimalNumberStyle);
+            blueBoldDecimalNumberStyle.Alignment = HorizontalAlignment.Center;
+            int currentBetAwayTeamRowIndex = 1, currentColumn = 0;
+            XSSFRow row = null;
+
+            while (reader.Read())
+            {
+                string amount = string.Format(
+                    "{0}/{1}/{2}",
+                    Math.Round(Converter.ToDecimal(reader["cpstake"]) * Converter.ToDecimal(reader["virtualrate"]), 2),
+                    Math.Round(Converter.ToDecimal(reader["cpstake"]), 2),
+                    Math.Round(Converter.ToDecimal(reader["stake"]), 2));
+
+                decimal handicap_one = Math.Round(Converter.ToDecimal(reader["hdp1"]));
+                decimal oddsspread = Math.Round(Converter.ToDecimal(reader["oddsspread"]));
+                string handicap_Odds = string.Format(
+                    "{0} ({1})",
+                    handicap_one,
+                    oddsspread);
+
+                if (Converter.ToString2(reader["betteam"]).ToLower() == "h")
+                {
+                    row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
+
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["transid"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, amount, redBoldTextStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, handicap_Odds, rightTextStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(reader["livehomescore"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(reader["liveawayscore"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["betfrom"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["transdate"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["creator"]), textStyle);
+                    currentRow++;
+                }
+                else
+                {
+                    row = worksheet.GetRow(currentBetAwayTeamRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetAwayTeamRowIndex) as XSSFRow;
+                    currentColumn = 12;
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
+                    NPOIExcelUtility.RenderCell(
+                        ref worksheet,
+                        ref row,
+                        currentBetAwayTeamRowIndex,
+                        ref currentColumn,
+                        Converter.ToDecimal(reader["odds"]),
+                        blueBoldDecimalNumberStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["transid"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, amount, redBoldTextStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, handicap_Odds, rightTextStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToInt(reader["livehomescore"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToInt(reader["liveawayscore"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["betfrom"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["transdate"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["creator"]), textStyle);
+                    currentBetAwayTeamRowIndex++;
+                }
+
+                currentColumn = 0;
+            }
         }
     }
 }

@@ -232,6 +232,15 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HDP(% ODDS).
+        /// </summary>
+        internal static string Hdp_Percent_Odds {
+            get {
+                return ResourceManager.GetString("Hdp_Percent_Odds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hdp1.
         /// </summary>
         internal static string Hdp1 {
