@@ -192,8 +192,7 @@ namespace SaveBetsBusiness.Service.Implement
                 case BetTypeConstants.OverUnder:
                 case BetTypeConstants._1stOverUnder:
                 case BetTypeConstants.MoneyLine:
-               
-                    this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
+                    this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
                     break;
 
                 case BetTypeConstants.MyanmarHandicap:
@@ -312,7 +311,7 @@ namespace SaveBetsBusiness.Service.Implement
         [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow)
+        private void ExportTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow, int bettype)
         {
             XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
             NPOIExcelUtility.SetBorderToCell(textStyle);
@@ -328,6 +327,7 @@ namespace SaveBetsBusiness.Service.Implement
             blueBoldDecimalNumberStyle.Alignment = HorizontalAlignment.Center;
             int currentBetAwayTeamRowIndex = 1, currentColumn = 0;
             XSSFRow row = null;
+            bool isHandicapBettype = this.IsHandicapBettype(bettype);
 
             while (reader.Read())
             {
@@ -346,7 +346,17 @@ namespace SaveBetsBusiness.Service.Implement
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["transid"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, amount, redBoldTextStyle);
-                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["hdp1"]), decimalNumberStyle);
+                    
+                    if (isHandicapBettype)
+                    {
+                        decimal handicap = Converter.ToDecimal(reader["hdp2"]) - Converter.ToDecimal(reader["hdp1"]);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, handicap, decimalNumberStyle);
+                    }
+                    else
+                    {
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["hdp1"]), decimalNumberStyle);
+                    }
+
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(reader["livehomescore"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(reader["liveawayscore"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["betfrom"]), textStyle);
@@ -369,7 +379,17 @@ namespace SaveBetsBusiness.Service.Implement
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["transid"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, amount, redBoldTextStyle);
-                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["hdp1"]), decimalNumberStyle);
+                    
+                    if (isHandicapBettype)
+                    {
+                        decimal handicap = Converter.ToDecimal(reader["hdp1"]) - Converter.ToDecimal(reader["hdp2"]);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, handicap, decimalNumberStyle);
+                    }
+                    else
+                    {
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["hdp1"]), decimalNumberStyle);
+                    }
+
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToInt(reader["livehomescore"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToInt(reader["liveawayscore"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["betfrom"]), textStyle);
@@ -562,10 +582,7 @@ namespace SaveBetsBusiness.Service.Implement
             bool isNotShow = false;
 
             if (bettype == BetTypeConstants._1st1x2 ||
-                bettype == BetTypeConstants._1x2 ||
-                bettype == BetTypeConstants.CleanSheet ||
-                bettype == BetTypeConstants.DoubleChange ||
-                bettype == BetTypeConstants.BothOneNeitherTeamToScore)
+                bettype == BetTypeConstants._1x2)
             {
                 isNotShow = true;
             }
@@ -603,6 +620,18 @@ namespace SaveBetsBusiness.Service.Implement
             }
 
             return isMyanmarOddBettype;
+        }
+
+        private bool IsHandicapBettype(int bettype)
+        {
+            bool isHandicapBettype = false;
+
+            if (bettype == BetTypeConstants.Handicap || bettype == BetTypeConstants._1stHandicap)
+            {
+                isHandicapBettype = true;
+            }
+
+            return isHandicapBettype;
         }
 
         /// <summary>
