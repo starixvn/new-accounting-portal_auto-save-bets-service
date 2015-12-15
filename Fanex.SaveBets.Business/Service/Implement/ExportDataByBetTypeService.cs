@@ -84,6 +84,10 @@ namespace SaveBetsBusiness.Service.Implement
                 case BetTypeConstants.MyanmarOverUnder:
                 case BetTypeConstants._1stMyanmarHandicap:
                 case BetTypeConstants._1stMyanmarOverUnder:
+                case BetTypeConstants.HomeTeamOverUnder:
+                case BetTypeConstants._1stHomeTeamOverUnder:
+                case BetTypeConstants.AwayTeamOverUnder:
+                case BetTypeConstants._1stAwayTeamOverUnder:
                     this.InitTwoSectionColumnWidth(worksheet);
                     this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
@@ -192,6 +196,10 @@ namespace SaveBetsBusiness.Service.Implement
                 case BetTypeConstants.OverUnder:
                 case BetTypeConstants._1stOverUnder:
                 case BetTypeConstants.MoneyLine:
+                case BetTypeConstants.HomeTeamOverUnder:
+                case BetTypeConstants._1stHomeTeamOverUnder:
+                case BetTypeConstants.AwayTeamOverUnder:
+                case BetTypeConstants._1stAwayTeamOverUnder:
                     this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
                     break;
 
@@ -337,7 +345,7 @@ namespace SaveBetsBusiness.Service.Implement
                     Math.Round(Converter.ToDecimal(reader["cpstake"]), 2),
                     Math.Round(Converter.ToDecimal(reader["stake"]), 2));
 
-                if (Converter.ToString2(reader["betteam"]).ToLower() == "h")
+                if (Converter.ToString2(reader["betteam"]).ToLower() == "h" || Converter.ToString2(reader["betteam"]).ToLower() == "o")
                 {
                     row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
@@ -364,7 +372,7 @@ namespace SaveBetsBusiness.Service.Implement
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["creator"]), textStyle);
                     currentRow++;
                 }
-                else
+                else if (Converter.ToString2(reader["betteam"]).ToLower() == "a" || Converter.ToString2(reader["betteam"]).ToLower() == "u")
                 {
                     row = worksheet.GetRow(currentBetAwayTeamRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetAwayTeamRowIndex) as XSSFRow;
                     currentColumn = 12;
@@ -564,7 +572,11 @@ namespace SaveBetsBusiness.Service.Implement
                 bettype == BetTypeConstants.MyanmarHandicap ||
                 bettype == BetTypeConstants.MyanmarOverUnder ||
                 bettype == BetTypeConstants._1stMyanmarHandicap ||
-                bettype == BetTypeConstants._1stMyanmarOverUnder)
+                bettype == BetTypeConstants._1stMyanmarOverUnder ||
+                bettype == BetTypeConstants.HomeTeamOverUnder ||
+                bettype == BetTypeConstants._1stHomeTeamOverUnder ||
+                bettype == BetTypeConstants.AwayTeamOverUnder ||
+                bettype == BetTypeConstants._1stAwayTeamOverUnder)
             {
                 isShow = true;
             }

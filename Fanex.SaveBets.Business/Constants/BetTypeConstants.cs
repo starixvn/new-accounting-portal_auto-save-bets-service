@@ -56,5 +56,11 @@ namespace SaveBetsBusiness.Constants
 
         public const int MyanmarOverUnder = 302;
         public const int _1stMyanmarOverUnder = 304;
+
+        public const int HomeTeamOverUnder = 401;
+        public const int AwayTeamOverUnder = 402;
+        public const int _1stHomeTeamOverUnder = 403;
+        public const int _1stAwayTeamOverUnder = 404;
+        public const int _2stCorrectScore = 405;
     }
 }

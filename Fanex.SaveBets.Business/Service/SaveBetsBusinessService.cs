@@ -58,7 +58,6 @@ namespace SaveBetsBusiness.Service
             Justification = "Reviewed. Suppression is OK here.")]
         public void ProcessSaveBets()
         {
-            FileStream fileStream = null;
             XSSFWorkbook excelFile = null;
             int matchId = 0;
             try
@@ -107,24 +106,17 @@ namespace SaveBetsBusiness.Service
                 RenderEachBettypeLiveIndicatorSheet(ref excelFile);
 
                 ////.Write Excel File
-                using (new NetworkConnection(@"\\" + this._ip, this._networkCredential))
+
+                if (AppSettings.IsAuthenticate)
                 {
-                    string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
-                    string reportName = string.Format(
-                        "{0}_{1}_{2}.{3}",
-                        _matchInfo["matchid"],
-                        eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
-                        _matchInfo["SportType"],
-                        "xlsx");
-
-                    string reportPath = Path.Combine(reportDirectory, reportName);
-
-                    fileStream = new FileStream(
-                        reportPath,
-                        FileMode.Create,
-                        FileAccess.Write);
-
-                    excelFile.Write(fileStream);
+                    using (new NetworkConnection(@"\\" + this._ip, this._networkCredential))
+                    {
+                        WriteFile(eventDate, excelFile);
+                    }
+                }
+                else
+                {
+                    WriteFile(eventDate, excelFile);
                 }
 
                 _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
@@ -137,11 +129,6 @@ namespace SaveBetsBusiness.Service
             finally
             {
                 AppSettings.MatchId = matchId;
-                if (fileStream != null)
-                {
-                    fileStream.Close();
-                    fileStream.Dispose();
-                }
             }
         }
 
@@ -242,7 +229,7 @@ namespace SaveBetsBusiness.Service
 
                 foreach (var liveIndicator in liveIndicators)
                 {
-                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator).OrderBy(b => b.Bettype);
+                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator).Select(bettype => new { bettype.Bettype, bettype.LiveIndicator }).Distinct().OrderBy(b => b.Bettype);
 
                     foreach (var bettype in bettypesByLiveIndicator)
                     {
@@ -269,6 +256,32 @@ namespace SaveBetsBusiness.Service
             finally
             {
                 _exportDataByBetTypeService.Dispose();
+            }
+        }
+
+        private void WriteFile(DateTime eventDate, XSSFWorkbook excelFile)
+        {
+            string reportDirectory = DirectoryExtensions.CreateSaveBetReportDataDirectory(eventDate);
+            string reportName = string.Format(
+                "{0}_{1}_{2}.{3}",
+                _matchInfo["matchid"],
+                eventDate.ToShortFormatedDateWithSlash().Replace("/", "_"),
+                _matchInfo["SportType"],
+                "xlsx");
+
+            string reportPath = Path.Combine(reportDirectory, reportName);
+
+            var fileStream = new FileStream(
+                reportPath,
+                FileMode.Create,
+                FileAccess.Write);
+
+            excelFile.Write(fileStream);
+
+            if (fileStream != null)
+            {
+                fileStream.Close();
+                fileStream.Dispose();
             }
         }
     }
