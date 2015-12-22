@@ -235,7 +235,7 @@ namespace SaveBetsBusiness.Common
             object cellValue,
             XSSFCellStyle cellStyle)
         {
-            XSSFCell cell = row.CreateCell(currentColumn) as XSSFCell;
+            XSSFCell cell = row.GetCell(currentColumn) as XSSFCell ?? row.CreateCell(currentColumn) as XSSFCell;
             SetCellValue(cell, cellValue);
             cell.CellStyle = cellStyle;
             currentColumn += 1;
@@ -262,7 +262,7 @@ namespace SaveBetsBusiness.Common
             object cellValue,
             XSSFCellStyle cellStyle)
         {
-            XSSFCell cell = row.CreateCell(currentColumn) as XSSFCell;
+            XSSFCell cell = row.GetCell(currentColumn) as XSSFCell ?? row.CreateCell(currentColumn) as XSSFCell;
 
             SetCellValue(cell, cellValue);
 

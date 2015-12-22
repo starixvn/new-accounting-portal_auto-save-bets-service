@@ -240,5 +240,14 @@ namespace SaveBetsBusiness
                 return val == null ? false : Convert.ToString(ConfigurationManager.AppSettings["ServerFile.IsEncryptPassword"]) == "true";
             }
         }
+
+        public static bool IsAuthenticate
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["ServerFile.IsAuthenticate"];
+                return val == null ? false : Convert.ToString(ConfigurationManager.AppSettings["ServerFile.IsAuthenticate"]) == "true";
+            }
+        }
     }
 }
