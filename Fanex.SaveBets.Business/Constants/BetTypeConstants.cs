@@ -62,5 +62,8 @@ namespace SaveBetsBusiness.Constants
         public const int _1stHomeTeamOverUnder = 403;
         public const int _1stAwayTeamOverUnder = 404;
         public const int _2stCorrectScore = 405;
+
+        public const int ChargedCommission = 500;
+        public const int MatchWinner = 501;
     }
 }
