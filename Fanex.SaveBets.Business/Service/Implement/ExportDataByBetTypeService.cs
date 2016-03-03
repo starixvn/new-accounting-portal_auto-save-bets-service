@@ -88,6 +88,8 @@ namespace SaveBetsBusiness.Service.Implement
                 case BetTypeConstants._1stHomeTeamOverUnder:
                 case BetTypeConstants.AwayTeamOverUnder:
                 case BetTypeConstants._1stAwayTeamOverUnder:
+                case BetTypeConstants.ChargedCommission:
+                case BetTypeConstants.MatchWinner:
                     this.InitTwoSectionColumnWidth(worksheet);
                     this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
@@ -200,6 +202,8 @@ namespace SaveBetsBusiness.Service.Implement
                 case BetTypeConstants._1stHomeTeamOverUnder:
                 case BetTypeConstants.AwayTeamOverUnder:
                 case BetTypeConstants._1stAwayTeamOverUnder:
+                case BetTypeConstants.ChargedCommission:
+                case BetTypeConstants.MatchWinner:
                     this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
                     break;
 
@@ -576,7 +580,9 @@ namespace SaveBetsBusiness.Service.Implement
                 bettype == BetTypeConstants.HomeTeamOverUnder ||
                 bettype == BetTypeConstants._1stHomeTeamOverUnder ||
                 bettype == BetTypeConstants.AwayTeamOverUnder ||
-                bettype == BetTypeConstants._1stAwayTeamOverUnder)
+                bettype == BetTypeConstants._1stAwayTeamOverUnder ||
+                bettype == BetTypeConstants.ChargedCommission ||
+                bettype == BetTypeConstants.MatchWinner)
             {
                 isShow = true;
             }
