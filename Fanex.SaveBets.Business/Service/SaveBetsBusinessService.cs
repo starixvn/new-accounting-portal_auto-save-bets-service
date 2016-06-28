@@ -229,7 +229,8 @@ namespace SaveBetsBusiness.Service
 
                 foreach (var liveIndicator in liveIndicators)
                 {
-                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator).Select(bettype => new { bettype.Bettype, bettype.LiveIndicator }).Distinct().OrderBy(b => b.Bettype);
+                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator)
+                        .Select(bettype => new { bettype.Bettype, bettype.LiveIndicator }).Distinct().OrderBy(b => b.Bettype);
 
                     foreach (var bettype in bettypesByLiveIndicator)
                     {

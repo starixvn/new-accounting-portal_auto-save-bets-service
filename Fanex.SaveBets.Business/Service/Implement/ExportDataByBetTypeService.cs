@@ -121,6 +121,9 @@ namespace SaveBetsBusiness.Service.Implement
         /// <param name="currentRow">The current row.</param>
         /// <param name="currentColumn">The current column.</param>
         /// <param name="bettype">The bet type.</param>
+        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+            "SP2101:MethodMustNotContainMoreLinesThan",
+            Justification = "Reviewed. Suppression is OK here.")]
         private void ExportHeaderGroup(XSSFWorkbook excelFile, XSSFSheet worksheet, ref int currentRow, ref int currentColumn, int bettype)
         {
             XSSFCellStyle headerStyle = NPOIExcelUtility.HeaderStyle(excelFile);
@@ -426,7 +429,7 @@ namespace SaveBetsBusiness.Service.Implement
         {
             XSSFCellStyle textStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
             NPOIExcelUtility.SetBorderToCell(textStyle);
-            XSSFCellStyle boldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.White);
+            XSSFCellStyle boldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Black);
             NPOIExcelUtility.SetBorderToCell(boldTextStyle);
             XSSFCellStyle redBoldTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, true, HorizontalAlignment.Center, Color.Red);
             NPOIExcelUtility.SetBorderToCell(redBoldTextStyle);
@@ -458,7 +461,8 @@ namespace SaveBetsBusiness.Service.Implement
 
                 if (!isNotShowTeamAndHdpColumn)
                 {
-                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["betteam"]), textStyle);
+                    string betteam = Helper.GetTeam(bettype, Converter.ToString2(reader["betteam"]));
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, betteam, textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["hdp1"]), decimalNumberStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["hdp2"]), decimalNumberStyle);
                 }
