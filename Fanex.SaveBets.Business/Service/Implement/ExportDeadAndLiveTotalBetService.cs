@@ -1,13 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ExportDeadAndLiveTotalBetService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.04.21">Created</change>
-// </history>
-
-namespace SaveBetsBusiness.Service.Implement
+﻿namespace SaveBetsBusiness.Service.Implement
 {
     using System;
     using System.Data;
@@ -28,15 +19,7 @@ namespace SaveBetsBusiness.Service.Implement
         private const string PositiveNumberFormat = "[Red]#,##0.00;-#,##0.00;\"-\"";
         private Color _borderColor = NPOIExcelUtility.BorderColor;
 
-        /// <summary>
-        /// Exports the dead and live tb sheet.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="reader">The reader.</param>
-        /// <param name="bettype">The bet type.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportDeadAndLiveTBSheet(

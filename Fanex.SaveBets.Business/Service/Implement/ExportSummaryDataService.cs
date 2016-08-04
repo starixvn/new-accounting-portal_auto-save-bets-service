@@ -34,14 +34,7 @@ namespace SaveBetsBusiness.Service.Implement
         private const string BetAwayTeam = "2";
         private Color _borderColor = NPOIExcelUtility.BorderColor;
 
-        /// <summary>
-        /// Exports the summary sheet.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="matchInfo">The match information.</param>
-        /// <param name="turnOverInfo">The turn over information.</param>
-        /// <param name="winLossInfo">The win loss information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         public void ExportSummarySheet(
@@ -116,7 +109,7 @@ namespace SaveBetsBusiness.Service.Implement
         /// <param name="excelFile">The excel file.</param>
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="matchInfo">The match information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportMatchInfo(
@@ -213,7 +206,7 @@ namespace SaveBetsBusiness.Service.Implement
         /// <param name="excelFile">The excel file.</param>
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="turnOverInfo">The turn over information.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTurnOverInfo(
@@ -361,7 +354,7 @@ namespace SaveBetsBusiness.Service.Implement
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="winLossInfo">The win loss information.</param>
         /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportWinLossInfo(XSSFWorkbook excelFile, XSSFSheet worksheet, List<DataRow> winLossInfo, int currentRow)
@@ -567,7 +560,7 @@ namespace SaveBetsBusiness.Service.Implement
         /// <param name="excelFile">The excel file.</param>
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportWinLossInfoHeader(XSSFWorkbook excelFile, XSSFSheet worksheet, ref int currentRow)

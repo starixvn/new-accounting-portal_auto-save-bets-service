@@ -1,13 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ExportDataByBetTypeService.cs" company="Nexcel Solutions Vietnam">
-// Copyright (c) Nexcel Solutions Vietnam. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-// <history>
-//   <change who="Franklin.Nguyen" date="2014.04.21">Created</change>
-// </history>
-
-namespace SaveBetsBusiness.Service.Implement
+﻿namespace SaveBetsBusiness.Service.Implement
 {
     using System;
     using System.Data;
@@ -21,18 +12,8 @@ namespace SaveBetsBusiness.Service.Implement
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Resources;
 
-    /// <summary>
-    /// Export data by bet type service.
-    /// </summary>
     public class ExportDataByBetTypeService : IDisposable
     {
-        /// <summary>
-        /// Exports the data by bet type and live indicator.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="reader">The reader.</param>
-        /// <param name="bettype">The bet type.</param>
-        /// <param name="liveIndicator">If set to <c>true</c> [live indicator].</param>
         public void ExportDataByBetTypeAndLiveIndicator(
             XSSFWorkbook excelFile,
             IDataReader reader,
@@ -71,57 +52,33 @@ namespace SaveBetsBusiness.Service.Implement
             NPOIExcelUtility.SetBorderToCell(textStyle);
             int currentRow = 0, currentColumn = 0;
             XSSFRow row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
-            switch (bettype)
+            var twoSectionHeaderBettypesGroup = BetTypeConstants.TwoSectionHeaderBettypesGroup();
+            var threeSectionHeaderBettypesGroup = BetTypeConstants.ThreeSectionHeaderBettypesGroup();
+
+            if (twoSectionHeaderBettypesGroup.Contains(bettype))
             {
-                case BetTypeConstants.Handicap:
-                case BetTypeConstants._1stHandicap:
-                case BetTypeConstants.OddEven:
-                case BetTypeConstants._1stOddEven:
-                case BetTypeConstants.OverUnder:
-                case BetTypeConstants._1stOverUnder:
-                case BetTypeConstants.MoneyLine:
-                case BetTypeConstants.MyanmarHandicap:
-                case BetTypeConstants.MyanmarOverUnder:
-                case BetTypeConstants._1stMyanmarHandicap:
-                case BetTypeConstants._1stMyanmarOverUnder:
-                case BetTypeConstants.HomeTeamOverUnder:
-                case BetTypeConstants._1stHomeTeamOverUnder:
-                case BetTypeConstants.AwayTeamOverUnder:
-                case BetTypeConstants._1stAwayTeamOverUnder:
-                case BetTypeConstants.ChargedCommission:
-                case BetTypeConstants.MatchWinner:
-                    this.InitTwoSectionColumnWidth(worksheet);
-                    this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
-                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-                    this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
-                    break;
-
-                case BetTypeConstants._1x2:
-                case BetTypeConstants._1st1x2:
-                    this.InitThreeSectionColumnWidth(worksheet);
-                    this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
-                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-                    this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
-                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
-                    this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
-                    break;
-
-                default:
-                    this.InitOneSectionColumnWidth(worksheet, bettype);
-                    this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
-                    break;
+                this.InitTwoSectionColumnWidth(worksheet);
+                this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+                this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
+            }
+            else if (threeSectionHeaderBettypesGroup.Contains(bettype))
+            {
+                this.InitThreeSectionColumnWidth(worksheet);
+                this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+                this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
+                this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
+            }
+            else
+            {
+                this.InitOneSectionColumnWidth(worksheet, bettype);
+                this.ExportHeaderGroup(excelFile, worksheet, ref currentRow, ref currentColumn, bettype);
             }
         }
 
-        /// <summary>
-        /// Exports the header group.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="currentColumn">The current column.</param>
-        /// <param name="bettype">The bet type.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportHeaderGroup(XSSFWorkbook excelFile, XSSFSheet worksheet, ref int currentRow, ref int currentColumn, int bettype)
@@ -182,60 +139,31 @@ namespace SaveBetsBusiness.Service.Implement
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Creator.ToUpper(), headerStyle);
         }
 
-        /// <summary>
-        /// Exports the content of the bet type.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="reader">The reader.</param>
-        /// <param name="currentRow">The current row.</param>
-        /// <param name="bettype">The bet type.</param>
         private void ExportBetTypeContent(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow, int bettype)
         {
-            switch (bettype)
+            var twoSectionContentBettypesGroup = BetTypeConstants.TwoSectionContentBettypesGroup();
+            var myanmarOddsTwoSectionContentBettypesGroup = BetTypeConstants.MyanmarOddsTwoSectionContentBettypesGroup();
+            var threeSectionContentBettypesGroup = BetTypeConstants.ThreeSectionContentBettypesGroup();
+
+            if (twoSectionContentBettypesGroup.Contains(bettype))
             {
-                case BetTypeConstants.Handicap:
-                case BetTypeConstants._1stHandicap:
-                case BetTypeConstants.OddEven:
-                case BetTypeConstants._1stOddEven:
-                case BetTypeConstants.OverUnder:
-                case BetTypeConstants._1stOverUnder:
-                case BetTypeConstants.MoneyLine:
-                case BetTypeConstants.HomeTeamOverUnder:
-                case BetTypeConstants._1stHomeTeamOverUnder:
-                case BetTypeConstants.AwayTeamOverUnder:
-                case BetTypeConstants._1stAwayTeamOverUnder:
-                case BetTypeConstants.ChargedCommission:
-                case BetTypeConstants.MatchWinner:
-                    this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
-                    break;
-
-                case BetTypeConstants.MyanmarHandicap:
-                case BetTypeConstants.MyanmarOverUnder:
-                case BetTypeConstants._1stMyanmarHandicap:
-                case BetTypeConstants._1stMyanmarOverUnder:
-                    this.ExportMyanmarOddsTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
-                    break;
-
-                case BetTypeConstants._1x2:
-                case BetTypeConstants._1st1x2:
-                    this.ExportThreeSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
-                    break;
-
-                default:
-                    this.ExportOneSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
-                    break;
+                this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
+            }
+            else if (myanmarOddsTwoSectionContentBettypesGroup.Contains(bettype))
+            {
+                this.ExportMyanmarOddsTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
+            }
+            else if (threeSectionContentBettypesGroup.Contains(bettype))
+            {
+                this.ExportThreeSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
+            }
+            else
+            {
+                this.ExportOneSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
             }
         }
 
-        /// <summary>
-        /// Exports the three section content by bet type.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="reader">The reader.</param>
-        /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportThreeSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow)
@@ -323,7 +251,7 @@ namespace SaveBetsBusiness.Service.Implement
         /// <param name="worksheet">The worksheet.</param>
         /// <param name="reader">The reader.</param>
         /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow, int bettype)
@@ -361,7 +289,7 @@ namespace SaveBetsBusiness.Service.Implement
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["transid"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, amount, redBoldTextStyle);
-                    
+
                     if (isHandicapBettype)
                     {
                         decimal handicap = Converter.ToDecimal(reader["hdp2"]) - Converter.ToDecimal(reader["hdp1"]);
@@ -394,7 +322,7 @@ namespace SaveBetsBusiness.Service.Implement
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["transid"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, amount, redBoldTextStyle);
-                    
+
                     if (isHandicapBettype)
                     {
                         decimal handicap = Converter.ToDecimal(reader["hdp1"]) - Converter.ToDecimal(reader["hdp2"]);
@@ -561,32 +489,11 @@ namespace SaveBetsBusiness.Service.Implement
             worksheet.SetColumnWidth(25, 150 * NpoiExcelExtensions.FontWidth);
         }
 
-        /// <summary>
-        /// Determines whether [is show HDP column by bet type] [the specified bet type].
-        /// </summary>
-        /// <param name="bettype">The bet type.</param>
-        /// <returns>To be show HDP column or not.</returns>
         private bool IsShowHdpColumnByBettype(int bettype)
         {
             bool isShow = false;
-
-            if (bettype == BetTypeConstants._1stHandicap ||
-                bettype == BetTypeConstants.Handicap ||
-                bettype == BetTypeConstants._1stOddEven ||
-                bettype == BetTypeConstants.OddEven ||
-                bettype == BetTypeConstants._1stOverUnder ||
-                bettype == BetTypeConstants.OverUnder ||
-                bettype == BetTypeConstants.MoneyLine ||
-                bettype == BetTypeConstants.MyanmarHandicap ||
-                bettype == BetTypeConstants.MyanmarOverUnder ||
-                bettype == BetTypeConstants._1stMyanmarHandicap ||
-                bettype == BetTypeConstants._1stMyanmarOverUnder ||
-                bettype == BetTypeConstants.HomeTeamOverUnder ||
-                bettype == BetTypeConstants._1stHomeTeamOverUnder ||
-                bettype == BetTypeConstants.AwayTeamOverUnder ||
-                bettype == BetTypeConstants._1stAwayTeamOverUnder ||
-                bettype == BetTypeConstants.ChargedCommission ||
-                bettype == BetTypeConstants.MatchWinner)
+            var bettypes = BetTypeConstants.ShowHdpColumnByBettypes();
+            if (bettypes.Contains(bettype))
             {
                 isShow = true;
             }
@@ -594,17 +501,12 @@ namespace SaveBetsBusiness.Service.Implement
             return isShow;
         }
 
-        /// <summary>
-        /// Determines whether [is not show team and HDP column by bet type] [the specified bet type].
-        /// </summary>
-        /// <param name="bettype">The bet type.</param>
-        /// <returns>To be show team and HDP column or not.</returns>
         private bool IsNotShowTeamAndHdpColumnByBettype(int bettype)
         {
             bool isNotShow = false;
 
-            if (bettype == BetTypeConstants._1st1x2 ||
-                bettype == BetTypeConstants._1x2)
+            var bettypes = BetTypeConstants.NotShowTeamAndHdpColumnByBettypes();
+            if (bettypes.Contains(bettype))
             {
                 isNotShow = true;
             }
@@ -612,17 +514,11 @@ namespace SaveBetsBusiness.Service.Implement
             return isNotShow;
         }
 
-        /// <summary>
-        /// Determines whether [is not show score column by bet type] [the specified bet type].
-        /// </summary>
-        /// <param name="bettype">The bet type.</param>
-        /// <returns>To be show score column or not.</returns>
         private bool IsNotShowScoreColumnByBetType(int bettype)
         {
             bool isNotShow = false;
-
-            if (bettype == BetTypeConstants._1st1x2 ||
-                bettype == BetTypeConstants._1x2)
+            var bettypes = BetTypeConstants.NotShowScoreColumnByBettypes();
+            if (bettypes.Contains(bettype))
             {
                 isNotShow = true;
             }
@@ -633,10 +529,8 @@ namespace SaveBetsBusiness.Service.Implement
         private bool IsMyanmarOddBettype(int bettype)
         {
             bool isMyanmarOddBettype = false;
-            if (bettype == BetTypeConstants.MyanmarHandicap ||
-                bettype == BetTypeConstants.MyanmarOverUnder ||
-                bettype == BetTypeConstants._1stMyanmarHandicap ||
-                bettype == BetTypeConstants._1stMyanmarOverUnder)
+            var bettypes = BetTypeConstants.MyanmarOddBettypes();
+            if (bettypes.Contains(bettype))
             {
                 isMyanmarOddBettype = true;
             }
@@ -647,8 +541,8 @@ namespace SaveBetsBusiness.Service.Implement
         private bool IsHandicapBettype(int bettype)
         {
             bool isHandicapBettype = false;
-
-            if (bettype == BetTypeConstants.Handicap || bettype == BetTypeConstants._1stHandicap)
+            var bettypes = BetTypeConstants.HandicapBettypes();
+            if (bettypes.Contains(bettype))
             {
                 isHandicapBettype = true;
             }
@@ -656,14 +550,7 @@ namespace SaveBetsBusiness.Service.Implement
             return isHandicapBettype;
         }
 
-        /// <summary>
-        /// Exports the two section content by bet type.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="reader">The reader.</param>
-        /// <param name="currentRow">The current row.</param>
-        [SuppressMessage("StyleCop.CSharp.Nexcel.NexcelCustomRules",
+        [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         private void ExportMyanmarOddsTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow)
