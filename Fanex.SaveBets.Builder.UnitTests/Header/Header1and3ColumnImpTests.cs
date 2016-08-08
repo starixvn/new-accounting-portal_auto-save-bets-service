@@ -14,7 +14,7 @@ namespace Fanex.SaveBets.Builder.UnitTests.Header
         [Test]
         public void BuildHeader_1Column_ShouldReturnHeaderTextIsTEAM()
         {
-            var header = new Header1ColumnImp();
+            var header = new Header1ColumnTeamImp();
 
             var headerText = header.BuildHeader().FirstOrDefault();
             var expectedResult = "TEAM";

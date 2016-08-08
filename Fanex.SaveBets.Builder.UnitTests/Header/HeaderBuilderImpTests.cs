@@ -32,7 +32,7 @@ namespace Fanex.SaveBets.Builder.UnitTests.Header
         public void GetHeaderByBettype_ShouldReturn1Column(int bettype)
         {
             HeaderBuilder builder = new HeaderBuilderImp();
-            var result = builder.GetHeaderByBettype(bettype);
+            var result = builder.GetHeaderHandicapAndBetteamOf(bettype);
             var expectedResult = new List<string> { "TEAM" };
 
             Assert.AreEqual(expectedResult, result);
@@ -57,7 +57,7 @@ namespace Fanex.SaveBets.Builder.UnitTests.Header
         public void GetHeaderByBettype_ShouldReturn3Column(int bettype)
         {
             HeaderBuilder builder = new HeaderBuilderImp();
-            var result = builder.GetHeaderByBettype(bettype);
+            var result = builder.GetHeaderHandicapAndBetteamOf(bettype);
             var expectedResult = new List<string> { "TEAM", "HDP1", "HDP2" };                
 
             Assert.AreEqual(expectedResult, result);

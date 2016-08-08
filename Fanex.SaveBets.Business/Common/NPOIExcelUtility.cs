@@ -179,6 +179,35 @@ namespace SaveBetsBusiness.Common
             return cellStyle;
         }
 
+        public static XSSFCellStyle IntStyleWithoutSeparateThousand(
+            XSSFWorkbook excelFile,
+            Color cellColor,
+            bool bold,
+            Color fontColor)
+        {
+            XSSFCellStyle cellStyle = excelFile.CreateCellStyle() as XSSFCellStyle;
+            XSSFFont font = excelFile.CreateFont() as XSSFFont;
+            IDataFormat dataFormat = excelFile.CreateDataFormat();
+
+            font.FontHeightInPoints = FontSize;
+            font.FontName = FontName;
+            font.SetColor(new XSSFColor(fontColor));
+
+            if (bold)
+            {
+                font.Boldweight = (short)FontBoldWeight.Bold;
+            }
+
+            cellStyle.SetFillForegroundColor(new XSSFColor(cellColor));
+            cellStyle.FillPattern = FillPattern.SolidForeground;
+            cellStyle.Alignment = HorizontalAlignment.Right;
+            cellStyle.VerticalAlignment = VerticalAlignment.Center;
+            cellStyle.DataFormat = dataFormat.GetFormat("0");
+            cellStyle.SetFont(font);
+
+            return cellStyle;
+        }
+
         /// <summary>
         /// Style for integer value.
         /// </summary>

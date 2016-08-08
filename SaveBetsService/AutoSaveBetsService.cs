@@ -15,6 +15,8 @@ namespace AutoSaveBetsService
     using System.Timers;
     using Fanex.Common;
     using Fanex.Data.Configuration;
+    using ONEbook.UM.Services;
+    using ONEbook.UM.Services.Impl;
     using SaveBetsBusiness;
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Service;
@@ -30,6 +32,7 @@ namespace AutoSaveBetsService
         private static Timer timer;
 
         private static SaveBetsBusinessService service;
+        private static IMaintenanceService _maintenanceService;
 
         public AutoSaveBetsService()
         {
@@ -64,6 +67,7 @@ namespace AutoSaveBetsService
             }
 
             service = new SaveBetsBusinessService(ip, username, password);
+            _maintenanceService = new MaintenanceService();
         }
 
         protected override void OnStop()
@@ -96,10 +100,14 @@ namespace AutoSaveBetsService
                         AppSettings.ForceRunningOnProcessing = true;
                     }
 
-                    service.ProcessSaveBets();
+                    var downTime = _maintenanceService.GetUnderMaintenanceTime();
+                    if (!downTime.IsUnderMaintenanceTime)
+                    {
+                        service.ProcessSaveBets();
+                    }
 
-                    AppSettings.OnProcessing = false;                    
-                }              
+                    AppSettings.OnProcessing = false;
+                }
             }
             catch (Exception ex)
             {

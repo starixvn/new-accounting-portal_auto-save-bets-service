@@ -31,9 +31,9 @@ namespace Fanex.SaveBets.Builder.UnitTests.Mapper
         [TestCase(441)]
         public void GetNumOfColumnOf_ShouldReturn1(int bettype)
         {
-            var mapper = new BettypeMapperImp();
-            var result = mapper.GetNumOfColumnOf(bettype);
-            var expectedResult = 1;
+            var mapper = new HeaderBettypeMapperImp();
+            var result = mapper.GetHeaderHandicapAndBetTeamOf(bettype);
+            var expectedResult = "Header1ColumnTeamImp";
 
             Assert.AreEqual(expectedResult, result);
         }
@@ -56,9 +56,9 @@ namespace Fanex.SaveBets.Builder.UnitTests.Mapper
         [TestCase(444)]
         public void GetNumOfColumnOf_ShouldReturn3(int bettype)
         {
-            var mapper = new BettypeMapperImp();
-            var result = mapper.GetNumOfColumnOf(bettype);
-            var expectedResult = 3;
+            var mapper = new HeaderBettypeMapperImp();
+            var result = mapper.GetHeaderHandicapAndBetTeamOf(bettype);
+            var expectedResult = "Header3ColumnImp";
 
             Assert.AreEqual(expectedResult, result);
         }

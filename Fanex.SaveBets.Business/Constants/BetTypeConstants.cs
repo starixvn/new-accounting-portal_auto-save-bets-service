@@ -5,7 +5,7 @@
     /// <summary>
     /// Bet type constant.
     /// </summary>
-    public static class BetTypeConstants
+    public static class BetTypeConstants_
     {
         private const int Handicap = 1;
         private const int _1stHandicap = 7;
@@ -95,7 +95,8 @@
             List<int> bettypes = new List<int>
             {
                 _1x2,
-                _1st1x2
+                _1st1x2,
+                430
             };
 
             return bettypes;

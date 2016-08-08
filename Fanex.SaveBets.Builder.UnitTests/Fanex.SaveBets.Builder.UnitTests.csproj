@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Content\ContentBetChoice1ImpTests.cs" />
     <Compile Include="Header\Header1and3ColumnImpTests.cs" />
     <Compile Include="Header\HeaderBuilderImpTests.cs" />
+    <Compile Include="Helper\MockDataReader.cs" />
     <Compile Include="Mapper\BettypeMapperImpTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

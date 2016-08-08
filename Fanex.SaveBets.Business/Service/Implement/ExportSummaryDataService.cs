@@ -44,8 +44,7 @@ namespace SaveBetsBusiness.Service.Implement
             List<DataRow> winLossInfo)
         {
             string sheetName = SaveBetsBusinessResource.Summary_SheetName;
-            XSSFSheet worksheet = excelFile.GetSheet(sheetName) as XSSFSheet ?? excelFile.CreateSheet(sheetName) as XSSFSheet;
-            this.InitColumnWidth_SummarySheet(worksheet);
+            XSSFSheet worksheet = excelFile.GetSheet(sheetName) as XSSFSheet ?? excelFile.CreateSheet(sheetName) as XSSFSheet;            
 
             int currentRow = 0;
             XSSFRow row = worksheet.CreateRow(currentRow) as XSSFRow;
@@ -54,6 +53,7 @@ namespace SaveBetsBusiness.Service.Implement
             currentRow = 15;
             this.ExportWinLossInfo(excelFile, worksheet, winLossInfo, currentRow);
             worksheet.CreateFreezePane(3, 0, 3, 0);
+            this.InitColumnWidth_SummarySheet(worksheet);
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace SaveBetsBusiness.Service.Implement
                 worksheet.SetColumnWidth(i, 90 * NpoiExcelExtensions.FontWidth);
             }
 
-            worksheet.SetColumnWidth(0, 100 * NpoiExcelExtensions.FontWidth);
+            worksheet.AutoSizeColumn(0);            
             worksheet.SetColumnWidth(1, 100 * NpoiExcelExtensions.FontWidth);
             worksheet.SetColumnWidth(2, 100 * NpoiExcelExtensions.FontWidth);
             worksheet.SetColumnWidth(10, 80 * NpoiExcelExtensions.FontWidth);
@@ -722,7 +722,7 @@ namespace SaveBetsBusiness.Service.Implement
             string[] bettypes = status.Split(new char[] { ';' });
             foreach (string bettype in bettypes)
             {
-                if (bettype.StartsWith(BetTypeConstants.FirstHalfFirstGoalLastGoal))
+                if (bettype.StartsWith("1FL"))
                 {
                     bettypeNameAndValue = bettype.Split(new char[] { ':' });
                     betValues = bettypeNameAndValue[1].Split(new char[] { '-' });
@@ -737,7 +737,7 @@ namespace SaveBetsBusiness.Service.Implement
                         string.Format("{0}:{1}", SaveBetsBusinessLabel._1HLG, firstHalfLastGoalTeam);
                 }
 
-                if (bettype.StartsWith(BetTypeConstants.FirstGoalLastGoal))
+                if (bettype.StartsWith("FL"))
                 {
                     bettypeNameAndValue = bettype.Split(new char[] { ':' });
                     betValues = bettypeNameAndValue[1].Split(new char[] { '-' });

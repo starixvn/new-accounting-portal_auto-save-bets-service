@@ -8,6 +8,6 @@ namespace Fanex.SaveBets.Builder.Header
 {
     public interface HeaderBuilder
     {
-        List<string> GetHeaderByBettype(int bettype);
+        List<string> GetHeaderHandicapAndBetteamOf(int bettype);
     }
 }
