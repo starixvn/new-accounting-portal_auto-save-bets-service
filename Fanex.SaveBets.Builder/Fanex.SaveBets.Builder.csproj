@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E027FBF5-7AE6-4C22-94CC-BF4CC910D001}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Fanex.SaveBets.Builder</RootNamespace>
+    <AssemblyName>Fanex.SaveBets.Builder</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="IBCFile, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fanex.File.1.0.0\lib\net40\IBCFile.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RemotingRef, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RemotingRef.1.0.0.10\lib\net40\RemotingRef.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SPSRemoting.1.0.0\lib\net40\SPSRemoting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Content\ContentBetChoice.cs" />
+    <Compile Include="Content\ContentBetChoice1Imp.cs" />
+    <Compile Include="Content\ContentBetChoice2Imp.cs" />
+    <Compile Include="Content\ContentBetChoice401Imp.cs" />
+    <Compile Include="Content\ContentBetChoice405Imp.cs" />
+    <Compile Include="Content\ContentBetChoice406Imp.cs" />
+    <Compile Include="Content\ContentBetChoice407Imp.cs" />
+    <Compile Include="Content\ContentBetChoice408Imp.cs" />
+    <Compile Include="Content\ContentBetChoice409Imp.cs" />
+    <Compile Include="Content\ContentBetChoice410Imp.cs" />
+    <Compile Include="Content\ContentBetChoice411Imp.cs" />
+    <Compile Include="Content\ContentBetChoice412Imp.cs" />
+    <Compile Include="Content\ContentBetChoice413Imp.cs" />
+    <Compile Include="Content\ContentBetChoice415Imp.cs" />
+    <Compile Include="Content\ContentBetChoice416Imp.cs" />
+    <Compile Include="Content\ContentBetChoice417Imp.cs" />
+    <Compile Include="Content\ContentBetChoice424Imp.cs" />
+    <Compile Include="Content\ContentBetChoice425Imp.cs" />
+    <Compile Include="Content\ContentBetChoice426Imp.cs" />
+    <Compile Include="Content\ContentBetChoice427Imp.cs" />
+    <Compile Include="Content\ContentBetChoice431Imp.cs" />
+    <Compile Include="Content\ContentBetChoice432Imp.cs" />
+    <Compile Include="Content\ContentBetChoice433Imp.cs" />
+    <Compile Include="Content\ContentBetChoice442Imp.cs" />
+    <Compile Include="Content\ContentBetChoice4Imp.cs" />
+    <Compile Include="Content\ContentBetChoice5Imp.cs" />
+    <Compile Include="Content\ContentBetChoiceBuilder.cs" />
+    <Compile Include="Content\ContentBetChoiceBuilderImp.cs" />
+    <Compile Include="Content\ContentBetChoiceDefault1Section3ColumnImp.cs" />
+    <Compile Include="Header\Header.cs" />
+    <Compile Include="Header\Header0Column.cs" />
+    <Compile Include="Header\Header1ColumnHdpImp.cs" />
+    <Compile Include="Header\Header1ColumnMyanmarOddBettype.cs" />
+    <Compile Include="Header\Header1ColumnTeamImp.cs" />
+    <Compile Include="Header\Header3ColumnImp.cs" />
+    <Compile Include="Header\HeaderBuilder.cs" />
+    <Compile Include="Header\HeaderBuilderImp.cs" />
+    <Compile Include="Header\HeaderDefault1Section3ColumnImp.cs" />
+    <Compile Include="Helper\CacheRef.cs" />
+    <Compile Include="Mapper\ContentBettypeMapper.cs" />
+    <Compile Include="Mapper\ContentBettypeMapperImp.cs" />
+    <Compile Include="Mapper\HeaderBettypeMapper.cs" />
+    <Compile Include="Mapper\HeaderBettypeMapperImp.cs" />
+    <Compile Include="Mapper\SectionBettypeMapper.cs" />
+    <Compile Include="Mapper\SectionBettypeMapperImp.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
