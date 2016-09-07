@@ -17,11 +17,11 @@ namespace Fanex.SaveBets.Builder.Content
 
         public List<object> ContentBetChoiceBuilder(IDataReader reader)
         {
-            var betteam = Converter.To<string>(reader["betteam"]).ToLower();            
-
+            var betteam = Converter.To<string>(reader["betteam"]).ToLower();
+            var beteamValue = betteams.ContainsKey(betteam) ? betteams[betteam] : string.Empty;
             return new List<object>()
             {
-                betteam
+                beteamValue
             };
         }
     }
