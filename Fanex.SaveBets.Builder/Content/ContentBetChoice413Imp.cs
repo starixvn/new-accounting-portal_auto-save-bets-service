@@ -11,7 +11,7 @@ namespace Fanex.SaveBets.Builder.Content
     {
         public List<object> ContentBetChoiceBuilder(IDataReader reader)
         {
-            var betteam = Converter.To<string>(reader["betteam"]).ToLower();           
+            var betteam = Converter.To<string>(reader["betteam"]);
             var hdp1 = Converter.To<decimal>(reader["hdp1"]);
             var hdp2 = Converter.To<decimal>(reader["hdp2"]);
 

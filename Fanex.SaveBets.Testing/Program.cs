@@ -2,6 +2,9 @@
 using System.IO;
 using Fanex.Common;
 using Fanex.Data.Configuration;
+using Fanex.Logging;
+using Fanex.MailDelivery.Client.Messages;
+using Newtonsoft.Json;
 using ONEbook.UM.Services;
 using ONEbook.UM.Services.Impl;
 using SaveBetsBusiness;
@@ -13,34 +16,48 @@ namespace Fanex.SaveBets.Testing
     {
         private static void Main(string[] args)
         {
-            IMaintenanceService um = new MaintenanceService();
-            var downTime = um.GetUnderMaintenanceTime();
-            if (downTime.IsUnderMaintenanceTime)
+            try
             {
-                Console.WriteLine("---------------UM---------------");
-                return;
+                IMaintenanceService um = new MaintenanceService();
+                var downTime = um.GetUnderMaintenanceTime();
+                if (downTime.IsUnderMaintenanceTime)
+                {
+                    return;
+                }
+
+                Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
+
+                DbSettingProviderManager.Current.Start();
+
+                AppSettings.OnProcessing = false;
+                AppSettings.ForceRunningOnProcessing = true;
+
+                string ip = AppSettings.IP;
+                string username = AppSettings.UserName;
+                string password = AppSettings.Password;
+
+                if (AppSettings.IsEncryptPassword)
+                {
+                    password = Cryptography.CfsDeCrypt(password);
+                }
+
+                var service = new SaveBetsBusinessService(ip, username, password);
+                service.ProcessSaveBets();
+
+                JobResultMessage jobResult = new JobResultMessage()
+                {
+                    Mail = null,
+                    JobStatus = MailDelivery.Client.Enumerations.JobStatus.SuccessWithoutSendmail
+                };
+
+                var json = JsonConvert.SerializeObject(jobResult);
+                Console.Write(json);
+                Environment.Exit(0);
             }
-
-            Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-
-            DbSettingProviderManager.Current.Start();
-
-            AppSettings.OnProcessing = false;
-            AppSettings.ForceRunningOnProcessing = true;
-
-            string ip = AppSettings.IP;
-            string username = AppSettings.UserName;
-            string password = AppSettings.Password;
-
-            if (AppSettings.IsEncryptPassword)
+            catch (Exception ex)
             {
-                password = Cryptography.CfsDeCrypt(password);
+                LogService.Error(ex.Message);
             }
-
-            var service = new SaveBetsBusinessService(ip, username, password);
-            service.ProcessSaveBets();
-
-            Console.WriteLine("---------------DONE---------------");
         }
     }
 }

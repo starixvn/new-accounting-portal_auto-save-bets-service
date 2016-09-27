@@ -13,18 +13,18 @@ namespace Fanex.SaveBets.Builder.Content
         private Dictionary<string, string> betteams = new Dictionary<string, string>()
         {
             ////426
-            { "h1", "{h} to win by 1 goal" },
-            { "h2+", "{h} to win by 2up goals" },
+            { "h1", "{h} to win by 1 Goal" },
+            { "h2+", "{h} to win by 2up Goals" },
             { "d", "Score Draw" },
-            { "a1", "{a} to win by 1 goal" },
-            { "a2+", "{a}  to win by 2up goals" },
+            { "a1", "{a} to win by 1 Goal" },
+            { "a2+", "{a}  to win by 2up Goals" },
             { "ng", "No Goal" },
 
             ////429
             { "0", "No Goal" },
             { "1", "1 Goal" },
             { "2", "2 Goals" },
-            { "3-over", "3-Over" },
+            { "3-over", "3 Goals &Over" },
 
             ////445, 446, 447
             { "yy", "Yes/Yes" },

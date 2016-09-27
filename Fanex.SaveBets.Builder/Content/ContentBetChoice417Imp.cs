@@ -22,7 +22,7 @@ namespace Fanex.SaveBets.Builder.Content
             { "yo", "Yes & Over {hdp1}" },
             { "yu", "Yes & Under {hdp1}" },
             { "no", "No & Over {hdp1}" },
-            { "nu", "No & Over {hdp1}" },
+            { "nu", "No & Under {hdp1}" },
 
             ////419, 420, 421
             { "1h", "1st Half" },
