@@ -17,7 +17,7 @@ namespace Fanex.SaveBets.Builder.Content
             { "g3", "3 Goals" },
             { "g4", "4 Goals" },
             { "g5", "5 Goals" },
-            { "g6", "6 Goals &Over" }
+            { "g6", "6+" }
         };
 
         public List<object> ContentBetChoiceBuilder(IDataReader reader)

@@ -11,11 +11,11 @@ namespace Fanex.SaveBets.Builder.Content
         {
             { "h1", "{h} to Win by 1 Goal" },
             { "h2", "{h} to Win by 2 Goals" },
-            { "h3", "{h} to Win by 3up Goals" },
+            { "h3", "{h} to Win by 3+ Goals" },
             { "d", "S.Draw" },
             { "a1", "{a} to Win by 1 Goal" },
             { "a2", "{a} to Win by 2 Goals" },
-            { "a3", "{a} to Win by 3up Goals" },
+            { "a3", "{a} to Win by 3+ Goals" },
             { "ng", "No Goal" },
         };
 
