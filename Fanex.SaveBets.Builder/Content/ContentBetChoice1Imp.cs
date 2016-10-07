@@ -21,7 +21,7 @@ namespace Fanex.SaveBets.Builder.Content
             }
             else
             {
-                hdp1 = hdp1 - hdp2;
+                hdp = hdp1 - hdp2;
             }
 
             return new List<object>()

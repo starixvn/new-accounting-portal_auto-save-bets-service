@@ -11,12 +11,12 @@ namespace Fanex.SaveBets.Builder.Content
         private Dictionary<string, string> betteams = new Dictionary<string, string>()
         {
             ////417
-            { "yh", "Yes/{h}" },
+            { "yh", "Yes/Home" },
+            { "ya", "Yes/Away" },
+            { "nh", "No/Home" },
+            { "na", "No/Away" },
             { "yd", "Yes/Draw" },
-            { "ya", "Yes/{a}" },
-            { "nh", "No/{h}" },
             { "nd", "No/Draw" },
-            { "na", "No/{a}" },
 
             ////418
             { "yo", "Yes & Over {hdp1}" },
@@ -25,8 +25,8 @@ namespace Fanex.SaveBets.Builder.Content
             { "nu", "No & Under {hdp1}" },
 
             ////419, 420, 421
-            { "1h", "1st Half" },
-            { "2h", "2nd Half" },
+            { "1h", "First Half" },
+            { "2h", "Second Half" },
             { "n", "Neither" },
 
             ////422, 423

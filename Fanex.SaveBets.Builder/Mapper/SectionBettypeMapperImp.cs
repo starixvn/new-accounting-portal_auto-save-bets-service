@@ -26,6 +26,7 @@ namespace Fanex.SaveBets.Builder.Mapper
             { 406, OneSection },
             { 407, OneSection },
             { 408, OneSection },
+            { 171, OneSection },
             { 409, OneSection },
             { 410, OneSection },
             { 412, OneSection },
