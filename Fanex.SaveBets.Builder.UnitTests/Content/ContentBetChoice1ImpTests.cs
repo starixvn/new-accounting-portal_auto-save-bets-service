@@ -28,8 +28,7 @@ namespace Fanex.SaveBets.Builder.UnitTests.Content
             IDataReader reader = new MockDataReader(itemsList);
 
             ContentBetChoice choice = new ContentBetChoice1Imp();
-            var result = choice.ContentBetChoiceBuilder(reader);
-            //var expectedResult = 
+            var result = choice.ContentBetChoiceBuilder(reader);            
         }
     }
 }

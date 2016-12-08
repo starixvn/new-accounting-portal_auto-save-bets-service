@@ -30,6 +30,11 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string ContentBetChoice424Imp = "ContentBetChoice424Imp";
         private const string ContentBetChoice425Imp = "ContentBetChoice425Imp";
         private const string ContentBetChoice426Imp = "ContentBetChoice426Imp";
+        private const string ContentBetChoice221Imp = "ContentBetChoice221Imp";
+        private const string ContentBetChoice222Imp = "ContentBetChoice222Imp";
+        private const string ContentBetChoice223Imp = "ContentBetChoice223Imp";
+        private const string ContentBetChoice224Imp = "ContentBetChoice224Imp";
+        private const string ContentBetChoice225Imp = "ContentBetChoice225Imp";
 
         private Dictionary<int, string> groupBettypes;
 
@@ -123,6 +128,12 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 445, ContentBetChoice426Imp },
                 { 446, ContentBetChoice426Imp },
                 { 447, ContentBetChoice426Imp },
+
+                { 221, ContentBetChoice221Imp },
+                { 222, ContentBetChoice222Imp },
+                { 223, ContentBetChoice223Imp },                
+                { 224, ContentBetChoice224Imp },
+                { 225, ContentBetChoice225Imp },
             };
         }
 

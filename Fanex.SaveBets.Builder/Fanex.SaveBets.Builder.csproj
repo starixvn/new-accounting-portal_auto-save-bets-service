@@ -59,6 +59,11 @@
   <ItemGroup>
     <Compile Include="Content\ContentBetChoice.cs" />
     <Compile Include="Content\ContentBetChoice1Imp.cs" />
+    <Compile Include="Content\ContentBetChoice221Imp.cs" />
+    <Compile Include="Content\ContentBetChoice222Imp.cs" />
+    <Compile Include="Content\ContentBetChoice223Imp.cs" />
+    <Compile Include="Content\ContentBetChoice224Imp.cs" />
+    <Compile Include="Content\ContentBetChoice225Imp.cs" />
     <Compile Include="Content\ContentBetChoice2Imp.cs" />
     <Compile Include="Content\ContentBetChoice401Imp.cs" />
     <Compile Include="Content\ContentBetChoice405Imp.cs" />
@@ -91,6 +96,7 @@
     <Compile Include="Header\Header1ColumnHdpImp.cs" />
     <Compile Include="Header\Header1ColumnMyanmarOddBettype.cs" />
     <Compile Include="Header\Header1ColumnTeamImp.cs" />
+    <Compile Include="Header\Header2ColumnImp.cs" />
     <Compile Include="Header\Header3ColumnImp.cs" />
     <Compile Include="Header\HeaderBuilder.cs" />
     <Compile Include="Header\HeaderBuilderImp.cs" />

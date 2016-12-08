@@ -10,6 +10,7 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string Header1ColumnMyanmarOddBettype = "Header1ColumnMyanmarOddBettype";
         private const string Header3ColumnImp = "Header3ColumnImp";
         private const string Header0Column = "Header0Column";
+        private const string Header2ColumnImp = "Header2ColumnImp";
 
         private Dictionary<int, string> groupBettypes;
 
@@ -96,6 +97,12 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 5, Header0Column },
                 { 15, Header0Column },
                 { 430, Header0Column },
+
+                { 221, Header2ColumnImp },
+                { 222, Header2ColumnImp },
+                { 223, Header2ColumnImp },
+                { 224, Header2ColumnImp },
+                { 225, Header2ColumnImp },
             };
         }
 

@@ -3,7 +3,7 @@ using System.IO;
 using Fanex.Common;
 using Fanex.Data.Configuration;
 using Fanex.Logging;
-using Fanex.MailDelivery.Client.Messages;
+using Fanex.MailDelivery.Core.Models;
 using Newtonsoft.Json;
 using ONEbook.UM.Services;
 using ONEbook.UM.Services.Impl;
@@ -44,10 +44,10 @@ namespace Fanex.SaveBets.Testing
                 var service = new SaveBetsBusinessService(ip, username, password);
                 service.ProcessSaveBets();
 
-                JobResultMessage jobResult = new JobResultMessage()
+                JobMessage jobResult = new JobMessage()
                 {
                     Mail = null,
-                    JobStatus = MailDelivery.Client.Enumerations.JobStatus.SuccessWithoutSendmail
+                    JobStatus = JobStatus.SuccessWithoutSendmail
                 };
 
                 var json = JsonConvert.SerializeObject(jobResult);
