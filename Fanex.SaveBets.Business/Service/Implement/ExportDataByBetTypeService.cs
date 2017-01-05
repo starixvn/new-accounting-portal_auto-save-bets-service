@@ -408,11 +408,6 @@
             }
         }
 
-        /// <summary>
-        /// Initializes the width of the one section column.
-        /// </summary>
-        /// <param name="worksheet">The worksheet.</param>
-        /// <param name="bettype">The bet type.</param>
         private void InitOneSectionColumnWidth(XSSFSheet worksheet)
         {
             for (int i = 0; i < 13; i++)
@@ -429,6 +424,7 @@
             worksheet.SetColumnWidth(11, 220 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(12, 150 * NPOIExcelUtility.FontWidth);
             worksheet.AutoSizeColumn(5);
+            worksheet.AutoSizeColumn(10);
         }
 
         /// <summary>
