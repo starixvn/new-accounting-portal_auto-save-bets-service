@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Fanex.Common;
+using Fanex.SaveBets.Builder.Helper;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using Fanex.Common;
-using Fanex.SaveBets.Builder.Helper;
 
 namespace Fanex.SaveBets.Builder.Content
 {
@@ -15,7 +12,7 @@ namespace Fanex.SaveBets.Builder.Content
             ////426
             { "h1", "{h} to win by 1 Goal" },
             { "h2+", "{h} to win by 2+ Goals" },
-            { "d", "Score Draw" },
+            { "d", "Any Score Draw (Exclude 0-0)" },
             { "a1", "{a} to win by 1 Goal" },
             { "a2+", "{a}  to win by 2+ Goals" },
             { "ng", "No Goal" },
