@@ -32,7 +32,6 @@ namespace Fanex.SaveBets.Testing
                 AppSettings.OnProcessing = false;
                 AppSettings.ForceRunningOnProcessing = true;
 
-                string ip = AppSettings.IP;
                 string username = AppSettings.UserName;
                 string password = AppSettings.Password;
 
@@ -41,7 +40,7 @@ namespace Fanex.SaveBets.Testing
                     password = Cryptography.CfsDeCrypt(password);
                 }
 
-                var service = new SaveBetsBusinessService(ip, username, password);
+                var service = new SaveBetsBusinessService(username, password);
                 service.ProcessSaveBets();
 
                 JobMessage jobResult = new JobMessage()

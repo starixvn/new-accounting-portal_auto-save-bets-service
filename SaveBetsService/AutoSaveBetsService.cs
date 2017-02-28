@@ -57,7 +57,6 @@ namespace AutoSaveBetsService
             AppSettings.OnProcessing = false;
             AppSettings.ForceRunningOnProcessing = false;
 
-            string ip = AppSettings.IP;
             string username = AppSettings.UserName;
             string password = AppSettings.Password;
 
@@ -66,7 +65,7 @@ namespace AutoSaveBetsService
                 password = Cryptography.CfsDeCrypt(password);
             }
 
-            service = new SaveBetsBusinessService(ip, username, password);
+            service = new SaveBetsBusinessService(username, password);
             _maintenanceService = new MaintenanceService();
         }
 

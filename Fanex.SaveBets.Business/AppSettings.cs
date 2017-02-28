@@ -204,16 +204,6 @@ namespace SaveBetsBusiness
                 return val == null ? 0 : Convert.ToInt32(ConfigurationManager.AppSettings["ForceRunning.MatchId"]);
             }
         }
-
-        public static string IP
-        {
-            get
-            {
-                var val = ConfigurationManager.AppSettings["ServerFile.IP"];
-                return val == null ? string.Empty : Convert.ToString(ConfigurationManager.AppSettings["ServerFile.IP"]);
-            }
-        }
-
         public static string UserName
         {
             get
