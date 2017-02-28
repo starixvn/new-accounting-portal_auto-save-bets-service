@@ -35,15 +35,13 @@ namespace SaveBetsBusiness.Service
         private DataRow _matchInfo = null;
         private Impersonate _impersonate;
         private NetworkCredential _networkCredential;
-        private string _ip;
         private string _userName;
         private string _password;
 
-        public SaveBetsBusinessService(string ip, string username, string password)
+        public SaveBetsBusinessService(string username, string password)
         {
             _processSaveBets = new ProcessSaveBets();
             _jobs = new List<DataRow>();
-            this._ip = ip;
             this._userName = username;
             this._password = password;
             this._networkCredential = new NetworkCredential(username, password);
@@ -109,7 +107,7 @@ namespace SaveBetsBusiness.Service
 
                 if (AppSettings.IsAuthenticate)
                 {
-                    using (new NetworkConnection(@"\\" + this._ip, this._networkCredential))
+                    using (new NetworkConnection(AppSettings.ExportDataDirectory, this._networkCredential))
                     {
                         WriteFile(eventDate, excelFile);
                     }
