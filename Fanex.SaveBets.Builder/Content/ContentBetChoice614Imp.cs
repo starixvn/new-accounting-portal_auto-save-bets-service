@@ -9,12 +9,12 @@ namespace Fanex.SaveBets.Builder.Content
     {
         private Dictionary<string, string> betteams = new Dictionary<string, string>()
         {
-            { "h1-4", "{h} to Win by 1 to 4 points" },
-            { "h5-8", "{h} to Win by 5 to 8 points" },
-            { "h9+", "{h} to Win by 9+ points" },
-            { "a1-4", "{a} to Win by 1 to 4 points" },
-            { "a5-8", "{a} to Win by 5 to 8 points" },
-            { "a9+", "{a} to Win by 9+ points" },
+            { "h1-4", "{h} to Win by 1 - 4 Points" },
+            { "h5-8", "{h} to Win by 5 - 8 Points" },
+            { "h9+", "{h} to Win by 9+ Points" },
+            { "a1-4", "{a} to Win by 1 - 4 Points" },
+            { "a5-8", "{a} to Win by 5 - 8 Points" },
+            { "a9+", "{a} to Win by 9+ Points" },
             { "d", "Draw" }
         };
 
