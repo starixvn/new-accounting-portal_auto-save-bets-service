@@ -1,10 +1,5 @@
 ﻿namespace SaveBetsBusiness.Service.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
     using Fanex.Common;
     using Fanex.SaveBets.Builder.Content;
     using Fanex.SaveBets.Builder.Header;
@@ -14,6 +9,11 @@
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Resources;
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
 
     public class ExportDataByBetTypeService : IDisposable
     {
@@ -303,7 +303,7 @@
                     else if (secondSection.Contains(betteam))
                     {
                         row = worksheet.GetRow(currentBetAwayTeamRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetAwayTeamRowIndex) as XSSFRow;
-                        currentColumn = 12;
+                        currentColumn++;
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["transid"]), numberStyle);
