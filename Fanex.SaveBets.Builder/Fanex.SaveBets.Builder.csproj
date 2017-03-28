@@ -125,6 +125,7 @@
     <Compile Include="Mapper\ContentBettypeMapperImp.cs" />
     <Compile Include="Mapper\HeaderBettypeMapper.cs" />
     <Compile Include="Mapper\HeaderBettypeMapperImp.cs" />
+    <Compile Include="Mapper\SecondSectionStartColumnIndexMapper.cs" />
     <Compile Include="Mapper\SectionBettypeMapper.cs" />
     <Compile Include="Mapper\SectionBettypeMapperImp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
