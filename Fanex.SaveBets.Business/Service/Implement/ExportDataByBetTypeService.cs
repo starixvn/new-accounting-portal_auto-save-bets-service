@@ -262,6 +262,7 @@
                 var betChoiceToShowObj = new ContentBetChoiceBuilderImp();
                 List<string> firstSection = new List<string> { "h", "o", "y" };
                 List<string> secondSection = new List<string> { "a", "u", "n", "e" };
+
                 while (reader.Read())
                 {
                     string amount = string.Format(
@@ -303,7 +304,7 @@
                     else if (secondSection.Contains(betteam))
                     {
                         row = worksheet.GetRow(currentBetAwayTeamRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetAwayTeamRowIndex) as XSSFRow;
-                        currentColumn++;
+                        currentColumn = GetStartColumnIndexOfSecondSection(bettype);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["transid"]), numberStyle);
@@ -570,6 +571,14 @@
             {
                 LogExtensions.ExceptionHandler(ex);
             }
+        }
+
+        private int GetStartColumnIndexOfSecondSection(int bettype)
+        {
+            if (bettype == 606 || bettype == 607 || bettype == 609 || bettype == 610 || bettype == 611 || bettype == 612 || bettype == 613 || bettype == 615 || bettype == 616 || bettype == 617)
+                return 13;
+            else
+                return 12;
         }
     }
 }
