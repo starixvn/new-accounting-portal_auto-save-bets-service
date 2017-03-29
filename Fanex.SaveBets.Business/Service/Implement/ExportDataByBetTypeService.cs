@@ -461,8 +461,6 @@
 
             if (secondSectionStartColumnIndex == 13)
             {
-                //worksheet.SetColumnWidth(6, 220 * NPOIExcelUtility.FontWidth);
-                //worksheet.SetColumnWidth(19, 220 * NPOIExcelUtility.FontWidth);
                 worksheet.AutoSizeColumn(6);
                 worksheet.AutoSizeColumn(19);
             }

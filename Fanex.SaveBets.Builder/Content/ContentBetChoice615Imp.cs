@@ -28,7 +28,7 @@ namespace Fanex.SaveBets.Builder.Content
             string betTypeNameValue = betIds.ContainsKey(betid) ? betIds[betid] : string.Empty;
             var hdp1 = Converter.To<decimal>(reader["hdp1"]);
 
-            betteamValue = betteamValue.Replace("{hdp1}", $"{hdp1}:#,##0.00");
+            betteamValue = betteamValue.Replace("{hdp1}", hdp1.ToString());
             return new List<object>()
             {
                 betteamValue,
