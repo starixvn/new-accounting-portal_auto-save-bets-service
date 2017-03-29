@@ -35,8 +35,8 @@ namespace Fanex.SaveBets.Builder.Content
             betteamValue = betteamValue
                 .Replace("{h}", CacheRef.GetTeamName(homeId))
                 .Replace("{a}", CacheRef.GetTeamName(awayId))
-                .Replace("{homehdp}", Converter.ToString2(hdp2 - hdp1))
-                .Replace("{awayhdp}", Converter.ToString2(hdp1 - hdp2));
+                .Replace("{homehdp}", $"{hdp2 - hdp1}:#,##0.00")
+                .Replace("{awayhdp}", $"{hdp1 - hdp2}:#,##0.00");
 
             return new List<object>()
             {

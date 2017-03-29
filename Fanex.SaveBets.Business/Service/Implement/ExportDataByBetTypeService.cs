@@ -461,10 +461,10 @@
 
             if (secondSectionStartColumnIndex == 13)
             {
-                worksheet.SetColumnWidth(6, 220 * NPOIExcelUtility.FontWidth);
-                worksheet.SetColumnWidth(19, 220 * NPOIExcelUtility.FontWidth);
-                //  worksheet.AutoSizeColumn(6);
-                //worksheet.AutoSizeColumn(secondSectionStartColumnIndex + 6);
+                //worksheet.SetColumnWidth(6, 220 * NPOIExcelUtility.FontWidth);
+                //worksheet.SetColumnWidth(19, 220 * NPOIExcelUtility.FontWidth);
+                worksheet.AutoSizeColumn(6);
+                worksheet.AutoSizeColumn(19);
             }
         }
 
@@ -585,14 +585,6 @@
             {
                 LogExtensions.ExceptionHandler(ex);
             }
-        }
-
-        private int GetStartColumnIndexOfSecondSection(int bettype)
-        {
-            if (bettype == 606 || bettype == 607 || bettype == 609 || bettype == 610 || bettype == 611 || bettype == 612 || bettype == 613 || bettype == 615 || bettype == 616 || bettype == 617)
-                return 13;
-            else
-                return 12;
         }
     }
 }
