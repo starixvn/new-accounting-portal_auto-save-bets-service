@@ -458,6 +458,12 @@
             worksheet.AutoSizeColumn(secondSectionStartColumnIndex + 5);
             worksheet.AutoSizeColumn(secondSectionStartColumnIndex - 4);
             worksheet.AutoSizeColumn(2 * secondSectionStartColumnIndex - 4);
+
+            if (secondSectionStartColumnIndex == 13)
+            {
+                worksheet.AutoSizeColumn(6);
+                worksheet.AutoSizeColumn(secondSectionStartColumnIndex + 6);
+            }
         }
 
         /// <summary>
