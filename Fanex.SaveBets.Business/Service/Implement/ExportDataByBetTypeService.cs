@@ -446,16 +446,18 @@
             worksheet.SetColumnWidth(0, 170 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(2, 150 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(4, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(9, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(10, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(secondSectionStartColumnIndex - 3, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(secondSectionStartColumnIndex - 2, 150 * NPOIExcelUtility.FontWidth);
 
             worksheet.SetColumnWidth(secondSectionStartColumnIndex, 170 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(secondSectionStartColumnIndex + 2, 150 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(secondSectionStartColumnIndex + 4, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(secondSectionStartColumnIndex + 9, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(secondSectionStartColumnIndex + 10, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(2 * secondSectionStartColumnIndex - 3, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(2 * secondSectionStartColumnIndex - 2, 150 * NPOIExcelUtility.FontWidth);
             worksheet.AutoSizeColumn(5);
             worksheet.AutoSizeColumn(secondSectionStartColumnIndex + 5);
+            worksheet.AutoSizeColumn(secondSectionStartColumnIndex - 4);
+            worksheet.AutoSizeColumn(2 * secondSectionStartColumnIndex - 4);
         }
 
         /// <summary>
