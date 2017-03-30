@@ -9,7 +9,7 @@ namespace Fanex.SaveBets.Builder.Content
         private Dictionary<string, string> betteams = new Dictionary<string, string>()
         {
             { "o", "Odd" },
-            { "u", "Even" }
+            { "e", "Even" }
         };
 
         private Dictionary<int, string> betIds = new Dictionary<int, string>()
