@@ -125,7 +125,7 @@
             else if (sectionObj.IsMyanmarBettypeGroup(bettype))
             {
                 this.ExportMyanmarOddsTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
-                InitOneSectionColumnWidth(worksheet);
+                InitOneSectionColumnWidth(worksheet, bettype);
             }
             else if (numberOfSection == 3)
             {
@@ -135,7 +135,7 @@
             else
             {
                 this.ExportOneSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
-                InitOneSectionColumnWidth(worksheet);
+                InitOneSectionColumnWidth(worksheet, bettype);
             }
         }
 
@@ -410,9 +410,11 @@
             }
         }
 
-        private void InitOneSectionColumnWidth(XSSFSheet worksheet)
+        private void InitOneSectionColumnWidth(XSSFSheet worksheet, int bettype)
         {
-            for (int i = 0; i < 13; i++)
+            var oneSectionNumberColumnMapperImp = new OneSectionNumberColumnMapperImp();
+            int numberColumns = oneSectionNumberColumnMapperImp.GetNumberColumns(bettype);
+            for (int i = 0; i < numberColumns; i++)
             {
                 worksheet.SetColumnWidth(i, 80 * NPOIExcelUtility.FontWidth);
             }
@@ -423,10 +425,15 @@
 
             worksheet.SetColumnWidth(8, 80 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(9, 80 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(11, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(12, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(numberColumns - 2, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(numberColumns - 1, 150 * NPOIExcelUtility.FontWidth);
             worksheet.AutoSizeColumn(5);
             worksheet.AutoSizeColumn(10);
+
+            if (numberColumns == 14)
+            {
+                worksheet.AutoSizeColumn(6);
+            }
         }
 
         /// <summary>
