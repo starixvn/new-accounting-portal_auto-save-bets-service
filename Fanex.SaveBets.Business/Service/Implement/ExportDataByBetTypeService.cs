@@ -1,10 +1,5 @@
 ﻿namespace SaveBetsBusiness.Service.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
     using Fanex.Common;
     using Fanex.SaveBets.Builder.Content;
     using Fanex.SaveBets.Builder.Header;
@@ -14,6 +9,11 @@
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Resources;
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
 
     public class ExportDataByBetTypeService : IDisposable
     {
@@ -120,12 +120,12 @@
             if (numberOfSection == 2)
             {
                 this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
-                InitTwoSectionColumnWidth(worksheet);
+                InitTwoSectionColumnWidth(worksheet, bettype);
             }
             else if (sectionObj.IsMyanmarBettypeGroup(bettype))
             {
                 this.ExportMyanmarOddsTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
-                InitOneSectionColumnWidth(worksheet);
+                InitOneSectionColumnWidth(worksheet, bettype);
             }
             else if (numberOfSection == 3)
             {
@@ -135,7 +135,7 @@
             else
             {
                 this.ExportOneSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
-                InitOneSectionColumnWidth(worksheet);
+                InitOneSectionColumnWidth(worksheet, bettype);
             }
         }
 
@@ -262,6 +262,7 @@
                 var betChoiceToShowObj = new ContentBetChoiceBuilderImp();
                 List<string> firstSection = new List<string> { "h", "o", "y" };
                 List<string> secondSection = new List<string> { "a", "u", "n", "e" };
+
                 while (reader.Read())
                 {
                     string amount = string.Format(
@@ -302,8 +303,9 @@
                     }
                     else if (secondSection.Contains(betteam))
                     {
+                        var secondSectionStartColumnIndexMapper = new SecondSectionStartColumnIndexMapperImp();
                         row = worksheet.GetRow(currentBetAwayTeamRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetAwayTeamRowIndex) as XSSFRow;
-                        currentColumn = 12;
+                        currentColumn = secondSectionStartColumnIndexMapper.GetStartColumnIndexOfSecondSection(bettype);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["transid"]), numberStyle);
@@ -408,9 +410,11 @@
             }
         }
 
-        private void InitOneSectionColumnWidth(XSSFSheet worksheet)
+        private void InitOneSectionColumnWidth(XSSFSheet worksheet, int bettype)
         {
-            for (int i = 0; i < 13; i++)
+            var oneSectionNumberColumnMapperImp = new OneSectionNumberColumnMapperImp();
+            int numberColumns = oneSectionNumberColumnMapperImp.GetNumberColumns(bettype);
+            for (int i = 0; i < numberColumns; i++)
             {
                 worksheet.SetColumnWidth(i, 80 * NPOIExcelUtility.FontWidth);
             }
@@ -421,36 +425,52 @@
 
             worksheet.SetColumnWidth(8, 80 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(9, 80 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(11, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(12, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(numberColumns - 2, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(numberColumns - 1, 150 * NPOIExcelUtility.FontWidth);
             worksheet.AutoSizeColumn(5);
             worksheet.AutoSizeColumn(10);
+
+            if (numberColumns == 14)
+            {
+                worksheet.AutoSizeColumn(6);
+            }
         }
 
         /// <summary>
         /// Initializes the width of the two section column.
         /// </summary>
         /// <param name="worksheet">The worksheet.</param>
-        private void InitTwoSectionColumnWidth(XSSFSheet worksheet)
+        private void InitTwoSectionColumnWidth(XSSFSheet worksheet, int bettype)
         {
             for (int i = 0; i < 23; i++)
             {
                 worksheet.SetColumnWidth(i, 90 * NpoiExcelExtensions.FontWidth);
             }
 
+            var secondSectionStartColumnIndexMapper = new SecondSectionStartColumnIndexMapperImp();
+            var secondSectionStartColumnIndex = secondSectionStartColumnIndexMapper.GetStartColumnIndexOfSecondSection(bettype);
+
             worksheet.SetColumnWidth(0, 170 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(2, 150 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(4, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(9, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(10, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(secondSectionStartColumnIndex - 3, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(secondSectionStartColumnIndex - 2, 150 * NPOIExcelUtility.FontWidth);
 
-            worksheet.SetColumnWidth(12, 170 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(14, 150 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(16, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(21, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(22, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(secondSectionStartColumnIndex, 170 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(secondSectionStartColumnIndex + 2, 150 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(secondSectionStartColumnIndex + 4, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(2 * secondSectionStartColumnIndex - 3, 220 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(2 * secondSectionStartColumnIndex - 2, 150 * NPOIExcelUtility.FontWidth);
             worksheet.AutoSizeColumn(5);
-            worksheet.AutoSizeColumn(17);
+            worksheet.AutoSizeColumn(secondSectionStartColumnIndex + 5);
+            worksheet.AutoSizeColumn(secondSectionStartColumnIndex - 4);
+            worksheet.AutoSizeColumn(2 * secondSectionStartColumnIndex - 4);
+
+            if (secondSectionStartColumnIndex == 13)
+            {
+                worksheet.AutoSizeColumn(6);
+                worksheet.AutoSizeColumn(19);
+            }
         }
 
         /// <summary>

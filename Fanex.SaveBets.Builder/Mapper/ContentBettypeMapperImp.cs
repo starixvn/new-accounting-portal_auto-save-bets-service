@@ -35,6 +35,19 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string ContentBetChoice223Imp = "ContentBetChoice223Imp";
         private const string ContentBetChoice224Imp = "ContentBetChoice224Imp";
         private const string ContentBetChoice225Imp = "ContentBetChoice225Imp";
+        private const string ContentBetChoice601_602_608Imp = "ContentBetChoice601_602_608Imp";
+        private const string ContentBetChoice603_604_605Imp = "ContentBetChoice603_604_605Imp";
+        private const string ContentBetChoice606Imp = "ContentBetChoice606Imp";
+        private const string ContentBetChoice607Imp = "ContentBetChoice607Imp";
+        private const string ContentBetChoice609Imp = "ContentBetChoice609Imp";
+        private const string ContentBetChoice610Imp = "ContentBetChoice610Imp";
+        private const string ContentBetChoice611Imp = "ContentBetChoice611Imp";
+        private const string ContentBetChoice612Imp = "ContentBetChoice612Imp";
+        private const string ContentBetChoice613Imp = "ContentBetChoice613Imp";
+        private const string ContentBetChoice614Imp = "ContentBetChoice614Imp";
+        private const string ContentBetChoice615Imp = "ContentBetChoice615Imp";
+        private const string ContentBetChoice616Imp = "ContentBetChoice616Imp";
+        private const string ContentBetChoice617Imp = "ContentBetChoice617Imp";
 
         private Dictionary<int, string> groupBettypes;
 
@@ -131,9 +144,30 @@ namespace Fanex.SaveBets.Builder.Mapper
 
                 { 221, ContentBetChoice221Imp },
                 { 222, ContentBetChoice222Imp },
-                { 223, ContentBetChoice223Imp },                
+                { 223, ContentBetChoice223Imp },
                 { 224, ContentBetChoice224Imp },
                 { 225, ContentBetChoice225Imp },
+
+                { 601, ContentBetChoice601_602_608Imp },
+                { 602, ContentBetChoice601_602_608Imp },
+                { 608, ContentBetChoice601_602_608Imp },
+
+                { 603, ContentBetChoice603_604_605Imp },
+                { 604, ContentBetChoice603_604_605Imp },
+                { 605, ContentBetChoice603_604_605Imp },
+
+                { 606, ContentBetChoice606Imp },
+                { 607, ContentBetChoice607Imp },
+                { 609, ContentBetChoice609Imp },
+                { 610, ContentBetChoice610Imp },
+                { 611, ContentBetChoice611Imp },
+                { 612, ContentBetChoice612Imp },
+                { 613, ContentBetChoice613Imp },
+                { 615, ContentBetChoice615Imp },
+                { 616, ContentBetChoice616Imp },
+                { 617, ContentBetChoice617Imp },
+
+                { 614, ContentBetChoice614Imp }
             };
         }
 
