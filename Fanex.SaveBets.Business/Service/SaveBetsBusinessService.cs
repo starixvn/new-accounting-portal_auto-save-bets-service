@@ -17,6 +17,7 @@ namespace SaveBetsBusiness.Service
     using System.Linq;
     using System.Net;
     using Fanex.Common;
+    using Fanex.Logging;
     using Fanex.ServiceManagement.Utility;
     using NPOI.XSSF.UserModel;
     using SaveBetsBusiness.Common;
@@ -121,6 +122,7 @@ namespace SaveBetsBusiness.Service
             }
             catch (Exception ex)
             {
+                Logger.Log.Info($"{ex.Message}, MatchId:{matchId}");
                 LogExtensions.ExceptionHandler(ex);
                 throw;
             }
