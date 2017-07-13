@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Functions>
+<Functions SiteName="NAP - Reports - Save Bet Service">
   <Function Name="NAP_SaveBet">
     <Setting Key="NAP_SaveBet_GetJob" SpName="NAP_SaveBet_GetJob" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
     <Setting Key="NAP_SaveBet_GetMatchInfo" SpName="NAP_SaveBet_GetMatchInfo" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
