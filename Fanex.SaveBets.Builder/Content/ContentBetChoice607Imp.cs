@@ -17,7 +17,8 @@ namespace Fanex.SaveBets.Builder.Content
         {
             { 820, "2H Race to 20" },
             { 825, "2H Race to 25" },
-            { 830, "2H Race to 30" }
+            { 830, "2H Race to 30" },
+            { 835, "2H Race to 35" },
         };
 
         public List<object> ContentBetChoiceBuilder(IDataReader reader)
