@@ -443,7 +443,7 @@ namespace SaveBetsBusiness.Service.Implement
                 //// export data.
                 row = worksheet.CreateRow(currentRow) as XSSFRow;
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(dataRow["typename"]), leftTextStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["bettype"]), intNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToInt(dataRow["bettype"]), rightTextStyle);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(dataRow["Live"]), centerTextStyle);
 
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(dataRow["winlosta"]), decimalNumberStyle);
