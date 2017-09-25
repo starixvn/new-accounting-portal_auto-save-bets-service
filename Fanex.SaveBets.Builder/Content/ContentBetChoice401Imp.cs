@@ -7,7 +7,7 @@ namespace Fanex.SaveBets.Builder.Content
 {
     public class ContentBetChoice401Imp : ContentBetChoice
     {
-        private Dictionary<string, string> betteams = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> betteams = new Dictionary<string, string>()
         {
             { "o", "Over" },
             { "u", "Under" }
