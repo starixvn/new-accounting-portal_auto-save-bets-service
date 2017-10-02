@@ -19,10 +19,6 @@ namespace SaveBetsBusiness.Repositories.Implement
     /// </summary>
     public class SaveBetsBusinessRepository : ISaveBetsBusinessRepository
     {
-        public SaveBetsBusinessRepository()
-        {
-        }
-
         /// <summary>
         /// Gets the save get jobs.
         /// </summary>
@@ -38,14 +34,14 @@ namespace SaveBetsBusiness.Repositories.Implement
                     param.Add("groupsports", AppSettings.GroupSports);
 
                     if (AppSettings.ForceRunning && AppSettings.ForceRunningOnProcessing)
-                    {                        
+                    {
                         param.Add("matchid", AppSettings.ForceRunningWithMatchId);
-                        db.AssignParamValues(param);
                     }
 
+                    db.AssignParamValues(param);
                     var dataSet = db.ExecuteDataSet();
                     if (dataSet != null && dataSet.Tables.Count > 0)
-                    {                        
+                    {
                         dataTable = dataSet.Tables[0];
                     }
                 }
@@ -53,7 +49,6 @@ namespace SaveBetsBusiness.Repositories.Implement
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                throw;
             }
 
             return dataTable;
@@ -87,7 +82,6 @@ namespace SaveBetsBusiness.Repositories.Implement
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                throw;
             }
 
             return dataTable;
@@ -121,7 +115,6 @@ namespace SaveBetsBusiness.Repositories.Implement
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                throw;
             }
 
             return dataTable;
@@ -160,7 +153,6 @@ namespace SaveBetsBusiness.Repositories.Implement
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                throw;
             }
 
             return dataTable;
@@ -183,7 +175,6 @@ namespace SaveBetsBusiness.Repositories.Implement
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                throw;
             }
 
             return reader;
@@ -206,7 +197,6 @@ namespace SaveBetsBusiness.Repositories.Implement
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                throw;
             }
 
             return reader;
@@ -229,7 +219,6 @@ namespace SaveBetsBusiness.Repositories.Implement
             catch (Exception ex)
             {
                 LogExtensions.ExceptionHandler(ex);
-                throw;
             }
         }
     }
