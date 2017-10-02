@@ -128,7 +128,7 @@
     <Content Include="_Fanex.AutoSaveBets.Service.UAT.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Fanex.AutoSaveBets.Service.PRO.exe.config">
+    <Content Include="_Fanex.AutoSaveBets.Service.PRO-0.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="deployment.ignore">
@@ -138,7 +138,19 @@
     <None Include="Templates\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="_Fanex.AutoSaveBets.Service.Local.exe.config">
+    <Content Include="_Fanex.AutoSaveBets.Service.PRO-1.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="_Fanex.AutoSaveBets.Service.PRO-2.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="_Fanex.AutoSaveBets.Service.Local-0.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="_Fanex.AutoSaveBets.Service.Local-1.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="_Fanex.AutoSaveBets.Service.Local-2.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -239,5 +239,14 @@ namespace SaveBetsBusiness
                 return val == null ? false : Convert.ToString(ConfigurationManager.AppSettings["ServerFile.IsAuthenticate"]) == "true";
             }
         }
+
+        public static int GroupSports
+        {
+            get
+            {
+                var val = ConfigurationManager.AppSettings["GroupSports"];
+                return val == null ? 0 : Convert.ToInt32(ConfigurationManager.AppSettings["GroupSports"]);
+            }
+        }
     }
 }

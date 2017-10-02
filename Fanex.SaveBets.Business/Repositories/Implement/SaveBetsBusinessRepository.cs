@@ -34,16 +34,18 @@ namespace SaveBetsBusiness.Repositories.Implement
             {
                 using (ObjectDb db = new ObjectDb("NAP_SaveBet_GetJob"))
                 {
+                    Hashtable param = new Hashtable();
+                    param.Add("groupsports", AppSettings.GroupSports);
+
                     if (AppSettings.ForceRunning && AppSettings.ForceRunningOnProcessing)
-                    {
-                        Hashtable param = new Hashtable();
+                    {                        
                         param.Add("matchid", AppSettings.ForceRunningWithMatchId);
                         db.AssignParamValues(param);
                     }
 
                     var dataSet = db.ExecuteDataSet();
                     if (dataSet != null && dataSet.Tables.Count > 0)
-                    {
+                    {                        
                         dataTable = dataSet.Tables[0];
                     }
                 }
