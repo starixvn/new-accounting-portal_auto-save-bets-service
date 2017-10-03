@@ -87,6 +87,10 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 402, ContentBetChoice401Imp },
                 { 403, ContentBetChoice401Imp },
                 { 404, ContentBetChoice401Imp },
+                { 461, ContentBetChoice401Imp },
+                { 462, ContentBetChoice401Imp },
+                { 463, ContentBetChoice401Imp },
+                { 464, ContentBetChoice401Imp },
 
                 { 405, ContentBetChoice405Imp },
                 { 406, ContentBetChoice406Imp },
