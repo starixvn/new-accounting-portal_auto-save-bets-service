@@ -16,10 +16,9 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string Header3ColumnBetOptionHandicapImp = "Header3ColumnBetOptionHandicapImp";
         private const string Header4ColumnImp = "Header4ColumnImp";
 
-        private Dictionary<int, string> groupBettypes;
+        private readonly Dictionary<int, string> groupBettypes;
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
-
         public HeaderBettypeMapperImp()
         {
             groupBettypes = new Dictionary<int, string>()
@@ -32,6 +31,10 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 8, Header1ColumnHdpImp },
                 { 20, Header1ColumnHdpImp },
                 { 501, Header1ColumnHdpImp },
+                { 2703, Header1ColumnHdpImp },
+                { 2704, Header1ColumnHdpImp },
+                { 2705, Header1ColumnHdpImp },
+                { 2706, Header1ColumnHdpImp },
 
                 { 401, Header1ColumnTeamImp },
                 { 402, Header1ColumnTeamImp },
@@ -105,6 +108,8 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 5, Header0Column },
                 { 15, Header0Column },
                 { 430, Header0Column },
+                { 2701, Header0Column },
+                { 2702, Header0Column },
 
                 { 221, Header2ColumnImp },
                 { 222, Header2ColumnImp },

@@ -6,11 +6,7 @@
 
 namespace AutoSaveBetsService
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.ServiceProcess;
-    using System.Text;
 
     /// <summary>
     /// Main program.
@@ -23,9 +19,9 @@ namespace AutoSaveBetsService
         public static void Main()
         {
             ServiceBase[] servicesToRun;
-            servicesToRun = new ServiceBase[] 
-            { 
-                new AutoSaveBetsService() 
+            servicesToRun = new ServiceBase[]
+            {
+                new AutoSaveBetsService()
             };
 
             ServiceBase.Run(servicesToRun);

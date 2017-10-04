@@ -66,6 +66,8 @@
     <Compile Include="Content\ContentBetChoice223Imp.cs" />
     <Compile Include="Content\ContentBetChoice224Imp.cs" />
     <Compile Include="Content\ContentBetChoice225Imp.cs" />
+    <Compile Include="Content\ContentBetChoice2703_2704Imp.cs" />
+    <Compile Include="Content\ContentBetChoice2705_2706Imp.cs" />
     <Compile Include="Content\ContentBetChoice2Imp.cs" />
     <Compile Include="Content\ContentBetChoice401Imp.cs" />
     <Compile Include="Content\ContentBetChoice405Imp.cs" />

@@ -1,5 +1,10 @@
 ﻿namespace SaveBetsBusiness.Service.Implement
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
     using Fanex.Common;
     using Fanex.SaveBets.Builder.Content;
     using Fanex.SaveBets.Builder.Header;
@@ -9,11 +14,6 @@
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Resources;
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
 
     public class ExportDataByBetTypeService : IDisposable
     {

@@ -47,7 +47,7 @@ namespace SaveBetsBusiness.Service
 
         private static string GetChoice(List<string> splitBetteam)
         {
-            string result = string.Empty;            
+            string result = string.Empty;
             if (splitBetteam.Count > 1)
             {
                 var choiceString = splitBetteam[1];
@@ -72,7 +72,7 @@ namespace SaveBetsBusiness.Service
             {
                 return result;
             }
-            
+
             string teamId = string.Empty;
             string possession = string.Empty;
 

@@ -2,7 +2,7 @@
 
 namespace Fanex.SaveBets.Builder.Header
 {
-    class Header4ColumnImp : Header
+    internal class Header4ColumnImp : Header
     {
         public List<string> BuildHeader()
         {

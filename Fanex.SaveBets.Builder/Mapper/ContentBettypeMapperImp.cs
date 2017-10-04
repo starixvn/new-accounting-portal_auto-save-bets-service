@@ -48,8 +48,10 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string ContentBetChoice615Imp = "ContentBetChoice615Imp";
         private const string ContentBetChoice616Imp = "ContentBetChoice616Imp";
         private const string ContentBetChoice617Imp = "ContentBetChoice617Imp";
+        private const string ContentBetChoice2703_2704Imp = "ContentBetChoice2703_2704Imp";
+        private const string ContentBetChoice2705_2706Imp = "ContentBetChoice2705_2706Imp";
 
-        private Dictionary<int, string> groupBettypes;
+        private readonly Dictionary<int, string> groupBettypes;
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
         public ContentBettypeMapperImp()
@@ -171,7 +173,13 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 616, ContentBetChoice616Imp },
                 { 617, ContentBetChoice617Imp },
 
-                { 614, ContentBetChoice614Imp }
+                { 614, ContentBetChoice614Imp },
+
+                { 2703, ContentBetChoice2703_2704Imp },
+                { 2704, ContentBetChoice2703_2704Imp },
+
+                { 2705, ContentBetChoice2705_2706Imp },
+                { 2706, ContentBetChoice2705_2706Imp },
             };
         }
 

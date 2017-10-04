@@ -8,7 +8,7 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const int TwoSection = 2;
         private const int ThreeSection = 3;
 
-        private Dictionary<int, int> bettypeGroup = new Dictionary<int, int>()
+        private readonly Dictionary<int, int> bettypeGroup = new Dictionary<int, int>()
         {
             { 4, OneSection },
             { 30, OneSection },
@@ -92,6 +92,12 @@ namespace Fanex.SaveBets.Builder.Mapper
             { 5, ThreeSection },
             { 15, ThreeSection },
             { 430, ThreeSection },
+            { 2701, ThreeSection },
+            { 2702, ThreeSection },
+            { 2703, TwoSection },
+            { 2704, TwoSection },
+            { 2705, TwoSection },
+            { 2706, TwoSection },            
             { 601, OneSection },
             { 602, OneSection },
             { 608, OneSection },

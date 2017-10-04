@@ -9,18 +9,18 @@
     {
         private const int Handicap = 1;
         private const int _1stHandicap = 7;
-        
+
         private const int OddEven = 2;
         private const int _1stOddEven = 12;
-        
+
         private const int OverUnder = 3;
         private const int _1stOverUnder = 8;
-        
+
         private const int MoneyLine = 20;
-        
+
         private const int _1x2 = 5;
         private const int _1st1x2 = 15;
-        
+
         private const int CorrectScore = 4;
         private const int _1stCorrectScore = 30;
         private const int TotalGoal = 6;
@@ -31,26 +31,26 @@
         private const int DrawNoBet = 25;
         private const int ToWinToNil = 27;
         private const int _3wayHDP = 28;
-        
+
         private const int CleanSheet = 13;
         private const int DoubleChange = 24;
         private const int BothOneNeitherTeamToScore = 26;
-        
+
         public const string FirstHalfFirstGoalLastGoal = "1FL";
         public const string FirstGoalLastGoal = "FL";
-        
+
         private const int MyanmarHandicap = 301;
         private const int _1stMyanmarHandicap = 303;
-        
+
         private const int MyanmarOverUnder = 302;
         private const int _1stMyanmarOverUnder = 304;
-        
+
         private const int HomeTeamOverUnder = 401;
         private const int AwayTeamOverUnder = 402;
         private const int _1stHomeTeamOverUnder = 403;
         private const int _1stAwayTeamOverUnder = 404;
         private const int _2stCorrectScore = 405;
-        
+
         private const int ChargedCommission = 500;
         private const int MatchWinner = 501;
 

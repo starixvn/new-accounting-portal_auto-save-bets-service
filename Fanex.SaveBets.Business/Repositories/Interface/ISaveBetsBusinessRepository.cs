@@ -8,8 +8,6 @@ namespace SaveBetsBusiness.Repositories.Interface
 {
     using System.Data;
     using SaveBetsBusiness.Criteria;
-    using SaveBetsBusiness.Enums;
-    using SaveBetsBusiness.Model;
 
     /// <summary>
     /// TODO: Update summary.
