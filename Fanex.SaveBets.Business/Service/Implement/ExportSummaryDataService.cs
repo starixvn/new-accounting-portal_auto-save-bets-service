@@ -19,7 +19,6 @@ namespace SaveBetsBusiness.Service.Implement
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
     using SaveBetsBusiness.Common;
-    using SaveBetsBusiness.Constants;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Resources;
 
@@ -44,7 +43,7 @@ namespace SaveBetsBusiness.Service.Implement
             List<DataRow> winLossInfo)
         {
             string sheetName = SaveBetsBusinessResource.Summary_SheetName;
-            XSSFSheet worksheet = excelFile.GetSheet(sheetName) as XSSFSheet ?? excelFile.CreateSheet(sheetName) as XSSFSheet;            
+            XSSFSheet worksheet = excelFile.GetSheet(sheetName) as XSSFSheet ?? excelFile.CreateSheet(sheetName) as XSSFSheet;
 
             int currentRow = 0;
             XSSFRow row = worksheet.CreateRow(currentRow) as XSSFRow;
@@ -94,7 +93,7 @@ namespace SaveBetsBusiness.Service.Implement
                 worksheet.SetColumnWidth(i, 90 * NpoiExcelExtensions.FontWidth);
             }
 
-            worksheet.AutoSizeColumn(0);            
+            worksheet.AutoSizeColumn(0);
             worksheet.SetColumnWidth(1, 100 * NpoiExcelExtensions.FontWidth);
             worksheet.SetColumnWidth(2, 100 * NpoiExcelExtensions.FontWidth);
             worksheet.SetColumnWidth(10, 80 * NpoiExcelExtensions.FontWidth);
@@ -726,7 +725,7 @@ namespace SaveBetsBusiness.Service.Implement
                 {
                     bettypeNameAndValue = bettype.Split(new char[] { ':' });
                     betValues = bettypeNameAndValue[1].Split(new char[] { '-' });
-                   
+
                     string firstHalfFirstGoalTeam = betValues.Length > 0 ? this.GetTeamFromBetValue(betValues[0]) : string.Empty;
                     string firstHalfLastGoalTeam = betValues.Length > 1 ? this.GetTeamFromBetValue(betValues[1]) : string.Empty;
                     firstHalfFirstGoal = string.IsNullOrEmpty(firstHalfFirstGoalTeam) ?
@@ -747,7 +746,7 @@ namespace SaveBetsBusiness.Service.Implement
                     firstGoal = string.IsNullOrEmpty(fulltimeFirstGoalTeam) ?
                         string.Empty :
                         string.Format("{0}:{1}", SaveBetsBusinessLabel.FG, fulltimeFirstGoalTeam);
-                    lastGoal = string.IsNullOrEmpty(fulltimeLastGoalTeam) ? 
+                    lastGoal = string.IsNullOrEmpty(fulltimeLastGoalTeam) ?
                         string.Empty :
                         string.Format("{0}:{1}", SaveBetsBusinessLabel.LG, fulltimeLastGoalTeam);
                 }

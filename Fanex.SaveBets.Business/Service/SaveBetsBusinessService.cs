@@ -123,7 +123,7 @@ namespace SaveBetsBusiness.Service
             catch (Exception ex)
             {
                 Logger.Log.Info($"{ex.Message}, MatchId:{matchId}");
-                LogExtensions.ExceptionHandler(ex);                
+                LogExtensions.ExceptionHandler(ex);
             }
             finally
             {
@@ -148,7 +148,7 @@ namespace SaveBetsBusiness.Service
             }
             catch (Exception ex)
             {
-                LogExtensions.ExceptionHandler(ex);                
+                LogExtensions.ExceptionHandler(ex);
             }
             finally
             {
@@ -200,7 +200,7 @@ namespace SaveBetsBusiness.Service
             }
             catch (Exception ex)
             {
-                LogExtensions.ExceptionHandler(ex);                
+                LogExtensions.ExceptionHandler(ex);
             }
             finally
             {
@@ -248,7 +248,7 @@ namespace SaveBetsBusiness.Service
             }
             catch (Exception ex)
             {
-                LogExtensions.ExceptionHandler(ex);                
+                LogExtensions.ExceptionHandler(ex);
             }
             finally
             {

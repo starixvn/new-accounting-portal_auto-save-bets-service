@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Fanex.SaveBets.Builder.Header;
 using NUnit.Framework;
 
@@ -28,7 +24,7 @@ namespace Fanex.SaveBets.Builder.UnitTests.Header
         [TestCase(438)]
         [TestCase(439)]
         [TestCase(440)]
-        [TestCase(441)]        
+        [TestCase(441)]
         public void GetHeaderByBettype_ShouldReturn1Column(int bettype)
         {
             HeaderBuilder builder = new HeaderBuilderImp();
@@ -58,7 +54,7 @@ namespace Fanex.SaveBets.Builder.UnitTests.Header
         {
             HeaderBuilder builder = new HeaderBuilderImp();
             var result = builder.GetHeaderHandicapAndBetteamOf(bettype);
-            var expectedResult = new List<string> { "TEAM", "HDP1", "HDP2" };                
+            var expectedResult = new List<string> { "TEAM", "HDP1", "HDP2" };
 
             Assert.AreEqual(expectedResult, result);
         }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using Fanex.Common;
-using Fanex.SaveBets.Builder.Helper;
 
 namespace Fanex.SaveBets.Builder.Content
 {
@@ -19,7 +15,7 @@ namespace Fanex.SaveBets.Builder.Content
         public List<object> ContentBetChoiceBuilder(IDataReader reader)
         {
             var betteamKey = Converter.To<string>(reader["betteam"]).ToLower();
-            var betteamValue = betteams.ContainsKey(betteamKey) ? betteams[betteamKey] : string.Empty;            
+            var betteamValue = betteams.ContainsKey(betteamKey) ? betteams[betteamKey] : string.Empty;
 
             return new List<object>()
             {

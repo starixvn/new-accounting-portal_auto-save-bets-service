@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fanex.SaveBets.Builder.UnitTests.Helper
 {
@@ -14,7 +11,7 @@ namespace Fanex.SaveBets.Builder.UnitTests.Helper
 
         public MockDataReader(List<Dictionary<string, object>> records)
         {
-            _records = records;            
+            _records = records;
         }
 
         public object this[string name]

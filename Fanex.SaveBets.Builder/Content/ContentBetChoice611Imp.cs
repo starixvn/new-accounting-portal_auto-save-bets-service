@@ -1,6 +1,6 @@
-﻿using Fanex.Common;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
+using Fanex.Common;
 
 namespace Fanex.SaveBets.Builder.Content
 {

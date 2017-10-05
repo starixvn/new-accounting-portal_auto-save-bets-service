@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fanex.SaveBets.Builder.Mapper;
+﻿using Fanex.SaveBets.Builder.Mapper;
 using NUnit.Framework;
 
 namespace Fanex.SaveBets.Builder.UnitTests.Mapper

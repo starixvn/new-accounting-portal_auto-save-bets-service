@@ -9,7 +9,7 @@ namespace Fanex.SaveBets.Builder.Mapper
 
     public class SecondSectionStartColumnIndexMapperImp : SecondSectionStartColumnIndexMapper
     {
-        private Dictionary<int, int> groupBettypeStartColumnIndex = new Dictionary<int, int>()
+        private readonly Dictionary<int, int> groupBettypeStartColumnIndex = new Dictionary<int, int>()
         {
             { 606, 13 },
             { 607, 13 },
