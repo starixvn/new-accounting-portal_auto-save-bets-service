@@ -39,6 +39,7 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string ContentBetChoice611Imp = "ContentBetChoice611Imp";
         private const string ContentBetChoice612Imp = "ContentBetChoice612Imp";
         private const string ContentBetChoice613Imp = "ContentBetChoice613Imp";
+        private const string ContentBetChoice614Imp = "ContentBetChoice614Imp";
         private const string ContentBetChoice615Imp = "ContentBetChoice615Imp";
         private const string ContentBetChoice616Imp = "ContentBetChoice616Imp";
         private const string ContentBetChoice617Imp = "ContentBetChoice617Imp";
@@ -153,6 +154,7 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 611, ContentBetChoice611Imp },
                 { 612, ContentBetChoice612Imp },
                 { 613, ContentBetChoice613Imp },
+                { 614, ContentBetChoice614Imp },
                 { 615, ContentBetChoice615Imp },
                 { 616, ContentBetChoice616Imp },
                 { 617, ContentBetChoice617Imp },
