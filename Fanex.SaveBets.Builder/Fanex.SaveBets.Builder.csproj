@@ -42,7 +42,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="RemotingRef, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\RemotingRef.1.0.0.15\lib\net40\RemotingRef.dll</HintPath>
+      <HintPath>..\packages\RemotingRef.2.0.0.17\lib\net40\RemotingRef.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SPSRemoting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -61,11 +61,8 @@
   <ItemGroup>
     <Compile Include="Content\ContentBetChoice.cs" />
     <Compile Include="Content\ContentBetChoice1Imp.cs" />
-    <Compile Include="Content\ContentBetChoice221Imp.cs" />
-    <Compile Include="Content\ContentBetChoice222Imp.cs" />
-    <Compile Include="Content\ContentBetChoice223Imp.cs" />
-    <Compile Include="Content\ContentBetChoice224Imp.cs" />
-    <Compile Include="Content\ContentBetChoice225Imp.cs" />
+    <Compile Include="Content\ContentBetChoice221_222Imp.cs" />
+    <Compile Include="Content\ContentBetChoice223To227Imp.cs" />
     <Compile Include="Content\ContentBetChoice2703_2704Imp.cs" />
     <Compile Include="Content\ContentBetChoice2705_2706Imp.cs" />
     <Compile Include="Content\ContentBetChoice2Imp.cs" />
@@ -113,6 +110,7 @@
     <Compile Include="Header\Header2ColumnImp.cs" />
     <Compile Include="Header\Header3ColumnBetOptionHandicapImp.cs" />
     <Compile Include="Header\Header3ColumnImp.cs" />
+    <Compile Include="Header\Header3ColumnTeamIntervalHandicapImp.cs" />
     <Compile Include="Header\Header4ColumnImp.cs" />
     <Compile Include="Header\HeaderBuilder.cs" />
     <Compile Include="Header\HeaderBuilderImp.cs" />
