@@ -18,6 +18,7 @@ namespace SaveBetsBusiness.Service.Implement
     using Fanex.Common;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
+    using RemotingRef;
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Resources;
@@ -146,7 +147,8 @@ namespace SaveBetsBusiness.Service.Implement
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow) as XSSFRow;
 
-            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchInfo["matchcode"]), textStyle);
+            var matchCode = RefData.GetBetRadarMatchCodeFormat(Converter.ToString2(matchInfo["matchcode"]), "en");
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchCode), textStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
             startMergeColumn = currentColumn - 2;
