@@ -18,7 +18,7 @@ namespace Fanex.SaveBets.Builder.Content
         {
             var hdp1 = Converter.To<int>(reader["hdp1"]);
             var hdp2 = Converter.To<int>(reader["hdp2"]);
-            var oddsspread = Converter.To<int>(reader["oddsspread"]);
+            var oddsspread = Converter.To<decimal>(reader["oddsspread"]);
             var betteam = Converter.To<string>(reader["betteam"]);
 
             var refId = RefData.getFastMarketRefid(bettype, Converter.ToInt(betteam));
