@@ -26,7 +26,7 @@ namespace Fanex.SaveBets.Builder.Content
 
             var interval = RefData.getFastMarketTimeRange(bettype, hdp1);
 
-            return new List<object> { betchoice, interval, oddsspread };
+            return new List<object> { betchoice, interval, oddsspread.ToString("G29") };
         }
     }
 }
