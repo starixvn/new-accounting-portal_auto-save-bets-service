@@ -51,6 +51,8 @@ namespace Fanex.SaveBets.Builder.Mapper
             {
                 { 1, ContentBetChoice1Imp },
                 { 7, ContentBetChoice1Imp },
+                { 465, ContentBetChoice1Imp },
+                { 466, ContentBetChoice1Imp },
 
                 { 2, ContentBetChoice2Imp },
                 { 12, ContentBetChoice2Imp },

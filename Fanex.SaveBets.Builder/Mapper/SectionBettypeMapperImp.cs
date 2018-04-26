@@ -89,6 +89,8 @@ namespace Fanex.SaveBets.Builder.Mapper
             { 302, TwoSection },
             { 303, TwoSection },
             { 304, TwoSection },
+            { 465, TwoSection },
+            { 466, TwoSection },
             { 5, ThreeSection },
             { 15, ThreeSection },
             { 430, ThreeSection },
