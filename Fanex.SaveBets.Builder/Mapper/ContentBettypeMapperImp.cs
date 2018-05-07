@@ -26,11 +26,6 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string ContentBetChoice424Imp = "ContentBetChoice424Imp";
         private const string ContentBetChoice425Imp = "ContentBetChoice425Imp";
         private const string ContentBetChoice426Imp = "ContentBetChoice426Imp";
-        private const string ContentBetChoice221Imp = "ContentBetChoice221Imp";
-        private const string ContentBetChoice222Imp = "ContentBetChoice222Imp";
-        private const string ContentBetChoice223Imp = "ContentBetChoice223Imp";
-        private const string ContentBetChoice224Imp = "ContentBetChoice224Imp";
-        private const string ContentBetChoice225Imp = "ContentBetChoice225Imp";
         private const string ContentBetChoice603_604_605Imp = "ContentBetChoice603_604_605Imp";
         private const string ContentBetChoice606Imp = "ContentBetChoice606Imp";
         private const string ContentBetChoice607Imp = "ContentBetChoice607Imp";
@@ -43,8 +38,9 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string ContentBetChoice615Imp = "ContentBetChoice615Imp";
         private const string ContentBetChoice616Imp = "ContentBetChoice616Imp";
         private const string ContentBetChoice617Imp = "ContentBetChoice617Imp";
-        private const string ContentBetChoice2703_2704Imp = "ContentBetChoice2703_2704Imp";
-        private const string ContentBetChoice2705_2706Imp = "ContentBetChoice2705_2706Imp";
+        private const string ContentBetChoice221_222Imp = "ContentBetChoice221_222Imp";
+        private const string ContentBetChoice223To227Imp = "ContentBetChoice223To227Imp";
+        private const string ContentBetChoice6Imp = "ContentBetChoice6Imp";
 
         private readonly Dictionary<int, string> groupBettypes;
 
@@ -55,6 +51,8 @@ namespace Fanex.SaveBets.Builder.Mapper
             {
                 { 1, ContentBetChoice1Imp },
                 { 7, ContentBetChoice1Imp },
+                { 465, ContentBetChoice1Imp },
+                { 466, ContentBetChoice1Imp },
 
                 { 2, ContentBetChoice2Imp },
                 { 12, ContentBetChoice2Imp },
@@ -137,11 +135,13 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 446, ContentBetChoice426Imp },
                 { 447, ContentBetChoice426Imp },
 
-                { 221, ContentBetChoice221Imp },
-                { 222, ContentBetChoice222Imp },
-                { 223, ContentBetChoice223Imp },
-                { 224, ContentBetChoice224Imp },
-                { 225, ContentBetChoice225Imp },
+                { 221, ContentBetChoice221_222Imp },
+                { 222, ContentBetChoice221_222Imp },
+                { 223, ContentBetChoice223To227Imp },
+                { 224, ContentBetChoice223To227Imp },
+                { 225, ContentBetChoice223To227Imp },
+                { 226, ContentBetChoice223To227Imp },
+                { 227, ContentBetChoice223To227Imp },
 
                 { 603, ContentBetChoice603_604_605Imp },
                 { 604, ContentBetChoice603_604_605Imp },
@@ -159,11 +159,22 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 616, ContentBetChoice616Imp },
                 { 617, ContentBetChoice617Imp },
 
-                { 2703, ContentBetChoice2703_2704Imp },
-                { 2704, ContentBetChoice2703_2704Imp },
+                { 2703, ContentBetChoice2Imp },
+                { 2704, ContentBetChoice2Imp },
 
-                { 2705, ContentBetChoice2705_2706Imp },
-                { 2706, ContentBetChoice2705_2706Imp },
+                { 2705, ContentBetChoice1Imp },
+                { 2706, ContentBetChoice1Imp },
+                { 2707, ContentBetChoice4Imp },
+                { 2801, ContentBetChoice2Imp },
+                { 2803, ContentBetChoice2Imp },
+                { 2804, ContentBetChoice2Imp },
+                { 2805, ContentBetChoice1Imp },
+                { 2806, ContentBetChoice1Imp },
+                { 2807, ContentBetChoice4Imp },
+                { 2808, ContentBetChoice4Imp },
+                { 2809, ContentBetChoice6Imp },
+                { 2811, ContentBetChoice2Imp },
+                { 2812, ContentBetChoice2Imp }
             };
         }
 

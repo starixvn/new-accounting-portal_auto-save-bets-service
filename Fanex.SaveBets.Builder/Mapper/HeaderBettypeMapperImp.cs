@@ -15,6 +15,8 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string Header2ColumnBetOptionBetTypeName = "Header2ColumnBetOptionBetTypeName";
         private const string Header3ColumnBetOptionHandicapImp = "Header3ColumnBetOptionHandicapImp";
         private const string Header4ColumnImp = "Header4ColumnImp";
+        private const string Header3ColumnTeamIntervalHandicapImp = "Header3ColumnTeamIntervalHandicapImp";
+        private const string Header1ColumnPointImp = "Header1ColumnPointImp";
 
         private readonly Dictionary<int, string> groupBettypes;
 
@@ -30,11 +32,9 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 3, Header1ColumnHdpImp },
                 { 8, Header1ColumnHdpImp },
                 { 20, Header1ColumnHdpImp },
+                { 465, Header1ColumnHdpImp },
+                { 466, Header1ColumnHdpImp },
                 { 501, Header1ColumnHdpImp },
-                { 2703, Header1ColumnHdpImp },
-                { 2704, Header1ColumnHdpImp },
-                { 2705, Header1ColumnHdpImp },
-                { 2706, Header1ColumnHdpImp },
 
                 { 401, Header1ColumnTeamImp },
                 { 402, Header1ColumnTeamImp },
@@ -108,14 +108,14 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 5, Header0Column },
                 { 15, Header0Column },
                 { 430, Header0Column },
-                { 2701, Header0Column },
-                { 2702, Header0Column },
 
-                { 221, Header2ColumnImp },
-                { 222, Header2ColumnImp },
+                { 221, Header3ColumnTeamIntervalHandicapImp },
+                { 222, Header3ColumnTeamIntervalHandicapImp },
                 { 223, Header2ColumnImp },
                 { 224, Header2ColumnImp },
                 { 225, Header2ColumnImp },
+                { 226, Header2ColumnImp },
+                { 227, Header2ColumnImp },
 
                 { 601, Header3ColumnBetOptionHandicapImp },
                 { 602, Header3ColumnBetOptionHandicapImp },
@@ -136,7 +136,26 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 616, Header2ColumnBetOptionBetTypeName },
                 { 617, Header2ColumnBetOptionBetTypeName },
 
-                { 614, Header4ColumnImp }
+                { 614, Header4ColumnImp },
+
+                { 2701, Header0Column },
+                { 2702, Header0Column },
+                { 2703, Header1ColumnHdpImp },
+                { 2704, Header1ColumnHdpImp },
+                { 2705, Header1ColumnHdpImp },
+                { 2706, Header1ColumnHdpImp },
+                { 2707, Header3ColumnImp },
+                { 2801, Header1ColumnHdpImp },
+                { 2802, Header0Column },
+                { 2803, Header1ColumnHdpImp },
+                { 2804, Header1ColumnHdpImp },
+                { 2805, Header1ColumnHdpImp },
+                { 2806, Header1ColumnHdpImp },
+                { 2807, Header3ColumnImp },
+                { 2808, Header3ColumnImp },
+                { 2809, Header1ColumnPointImp },
+                { 2811, Header1ColumnHdpImp },
+                { 2812, Header1ColumnHdpImp }
             };
         }
 

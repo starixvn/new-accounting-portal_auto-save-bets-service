@@ -288,6 +288,10 @@
                             {
                                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, choice, textStyle);
                             }
+                            else if (choice is int)
+                            {
+                                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, choice, numberStyle);
+                            }
                             else
                             {
                                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, choice, decimalNumberStyle);
@@ -317,6 +321,10 @@
                             if (choice is string)
                             {
                                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, choice, textStyle);
+                            }
+                            else if (choice is int)
+                            {
+                                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, choice, numberStyle);
                             }
                             else
                             {
@@ -388,6 +396,10 @@
                         if (choice is string)
                         {
                             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, choice, textStyle);
+                        }
+                        else if (choice is int)
+                        {
+                            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, choice, numberStyle);
                         }
                         else
                         {
