@@ -7,3 +7,6 @@
 \\*.pro-0.exe.config
 \\*.pro-1.exe.config
 \\*.pro-2.exe.config
+\\*.new-pro-0.exe.config
+\\*.new-pro-1.exe.config
+\\*.new-pro-2.exe.config

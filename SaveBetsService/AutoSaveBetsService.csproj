@@ -153,6 +153,15 @@
     <Content Include="_Fanex.AutoSaveBets.Service.Local-2.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="_Fanex.AutoSaveBets.Service.NEW-PRO-0.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="_Fanex.AutoSaveBets.Service.NEW-PRO-1.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="_Fanex.AutoSaveBets.Service.NEW-PRO-2.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Local\DBACC.bodb_ACC.bodbAdminNet.xml">
