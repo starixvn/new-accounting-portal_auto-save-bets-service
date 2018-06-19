@@ -6,7 +6,7 @@ namespace Fanex.SaveBets.Builder.Content
 {
     public class ContentBetChoice413Imp : ContentBetChoice
     {
-        public List<object> ContentBetChoiceBuilder(IDataReader reader)
+        public List<object> ContentBetChoiceBuilder(DataRow reader)
         {
             var betteam = Converter.To<string>(reader["betteam"]);
             var hdp1 = Converter.To<decimal>(reader["hdp1"]);

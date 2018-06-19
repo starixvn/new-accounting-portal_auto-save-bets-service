@@ -5,6 +5,6 @@ namespace Fanex.SaveBets.Builder.Content
 {
     public interface ContentBetChoice
     {
-        List<object> ContentBetChoiceBuilder(IDataReader reader);
+        List<object> ContentBetChoiceBuilder(DataRow reader);
     }
 }

@@ -14,7 +14,7 @@ namespace Fanex.SaveBets.Builder.Content
             { 804, "Quarter 4 Winning Margin 7 Way" }
         };
 
-        public List<object> ContentBetChoiceBuilder(IDataReader reader)
+        public List<object> ContentBetChoiceBuilder(DataRow reader)
         {
             var betteamValue = Converter.To<string>(reader["betteam"]).ToLower();
             int betid = Converter.ToInt(reader["betid"]);

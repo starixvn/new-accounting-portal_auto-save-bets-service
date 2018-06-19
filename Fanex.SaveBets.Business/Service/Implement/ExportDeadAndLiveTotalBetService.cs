@@ -26,7 +26,7 @@
             XSSFWorkbook excelFile,
             ref XSSFSheet worksheet,
             ref int currentRow,
-            IDataReader reader,
+            DataTable totalBets,
             int bettype)
         {
             IDataFormat dataFormat = excelFile.CreateDataFormat();
@@ -76,7 +76,7 @@
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, bettypeName, headerStyle);
             currentRow += 2;
 
-            while (reader.Read())
+            foreach(DataRow reader in totalBets.Rows)
             {
                 if (numberBetTypeElements == 0)
                 {

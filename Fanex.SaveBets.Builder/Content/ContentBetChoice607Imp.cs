@@ -21,7 +21,7 @@ namespace Fanex.SaveBets.Builder.Content
             { 835, "2H Race to 35" },
         };
 
-        public List<object> ContentBetChoiceBuilder(IDataReader reader)
+        public List<object> ContentBetChoiceBuilder(DataRow reader)
         {
             var betteamKey = Converter.To<string>(reader["betteam"]).ToLower();
             var betteamValue = betteams.ContainsKey(betteamKey) ? betteams[betteamKey] : string.Empty;

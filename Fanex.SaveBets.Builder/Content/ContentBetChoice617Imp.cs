@@ -20,7 +20,7 @@ namespace Fanex.SaveBets.Builder.Content
             { 803, "Quarter 3 Which team to score the last basket" }
         };
 
-        public List<object> ContentBetChoiceBuilder(IDataReader reader)
+        public List<object> ContentBetChoiceBuilder(DataRow reader)
         {
             var betteamKey = Converter.To<string>(reader["betteam"]).ToLower();
             var betteamValue = betteams.ContainsKey(betteamKey) ? betteams[betteamKey] : string.Empty;
