@@ -121,9 +121,9 @@ namespace SaveBetsBusiness.Service
 
                 _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
                 
-                var endTime = DateTime.Now;
-                var duration = endTime.Subtract(startTime).TotalSeconds;
-                Logger.Log.Info($"Save Bets Service - MatchId: {matchId}, StartTime: {startTime}, EndTime: {endTime}, Duration: {duration:##,###} seconds");
+                /// var endTime = DateTime.Now;
+                /// var duration = endTime.Subtract(startTime).TotalSeconds;
+                /// Logger.Log.Info($"Save Bets Service - MatchId: {matchId}, StartTime: {startTime}, EndTime: {endTime}, Duration: {duration:##,###} seconds");
             }
             catch (Exception ex)
             {

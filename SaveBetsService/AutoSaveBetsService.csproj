@@ -125,41 +125,83 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="_Fanex.AutoSaveBets.Service.UAT.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.UAT-2.1.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Fanex.AutoSaveBets.Service.PRO-0.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.PRO-0.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="deployment.ignore">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.UAT-2.2.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.UAT-2.3.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.UAT-2.4.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.UAT-2.5.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.PRO-2.2.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.PRO-2.3.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.PRO-2.4.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.PRO-2.5.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
     <None Include="Templates\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="_Fanex.AutoSaveBets.Service.PRO-1.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.PRO-1.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Fanex.AutoSaveBets.Service.PRO-2.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.PRO-2.1.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Fanex.AutoSaveBets.Service.Local-0.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.Local-0.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Fanex.AutoSaveBets.Service.Local-1.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.Local-1.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Fanex.AutoSaveBets.Service.Local-2.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.Local-2.1.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Fanex.AutoSaveBets.Service.NEW-PRO-0.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.NEW-PRO-0.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Fanex.AutoSaveBets.Service.NEW-PRO-1.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.NEW-PRO-1.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="_Fanex.AutoSaveBets.Service.NEW-PRO-2.exe.config">
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.NEW-PRO-2.1.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.Local-2.2.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.Local-2.3.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.NEW-PRO-2.2.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.NEW-PRO-2.3.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.NEW-PRO-2.4.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.NEW-PRO-2.5.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
