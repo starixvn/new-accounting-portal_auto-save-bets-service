@@ -29,7 +29,7 @@ namespace Fanex.SaveBets.Builder.Content
             { 80420, "Quarter 4 Race to 20" }
         };
 
-        public List<object> ContentBetChoiceBuilder(IDataReader reader)
+        public List<object> ContentBetChoiceBuilder(DataRow reader)
         {
             var betteamKey = Converter.To<string>(reader["betteam"]).ToLower();
             var betteamValue = betteams.ContainsKey(betteamKey) ? betteams[betteamKey] : string.Empty;

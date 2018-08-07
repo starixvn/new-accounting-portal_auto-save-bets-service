@@ -19,7 +19,7 @@
     {
         public void ExportDataByBetTypeAndLiveIndicator(
             XSSFWorkbook excelFile,
-            IDataReader reader,
+            DataTable betTickets,
             int bettype,
             bool liveIndicator)
         {
@@ -32,7 +32,7 @@
             int currentRow = 0;
             this.ExportHeaderByBetType(excelFile, worksheet, bettype);
             currentRow++;
-            this.ExportBetTypeContent(excelFile, worksheet, reader, ref currentRow, bettype);
+            this.ExportBetTypeContent(excelFile, worksheet, betTickets, ref currentRow, bettype);
 
             worksheet.CreateFreezePane(0, 1, 0, 1);
         }
@@ -112,29 +112,29 @@
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Creator.ToUpper(), headerStyle);
         }
 
-        private void ExportBetTypeContent(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow, int bettype)
+        private void ExportBetTypeContent(XSSFWorkbook excelFile, XSSFSheet worksheet, DataTable betTickets, ref int currentRow, int bettype)
         {
             var sectionObj = new SectionBettypeMapperImp();
             int numberOfSection = sectionObj.GetNumberSectionOf(bettype);
 
             if (numberOfSection == 2)
             {
-                this.ExportTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
+                this.ExportTwoSectionContentByBetType(excelFile, worksheet, betTickets, ref currentRow, bettype);
                 InitTwoSectionColumnWidth(worksheet, bettype);
             }
             else if (sectionObj.IsMyanmarBettypeGroup(bettype))
             {
-                this.ExportMyanmarOddsTwoSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
+                this.ExportMyanmarOddsTwoSectionContentByBetType(excelFile, worksheet, betTickets, ref currentRow);
                 InitOneSectionColumnWidth(worksheet, bettype);
             }
             else if (numberOfSection == 3)
             {
-                this.ExportThreeSectionContentByBetType(excelFile, worksheet, reader, ref currentRow);
+                this.ExportThreeSectionContentByBetType(excelFile, worksheet, betTickets, ref currentRow);
                 InitThreeSectionColumnWidth(worksheet);
             }
             else
             {
-                this.ExportOneSectionContentByBetType(excelFile, worksheet, reader, ref currentRow, bettype);
+                this.ExportOneSectionContentByBetType(excelFile, worksheet, betTickets, ref currentRow, bettype);
                 InitOneSectionColumnWidth(worksheet, bettype);
             }
         }
@@ -142,7 +142,7 @@
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportThreeSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow)
+        private void ExportThreeSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, DataTable betTickets, ref int currentRow)
         {
             try
             {
@@ -165,7 +165,7 @@
                 int currentBetTwoRowIndex = 1, currentBetXRowIndex = 1, currentColumn = 0;
                 XSSFRow row = null;
 
-                while (reader.Read())
+                foreach (DataRow reader in betTickets.Rows)
                 {
                     string amount = string.Format(
                         "{0}/{1}/{2}",
@@ -236,7 +236,7 @@
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2100:CodeLineMustNotBeLongerThan", Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow, int bettype)
+        private void ExportTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, DataTable betTickets, ref int currentRow, int bettype)
         {
             try
             {
@@ -263,7 +263,7 @@
                 List<string> firstSection = new List<string> { "h", "o", "y" };
                 List<string> secondSection = new List<string> { "a", "u", "n", "e" };
 
-                while (reader.Read())
+                foreach (DataRow reader in betTickets.Rows)
                 {
                     string amount = string.Format(
                         "{0}/{1}/{2}",
@@ -350,7 +350,7 @@
         }
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules", "SP2101:MethodMustNotContainMoreLinesThan", Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportOneSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow, int bettype)
+        private void ExportOneSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, DataTable betTickets, ref int currentRow, int bettype)
         {
             try
             {
@@ -374,7 +374,7 @@
                 XSSFRow row = null;
 
                 var betChoiceToShowObj = new ContentBetChoiceBuilderImp();
-                while (reader.Read())
+                foreach (DataRow reader in betTickets.Rows)
                 {
                     string amount = string.Format(
                         "{0}/{1}/{2}",
@@ -518,7 +518,7 @@
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
             "SP2101:MethodMustNotContainMoreLinesThan",
             Justification = "Reviewed. Suppression is OK here.")]
-        private void ExportMyanmarOddsTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, IDataReader reader, ref int currentRow)
+        private void ExportMyanmarOddsTwoSectionContentByBetType(XSSFWorkbook excelFile, XSSFSheet worksheet, DataTable betTickets, ref int currentRow)
         {
             try
             {
@@ -539,7 +539,7 @@
                 int currentBetAwayTeamRowIndex = 1, currentColumn = 0;
                 XSSFRow row = null;
 
-                while (reader.Read())
+                foreach (DataRow reader in betTickets.Rows)
                 {
                     string amount = string.Format(
                         "{0}/{1}/{2}",

@@ -32,9 +32,9 @@ namespace SaveBetsBusiness.Service.Interface
 
         List<BettypeInfo> Bettypes_Bets { get; }
 
-        IDataReader GetTotalBets(GetTotalBetCriteria criteria);
+        DataTable GetTotalBets(GetTotalBetCriteria criteria);
 
-        IDataReader GetBetTickets(GetBetTicketsCriteria criteria);
+        DataTable GetBetTickets(GetBetTicketsCriteria criteria);
 
         void ExecuteEndMatchJob(ExecuteEndMatchJobCriteria criteria);
     }

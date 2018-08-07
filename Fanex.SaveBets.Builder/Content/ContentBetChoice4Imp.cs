@@ -6,7 +6,7 @@ namespace Fanex.SaveBets.Builder.Content
 {
     public class ContentBetChoice4Imp : ContentBetChoice
     {
-        public List<object> ContentBetChoiceBuilder(IDataReader reader)
+        public List<object> ContentBetChoiceBuilder(DataRow reader)
         {
             var betteam = Converter.To<string>(reader["betteam"])
                 .Replace("-over", "+")

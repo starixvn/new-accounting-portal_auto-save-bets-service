@@ -59,6 +59,7 @@ namespace SaveBetsBusiness.Service
         {
             XSSFWorkbook excelFile = null;
             int matchId = 0;
+            var startTime = DateTime.Now;
             try
             {
                 _jobs = _processSaveBets.Jobs;
@@ -119,6 +120,10 @@ namespace SaveBetsBusiness.Service
                 }
 
                 _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
+                
+                /// var endTime = DateTime.Now;
+                /// var duration = endTime.Subtract(startTime).TotalSeconds;
+                /// Logger.Log.Info($"Save Bets Service - MatchId: {matchId}, StartTime: {startTime}, EndTime: {endTime}, Duration: {duration:##,###} seconds");
             }
             catch (Exception ex)
             {
@@ -162,8 +167,7 @@ namespace SaveBetsBusiness.Service
         /// <param name="excelFile">The excel file.</param>
         private void RenderDeadTB_LiveTBSheet(ref XSSFWorkbook excelFile)
         {
-            ExportDeadAndLiveTotalBetService _exportDeadAndLiveTotalBetService = null;
-            IDataReader reader = null;
+            ExportDeadAndLiveTotalBetService _exportDeadAndLiveTotalBetService = null;            
             int currentRow = 0;
             GetTotalBetCriteria criteria = new GetTotalBetCriteria();
             var bettypes = _processSaveBets.Bettypes_TB;
@@ -187,16 +191,12 @@ namespace SaveBetsBusiness.Service
                         criteria.LiveIndicator = bettype.LiveIndicator;
                         criteria.Bettype = bettype.Bettype;
 
-                        reader = _processSaveBets.GetTotalBets(criteria);
+                        var totalBets = _processSaveBets.GetTotalBets(criteria);
                         ////Render Dead-TB/Live-TB Sheet depend on the value of liveIndicator = true or false
-                        _exportDeadAndLiveTotalBetService.ExportDeadAndLiveTBSheet(excelFile, ref worksheet, ref currentRow, reader, criteria.Bettype);
+                        _exportDeadAndLiveTotalBetService.ExportDeadAndLiveTBSheet(excelFile, ref worksheet, ref currentRow, totalBets, criteria.Bettype);
                     }
                 }
-
-                if (reader != null)
-                {
-                    reader.Close();
-                }
+             
             }
             catch (Exception ex)
             {
@@ -214,8 +214,7 @@ namespace SaveBetsBusiness.Service
         /// <param name="excelFile">The excel file.</param>
         private void RenderEachBettypeLiveIndicatorSheet(ref XSSFWorkbook excelFile)
         {
-            ExportDataByBetTypeService _exportDataByBetTypeService = null;
-            IDataReader reader = null;
+            ExportDataByBetTypeService _exportDataByBetTypeService = null;            
             GetBetTicketsCriteria criteria = new GetBetTicketsCriteria();
 
             try
@@ -235,16 +234,11 @@ namespace SaveBetsBusiness.Service
                         criteria.LiveIndicator = bettype.LiveIndicator;
                         criteria.Bettype = bettype.Bettype;
 
-                        reader = _processSaveBets.GetBetTickets(criteria);
+                        var betTickets = _processSaveBets.GetBetTickets(criteria);
                         ////Render each bettype a Sheet depend on the value of liveIndicator = true or false
-                        _exportDataByBetTypeService.ExportDataByBetTypeAndLiveIndicator(excelFile, reader, criteria.Bettype, criteria.LiveIndicator);
+                        _exportDataByBetTypeService.ExportDataByBetTypeAndLiveIndicator(excelFile, betTickets, criteria.Bettype, criteria.LiveIndicator);
                     }
-                }
-
-                if (reader != null)
-                {
-                    reader.Close();
-                }
+                }               
             }
             catch (Exception ex)
             {

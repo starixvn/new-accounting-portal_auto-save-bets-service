@@ -12,7 +12,7 @@ namespace Fanex.SaveBets.Builder.Content
             { "a", "Away" },
         };
 
-        public List<object> ContentBetChoiceBuilder(IDataReader reader)
+        public List<object> ContentBetChoiceBuilder(DataRow reader)
         {
             var betteam = Converter.To<string>(reader["betteam"]).ToLower();
             var beteamValue = betteams.ContainsKey(betteam) ? betteams[betteam] : string.Empty;

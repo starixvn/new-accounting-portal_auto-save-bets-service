@@ -22,9 +22,9 @@ namespace SaveBetsBusiness.Repositories.Interface
 
         DataTable GetMatchInfo(int matchId);
 
-        IDataReader GetTotalBet(GetTotalBetCriteria criteria);
+        DataTable GetTotalBet(GetTotalBetCriteria criteria);
 
-        IDataReader GetBetTickets(GetBetTicketsCriteria criteria);
+        DataTable GetBetTickets(GetBetTicketsCriteria criteria);
 
         void ExecuteEndMatchJob(ExecuteEndMatchJobCriteria criteria);
     }

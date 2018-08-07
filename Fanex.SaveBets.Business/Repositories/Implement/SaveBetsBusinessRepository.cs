@@ -6,11 +6,9 @@
 
 namespace SaveBetsBusiness.Repositories.Implement
 {
-    using System;
     using System.Collections;
     using System.Data;
     using Fanex.Data;
-    using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Criteria;
     using SaveBetsBusiness.Repositories.Interface;
 
@@ -26,29 +24,23 @@ namespace SaveBetsBusiness.Repositories.Implement
         public DataTable GetSaveGetJobs()
         {
             DataTable dataTable = new DataTable();
-            try
+
+            using (ObjectDb db = new ObjectDb("NAP_SaveBet_GetJob"))
             {
-                using (ObjectDb db = new ObjectDb("NAP_SaveBet_GetJob"))
+                Hashtable param = new Hashtable();
+                param.Add("groupsports", AppSettings.GroupSports);
+
+                if (AppSettings.ForceRunning && AppSettings.ForceRunningOnProcessing)
                 {
-                    Hashtable param = new Hashtable();
-                    param.Add("groupsports", AppSettings.GroupSports);
-
-                    if (AppSettings.ForceRunning && AppSettings.ForceRunningOnProcessing)
-                    {
-                        param.Add("matchid", AppSettings.ForceRunningWithMatchId);
-                    }
-
-                    db.AssignParamValues(param);
-                    var dataSet = db.ExecuteDataSet();
-                    if (dataSet != null && dataSet.Tables.Count > 0)
-                    {
-                        dataTable = dataSet.Tables[0];
-                    }
+                    param.Add("matchid", AppSettings.ForceRunningWithMatchId);
                 }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
+
+                db.AssignParamValues(param);
+                var dataSet = db.ExecuteDataSet();
+                if (dataSet != null && dataSet.Tables.Count > 0)
+                {
+                    dataTable = dataSet.Tables[0];
+                }
             }
 
             return dataTable;
@@ -62,26 +54,20 @@ namespace SaveBetsBusiness.Repositories.Implement
         public DataTable GetTurnover(int matchId)
         {
             DataTable dataTable = new DataTable();
-            try
-            {
-                GetTurnoverCriteria criteria = new GetTurnoverCriteria();
-                criteria.MatchId = matchId;
 
-                using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            GetTurnoverCriteria criteria = new GetTurnoverCriteria();
+            criteria.MatchId = matchId;
+
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var parameters = criteria.GetSpParams();
+                db.AssignParamValues(parameters);
+
+                var dataSet = db.ExecuteDataSet();
+                if (dataSet != null && dataSet.Tables.Count > 0)
                 {
-                    var parameters = criteria.GetSpParams();
-                    db.AssignParamValues(parameters);
-
-                    var dataSet = db.ExecuteDataSet();
-                    if (dataSet != null && dataSet.Tables.Count > 0)
-                    {
-                        dataTable = dataSet.Tables[0];
-                    }
+                    dataTable = dataSet.Tables[0];
                 }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
             }
 
             return dataTable;
@@ -95,26 +81,20 @@ namespace SaveBetsBusiness.Repositories.Implement
         public DataTable GetWinLoss(int matchId)
         {
             DataTable dataTable = new DataTable();
-            try
-            {
-                GetWinLossCriteria criteria = new GetWinLossCriteria();
-                criteria.MatchId = matchId;
 
-                using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            GetWinLossCriteria criteria = new GetWinLossCriteria();
+            criteria.MatchId = matchId;
+
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var parameters = criteria.GetSpParams();
+                db.AssignParamValues(parameters);
+
+                var dataSet = db.ExecuteDataSet();
+                if (dataSet != null && dataSet.Tables.Count > 0)
                 {
-                    var parameters = criteria.GetSpParams();
-                    db.AssignParamValues(parameters);
-
-                    var dataSet = db.ExecuteDataSet();
-                    if (dataSet != null && dataSet.Tables.Count > 0)
-                    {
-                        dataTable = dataSet.Tables[0];
-                    }
+                    dataTable = dataSet.Tables[0];
                 }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
             }
 
             return dataTable;
@@ -133,26 +113,19 @@ namespace SaveBetsBusiness.Repositories.Implement
                 return dataTable;
             }
 
-            try
-            {
-                GetMatchInfoCriteria criteria = new GetMatchInfoCriteria();
-                criteria.MatchId = matchId;
+            GetMatchInfoCriteria criteria = new GetMatchInfoCriteria();
+            criteria.MatchId = matchId;
 
-                using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            using (ObjectDb db = new ObjectDb(criteria.GetSettingKey()))
+            {
+                var parameters = criteria.GetSpParams();
+                db.AssignParamValues(parameters);
+
+                var dataSet = db.ExecuteDataSet();
+                if (dataSet != null && dataSet.Tables.Count > 0)
                 {
-                    var parameters = criteria.GetSpParams();
-                    db.AssignParamValues(parameters);
-
-                    var dataSet = db.ExecuteDataSet();
-                    if (dataSet != null && dataSet.Tables.Count > 0)
-                    {
-                        dataTable = dataSet.Tables[0];
-                    }
+                    dataTable = dataSet.Tables[0];
                 }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
             }
 
             return dataTable;
@@ -163,21 +136,19 @@ namespace SaveBetsBusiness.Repositories.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Total bet of match.</returns>
-        public IDataReader GetTotalBet(GetTotalBetCriteria criteria)
+        public DataTable GetTotalBet(GetTotalBetCriteria criteria)
         {
-            IDataReader reader = null;
-            try
+            DataTable totalBets = new DataTable();
+
+            ObjectDb db = new ObjectDb(criteria.GetSettingKey());
+            var parameters = criteria.GetSpParams();
+            var dataSet = db.ExecuteDataSet(parameters);
+            if (dataSet != null && dataSet.Tables.Count > 0)
             {
-                ObjectDb db = new ObjectDb(criteria.GetSettingKey());
-                var parameters = criteria.GetSpParams();
-                reader = db.ExecuteReader(parameters);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
+                totalBets = dataSet.Tables[0];
             }
 
-            return reader;
+            return totalBets;
         }
 
         /// <summary>
@@ -185,21 +156,19 @@ namespace SaveBetsBusiness.Repositories.Implement
         /// </summary>
         /// <param name="criteria">The criteria.</param>
         /// <returns>Bet tickets of match.</returns>
-        public IDataReader GetBetTickets(GetBetTicketsCriteria criteria)
+        public DataTable GetBetTickets(GetBetTicketsCriteria criteria)
         {
-            IDataReader reader = null;
-            try
+            DataTable betTickets = new DataTable();
+
+            ObjectDb db = new ObjectDb(criteria.GetSettingKey());
+            var parameters = criteria.GetSpParams();
+            var dataSet = db.ExecuteDataSet(parameters);
+            if (dataSet != null && dataSet.Tables.Count > 0)
             {
-                ObjectDb db = new ObjectDb(criteria.GetSettingKey());
-                var parameters = criteria.GetSpParams();
-                reader = db.ExecuteReader(parameters);
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
+                betTickets = dataSet.Tables[0];
             }
 
-            return reader;
+            return betTickets;
         }
 
         /// <summary>
@@ -208,17 +177,10 @@ namespace SaveBetsBusiness.Repositories.Implement
         /// <param name="criteria">The criteria.</param>
         public void ExecuteEndMatchJob(ExecuteEndMatchJobCriteria criteria)
         {
-            try
+            using (var db = new ObjectDb(criteria.GetSettingKey()))
             {
-                using (var db = new ObjectDb(criteria.GetSettingKey()))
-                {
-                    var parameters = criteria.GetSpParams();
-                    db.ExecuteNonQuery(parameters);
-                }
-            }
-            catch (Exception ex)
-            {
-                LogExtensions.ExceptionHandler(ex);
+                var parameters = criteria.GetSpParams();
+                db.ExecuteNonQuery(parameters);
             }
         }
     }

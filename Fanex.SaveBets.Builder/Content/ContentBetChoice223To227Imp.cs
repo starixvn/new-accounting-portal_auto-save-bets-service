@@ -13,7 +13,8 @@ namespace Fanex.SaveBets.Builder.Content
         {
             this.bettype = Converter.ToString2(bettype);
         }
-        public List<object> ContentBetChoiceBuilder(IDataReader reader)
+
+        public List<object> ContentBetChoiceBuilder(DataRow reader)
         {
             var hdp1 = Converter.To<int>(reader["hdp1"]);
             var hdp2 = Converter.To<int>(reader["hdp2"]);

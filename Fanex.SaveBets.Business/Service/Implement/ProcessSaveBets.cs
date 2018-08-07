@@ -96,7 +96,7 @@ namespace SaveBetsBusiness.Service.Implement
         {
             get
             {
-                return _repository.GetWinLoss(this._matchId).AsEnumerable().ToList();
+                return _repository.GetWinLoss(_matchId).AsEnumerable().ToList();
             }
         }
 
@@ -126,12 +126,12 @@ namespace SaveBetsBusiness.Service.Implement
             get { return _bettypes_bets; }
         }
 
-        public IDataReader GetTotalBets(GetTotalBetCriteria criteria)
+        public DataTable GetTotalBets(GetTotalBetCriteria criteria)
         {
             return _repository.GetTotalBet(criteria);
         }
 
-        public IDataReader GetBetTickets(GetBetTicketsCriteria criteria)
+        public DataTable GetBetTickets(GetBetTicketsCriteria criteria)
         {
             return _repository.GetBetTickets(criteria);
         }
