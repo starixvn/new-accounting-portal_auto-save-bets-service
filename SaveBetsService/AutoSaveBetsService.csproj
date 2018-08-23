@@ -158,6 +158,9 @@
     <Content Include="Configurations\_Fanex.AutoSaveBets.Service.PRO-2.5.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Configurations\_Fanex.AutoSaveBets.Service.MNL-0.exe.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Templates\NotificationEmailTemplate.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
