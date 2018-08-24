@@ -56,6 +56,7 @@ namespace AutoSaveBetsService
 
             AppSettings.OnProcessing = false;
             AppSettings.ForceRunningOnProcessing = false;
+            RemotingRefRegister.Register();
 
             string username = AppSettings.UserName;
             string password = AppSettings.Password;

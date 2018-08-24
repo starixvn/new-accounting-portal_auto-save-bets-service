@@ -5,6 +5,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using Fanex.Common;
+    using Fanex.SaveBets.Builder.Helper;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
     using SaveBetsBusiness.Common;
@@ -70,7 +71,7 @@
             XSSFCellStyle totalTextStyle = NPOIExcelUtility.TextStyle(excelFile, Color.White, false, HorizontalAlignment.Center, Color.Black);
             NPOIExcelUtility.SetBorderToCell(totalTextStyle, Color.Black, _borderColor, _borderColor, Color.Black);
 
-            string bettypeName = CacheRef.GetBettype(bettype);
+            string bettypeName = CacheRef.GetBetTypeName(bettype.ToString());
             row = worksheet.CreateRow(currentRow) as XSSFRow;
             currentColumn = 0;
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, bettypeName, headerStyle);

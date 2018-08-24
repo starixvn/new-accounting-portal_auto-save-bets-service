@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using Fanex.Common;
-using RemotingRef;
+using Fanex.SaveBets.Builder.Helper;
 
 namespace Fanex.SaveBets.Builder.Content
 {
@@ -21,10 +21,10 @@ namespace Fanex.SaveBets.Builder.Content
             var oddsspread = Converter.To<decimal>(reader["oddsspread"]);
             var betteam = Converter.To<string>(reader["betteam"]);
 
-            var refId = RefData.getFastMarketRefid(bettype, Converter.ToInt(betteam));
-            var betchoice = RefData.GetResourceDataByRefIdAndResourceId(refId, Converter.ToString2(hdp2), "en", string.Empty);
+            var refId = CacheRef.GetFastMarketRefid(bettype, Converter.ToInt(betteam));
+            var betchoice = CacheRef.GetResourceDataByRefIdAndResourceId(refId, Converter.ToString2(hdp2), "en", string.Empty);
 
-            var interval = RefData.getFastMarketTimeRange(bettype, hdp1);
+            var interval = CacheRef.GetFastMarketTimeRange(bettype, hdp1);
 
             return new List<object> { betchoice, interval, oddsspread.ToString("G29") };
         }

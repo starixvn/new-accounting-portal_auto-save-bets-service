@@ -16,9 +16,9 @@ namespace SaveBetsBusiness.Service.Implement
     using System.Drawing;
     using System.IO;
     using Fanex.Common;
+    using Fanex.SaveBets.Builder.Helper;
     using NPOI.SS.UserModel;
     using NPOI.XSSF.UserModel;
-    using RemotingRef;
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Resources;
@@ -147,7 +147,7 @@ namespace SaveBetsBusiness.Service.Implement
             this.IncreaseRowAndResetColumnIndex(ref currentRow, ref currentColumn, 0);
             row = worksheet.CreateRow(currentRow) as XSSFRow;
 
-            var matchCode = RefData.GetBetRadarMatchCodeFormat(Converter.ToString2(matchInfo["matchcode"]), "en");
+            var matchCode = CacheRef.GetBetRadarMatchCodeFormat(Converter.ToString2(matchInfo["matchcode"]));
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(matchCode), textStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, string.Empty, textStyle);

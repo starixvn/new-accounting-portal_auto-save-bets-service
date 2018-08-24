@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Fanex.Common;
-using RemotingRef;
+using Fanex.SaveBets.Builder.Helper;
 
 namespace SaveBetsBusiness.Service
 {
@@ -92,7 +92,7 @@ namespace SaveBetsBusiness.Service
             teamId = arrBettype[0];
             possession = arrBettype[1];
 
-            string teamName = RefData.GetBetTypeName(teamId, "en");
+            string teamName = CacheRef.GetBetTypeName(teamId);
             result = string.Format("{0} {1} {2} %", betchoice, teamName, possession);
 
             return result;
