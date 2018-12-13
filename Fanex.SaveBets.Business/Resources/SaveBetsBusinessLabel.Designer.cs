@@ -268,7 +268,7 @@ namespace SaveBetsBusiness.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to IBC.
+        ///   Looks up a localized string similar to House.
         /// </summary>
         internal static string IBC {
             get {
