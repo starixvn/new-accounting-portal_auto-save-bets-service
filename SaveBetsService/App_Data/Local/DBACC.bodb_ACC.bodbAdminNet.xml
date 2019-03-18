@@ -3,8 +3,8 @@
   <Function Name="Save Bet Service">
     <Setting Key="NAP_SaveBet_GetJob" SpName="NAP_SaveBet_GetJob" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
     <Setting Key="NAP_SaveBet_GetMatchInfo" SpName="NAP_SaveBet_GetMatchInfo" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
-    <Setting Key="NAP_SaveBet_GetTurnOver" SpName="NAP_SaveBet_GetTurnOver" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
-    <Setting Key="NAP_SaveBet_GetWinLost" SpName="NAP_SaveBet_GetWinLost" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
+    <Setting Key="NAP_SaveBet_GetTurnOver" SpName="NAP_SaveBet_GetTurnOver_xtest" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
+    <Setting Key="NAP_SaveBet_GetWinLost" SpName="NAP_SaveBet_GetWinLost_xtest" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
     <Setting Key="NAP_SaveBet_GetTB" SpName="NAP_SaveBet_GetTB" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
     <Setting Key="NAP_SaveBet_GetBets" SpName="NAP_SaveBet_GetBets" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
     <Setting Key="NAP_SaveBet_EndMatch" SpName="NAP_SaveBet_UpdateJobCompleted" DbName="DBACC.bodb_ACC.bodbAdminNet" Timeout="0"/>
