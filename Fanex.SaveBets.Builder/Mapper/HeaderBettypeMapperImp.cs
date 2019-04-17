@@ -34,6 +34,7 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 20, Header1ColumnHdpImp },
                 { 465, Header1ColumnHdpImp },
                 { 466, Header1ColumnHdpImp },
+                { 500, Header1ColumnHdpImp },
                 { 501, Header1ColumnHdpImp },
 
                 { 401, Header1ColumnTeamImp },
