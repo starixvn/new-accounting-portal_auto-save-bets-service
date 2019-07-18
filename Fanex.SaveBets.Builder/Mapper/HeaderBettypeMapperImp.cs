@@ -17,6 +17,7 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string Header4ColumnImp = "Header4ColumnImp";
         private const string Header3ColumnTeamIntervalHandicapImp = "Header3ColumnTeamIntervalHandicapImp";
         private const string Header1ColumnPointImp = "Header1ColumnPointImp";
+        private const string Header1ColumnScoreBoxOddsImp = "Header1ColumnScoreBoxOddsImp";
 
         private readonly Dictionary<int, string> groupBettypes;
 
@@ -59,6 +60,9 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 440, Header1ColumnTeamImp },
                 { 441, Header1ColumnTeamImp },
                 { 425, Header1ColumnTeamImp },
+
+                { 468, Header1ColumnScoreBoxOddsImp },
+                { 469, Header1ColumnScoreBoxOddsImp },
 
                 { 301, Header1ColumnMyanmarOddBettype },
                 { 302, Header1ColumnMyanmarOddBettype },
@@ -109,6 +113,8 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 5, Header0Column },
                 { 15, Header0Column },
                 { 430, Header0Column },
+                { 458, Header0Column },
+                { 459, Header0Column },
 
                 { 221, Header3ColumnTeamIntervalHandicapImp },
                 { 222, Header3ColumnTeamIntervalHandicapImp },

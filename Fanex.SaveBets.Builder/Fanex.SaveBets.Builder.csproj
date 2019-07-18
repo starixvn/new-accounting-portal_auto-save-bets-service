@@ -106,6 +106,8 @@
     <Compile Include="Content\ContentBetChoice432Imp.cs" />
     <Compile Include="Content\ContentBetChoice433Imp.cs" />
     <Compile Include="Content\ContentBetChoice442Imp.cs" />
+    <Compile Include="Content\ContentBetChoice467Imp.cs" />
+    <Compile Include="Content\ContentBetChoice468Imp.cs" />
     <Compile Include="Content\ContentBetChoice4Imp.cs" />
     <Compile Include="Content\ContentBetChoice5Imp.cs" />
     <Compile Include="Content\ContentBetChoice603_604_605Imp.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Header\Header1ColumnHdpImp.cs" />
     <Compile Include="Header\Header1ColumnMyanmarOddBettype.cs" />
     <Compile Include="Header\Header1ColumnPointImp.cs" />
+    <Compile Include="Header\Header1ColumnScoreBoxOddsImp.cs" />
     <Compile Include="Header\Header1ColumnTeamImp.cs" />
     <Compile Include="Header\Header2ColumnBetOptionBetTypeName.cs" />
     <Compile Include="Header\Header2ColumnImp.cs" />

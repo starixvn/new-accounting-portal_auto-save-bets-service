@@ -478,6 +478,9 @@
             worksheet.AutoSizeColumn(secondSectionStartColumnIndex - 4);
             worksheet.AutoSizeColumn(2 * secondSectionStartColumnIndex - 4);
 
+            worksheet.SetColumnWidth(5, 250 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(17, 250 * NPOIExcelUtility.FontWidth);
+
             if (secondSectionStartColumnIndex == 13)
             {
                 worksheet.AutoSizeColumn(6);
