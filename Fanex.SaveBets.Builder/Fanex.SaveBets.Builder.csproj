@@ -123,6 +123,10 @@
     <Compile Include="Content\ContentBetChoice616Imp.cs" />
     <Compile Include="Content\ContentBetChoice617Imp.cs" />
     <Compile Include="Content\ContentBetChoice6Imp.cs" />
+    <Compile Include="Content\ContentBetChoice703Imp.cs" />
+    <Compile Include="Content\ContentBetChoice707Imp.cs" />
+    <Compile Include="Content\ContentBetChoice709Imp.cs" />
+    <Compile Include="Content\ContentBetChoice711Imp.cs" />
     <Compile Include="Content\ContentBetChoiceBuilder.cs" />
     <Compile Include="Content\ContentBetChoiceBuilderImp.cs" />
     <Compile Include="Content\ContentBetChoiceDefault1Section3ColumnImp.cs" />
@@ -135,7 +139,9 @@
     <Compile Include="Header\Header1ColumnScoreBoxOddsImp.cs" />
     <Compile Include="Header\Header1ColumnTeamImp.cs" />
     <Compile Include="Header\Header2ColumnBetOptionBetTypeName.cs" />
+    <Compile Include="Header\Header2ColumnHdpOtherOptionsImp.cs" />
     <Compile Include="Header\Header2ColumnImp.cs" />
+    <Compile Include="Header\Header2ColumnTeamOtherOptionsImp.cs" />
     <Compile Include="Header\Header3ColumnBetOptionHandicapImp.cs" />
     <Compile Include="Header\Header3ColumnImp.cs" />
     <Compile Include="Header\Header3ColumnTeamIntervalHandicapImp.cs" />

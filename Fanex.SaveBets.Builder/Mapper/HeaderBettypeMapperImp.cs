@@ -18,6 +18,8 @@ namespace Fanex.SaveBets.Builder.Mapper
         private const string Header3ColumnTeamIntervalHandicapImp = "Header3ColumnTeamIntervalHandicapImp";
         private const string Header1ColumnPointImp = "Header1ColumnPointImp";
         private const string Header1ColumnScoreBoxOddsImp = "Header1ColumnScoreBoxOddsImp";
+        private const string Header2ColumnTeamOtherOptionsImp = "Header2ColumnTeamOtherOptionsImp";
+        private const string Header2ColumnHdpOtherOptionsImp = "Header2ColumnHdpOtherOptionsImp";
 
         private readonly Dictionary<int, string> groupBettypes;
 
@@ -44,6 +46,11 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 483, Header1ColumnHdpImp },
                 { 484, Header1ColumnHdpImp },
                 { 485, Header1ColumnHdpImp },
+                { 701, Header1ColumnHdpImp },
+                { 704, Header1ColumnHdpImp },
+                { 702, Header1ColumnHdpImp },
+                { 705, Header1ColumnHdpImp },
+                { 706, Header1ColumnHdpImp },
 
                 { 401, Header1ColumnTeamImp },
                 { 402, Header1ColumnTeamImp },
@@ -67,6 +74,7 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 440, Header1ColumnTeamImp },
                 { 441, Header1ColumnTeamImp },
                 { 425, Header1ColumnTeamImp },
+                { 703, Header1ColumnTeamImp },
 
                 { 468, Header1ColumnScoreBoxOddsImp },
                 { 469, Header1ColumnScoreBoxOddsImp },
@@ -151,6 +159,16 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 617, Header2ColumnBetOptionBetTypeName },
 
                 { 614, Header4ColumnImp },
+
+                { 711, Header2ColumnTeamOtherOptionsImp },
+                { 714, Header2ColumnTeamOtherOptionsImp },
+
+                { 707, Header2ColumnHdpOtherOptionsImp },
+                { 708, Header2ColumnHdpOtherOptionsImp },
+                { 712, Header2ColumnHdpOtherOptionsImp },
+                { 713, Header2ColumnHdpOtherOptionsImp },
+                { 709, Header2ColumnHdpOtherOptionsImp },
+                { 710, Header2ColumnHdpOtherOptionsImp },
 
                 { 2701, Header0Column },
                 { 2702, Header0Column },
