@@ -278,7 +278,30 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 9058, Header1ColumnHdpImp },
                 { 9060, Header1ColumnHdpImp },
                 { 9070, Header1ColumnHdpImp },
-                { 9074, Header1ColumnHdpImp }
+                { 9074, Header1ColumnHdpImp },
+
+                { 383, Header2ColumnHdpOtherOptionsImp },
+                { 382, Header2ColumnTeamOtherOptionsImp },
+                { 384, Header2ColumnTeamOtherOptionsImp },
+                { 385, Header2ColumnTeamOtherOptionsImp },
+                { 395, Header2ColumnTeamOtherOptionsImp },
+                { 396, Header2ColumnTeamOtherOptionsImp },
+
+                { 393, Header1ColumnHdpImp },
+                { 394, Header1ColumnHdpImp },
+                { 400, Header1ColumnHdpImp },
+                { 386, Header1ColumnHdpImp },
+                { 387, Header1ColumnHdpImp },
+                { 388, Header1ColumnHdpImp },
+                { 389, Header1ColumnHdpImp },
+
+                { 390, Header1ColumnTeamImp },
+                { 391, Header1ColumnTeamImp },
+                { 392, Header1ColumnTeamImp },
+                { 397, Header1ColumnTeamImp },
+                { 398, Header1ColumnTeamImp },
+                { 399, Header1ColumnTeamImp }
+
             };
         }
 
