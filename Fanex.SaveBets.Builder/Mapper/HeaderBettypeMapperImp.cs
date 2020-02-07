@@ -281,6 +281,7 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 9074, Header1ColumnHdpImp },
 
                 { 383, Header2ColumnHdpOtherOptionsImp },
+                { 381, Header2ColumnTeamOtherOptionsImp },
                 { 382, Header2ColumnTeamOtherOptionsImp },
                 { 384, Header2ColumnTeamOtherOptionsImp },
                 { 385, Header2ColumnTeamOtherOptionsImp },
