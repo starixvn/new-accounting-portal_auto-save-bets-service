@@ -1,7 +1,4 @@
-﻿using System;
-using System.Configuration;
-using System.IO;
-using Fanex.Common;
+﻿using Fanex.Common;
 using Fanex.Data.Configuration;
 using Fanex.Logging;
 using Fanex.MailDelivery.Core.Models;
@@ -11,6 +8,9 @@ using ONEbook.UM.Services;
 using ONEbook.UM.Services.Impl;
 using SaveBetsBusiness;
 using SaveBetsBusiness.Service;
+using System;
+using System.Configuration;
+using System.IO;
 
 namespace Fanex.SaveBets.Testing
 {
