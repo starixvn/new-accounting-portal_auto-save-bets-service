@@ -66,7 +66,7 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 2, ContentBetChoice2Imp },
                 { 12, ContentBetChoice2Imp },
                 { 3, ContentBetChoice2Imp },
-                { 8, ContentBetChoice2Imp },                
+                { 8, ContentBetChoice2Imp },
                 { 500, ContentBetChoice2Imp },
                 { 501, ContentBetChoice2Imp },
                 { 470, ContentBetChoice2Imp },
@@ -298,7 +298,30 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 9058, ContentBetChoice2Imp },
                 { 9060, ContentBetChoice2Imp },
                 { 9070, ContentBetChoice2Imp },
-                { 9074, ContentBetChoice2Imp }
+                { 9074, ContentBetChoice2Imp },
+
+                { 393, ContentBetChoice2Imp },
+                { 394, ContentBetChoice2Imp },
+                { 400, ContentBetChoice2Imp },
+                { 386, ContentBetChoice2Imp },
+                { 387, ContentBetChoice2Imp },
+                { 388, ContentBetChoice2Imp },
+                { 389, ContentBetChoice2Imp },
+
+                { 381, ContentBetChoice711Imp },
+                { 382, ContentBetChoice711Imp },
+                { 384, ContentBetChoice711Imp },
+                { 385, ContentBetChoice711Imp },
+                { 395, ContentBetChoice711Imp },
+                { 396, ContentBetChoice711Imp },
+
+                { 390, ContentBetChoice703Imp },
+                { 391, ContentBetChoice703Imp },
+                { 392, ContentBetChoice703Imp },
+                { 397, ContentBetChoice703Imp },
+                { 398, ContentBetChoice703Imp },
+                { 399, ContentBetChoice703Imp },
+                { 383, ContentBetChoice707Imp }
             };
         }
 

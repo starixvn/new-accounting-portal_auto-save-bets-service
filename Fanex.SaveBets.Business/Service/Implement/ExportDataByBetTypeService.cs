@@ -1,10 +1,5 @@
 ﻿namespace SaveBetsBusiness.Service.Implement
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Drawing;
     using Fanex.Common;
     using Fanex.SaveBets.Builder.Content;
     using Fanex.SaveBets.Builder.Header;
@@ -14,6 +9,11 @@
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Extensions;
     using SaveBetsBusiness.Resources;
+    using System;
+    using System.Collections.Generic;
+    using System.Data;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Drawing;
 
     public class ExportDataByBetTypeService : IDisposable
     {
@@ -436,7 +436,7 @@
             worksheet.SetColumnWidth(4, 220 * NPOIExcelUtility.FontWidth);
 
             worksheet.SetColumnWidth(8, 80 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(9, 80 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(9, 170 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(numberColumns - 2, 220 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(numberColumns - 1, 150 * NPOIExcelUtility.FontWidth);
             worksheet.AutoSizeColumn(5);

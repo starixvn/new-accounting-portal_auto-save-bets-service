@@ -63,7 +63,7 @@ namespace Fanex.SaveBets.Builder.Mapper
             { 458, ThreeSection },
             { 459, ThreeSection },
 
-            { 601, OneSection },            
+            { 601, OneSection },
             { 603, TwoSection },
             { 604, TwoSection },
             { 605, TwoSection },
@@ -94,7 +94,7 @@ namespace Fanex.SaveBets.Builder.Mapper
             { 2703, TwoSection },
             { 2704, TwoSection },
             { 2705, TwoSection },
-            { 2706, TwoSection },            
+            { 2706, TwoSection },
             { 2801, TwoSection },
             { 2802, ThreeSection },
             { 2803, TwoSection },
@@ -196,7 +196,16 @@ namespace Fanex.SaveBets.Builder.Mapper
             { 9058, TwoSection },
             { 9060, TwoSection },
             { 9070, TwoSection },
-            { 9074, TwoSection }
+            { 9074, TwoSection },
+
+            { 383, TwoSection },
+            { 393, TwoSection },
+            { 394, TwoSection },
+            { 400, TwoSection },
+            { 386, TwoSection },
+            { 387, TwoSection },
+            { 388, TwoSection },
+            { 389, TwoSection }
         };
 
         public int GetNumberSectionOf(int bettype)
