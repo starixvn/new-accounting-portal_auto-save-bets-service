@@ -251,7 +251,6 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 9073, Header1ColumnHdpImp },
                 { 9075, Header1ColumnHdpImp },
 
-
                 { 9005, Header1ColumnHdpImp },
                 { 9061, Header1ColumnHdpImp },
                 { 9071, Header1ColumnHdpImp },
@@ -301,8 +300,37 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 392, Header1ColumnTeamImp },
                 { 397, Header1ColumnTeamImp },
                 { 398, Header1ColumnTeamImp },
-                { 399, Header1ColumnTeamImp }
+                { 399, Header1ColumnTeamImp },
 
+                { 618, Header1ColumnTeamImp },
+                { 619, Header1ColumnTeamImp },
+                { 620, Header1ColumnTeamImp },
+                { 621, Header1ColumnTeamImp },
+                { 622, Header1ColumnTeamImp },
+                { 623, Header1ColumnTeamImp },
+                { 624, Header1ColumnTeamImp },
+                { 625, Header1ColumnTeamImp },
+                { 626, Header1ColumnTeamImp },
+                { 632, Header1ColumnTeamImp },
+                { 633, Header1ColumnTeamImp },
+                { 634, Header1ColumnTeamImp },
+                { 640, Header1ColumnTeamImp },
+                { 642, Header1ColumnTeamImp },
+                { 643, Header1ColumnTeamImp },
+                { 644, Header1ColumnTeamImp },
+                { 645, Header1ColumnTeamImp },
+                { 627, Header2ColumnTeamOtherOptionsImp },
+                { 628, Header2ColumnTeamOtherOptionsImp },
+                { 629, Header2ColumnTeamOtherOptionsImp },
+                { 630, Header2ColumnTeamOtherOptionsImp },
+                { 631, Header2ColumnTeamOtherOptionsImp },
+                { 646, Header3ColumnImp },
+                { 635, Header1ColumnHdpImp },
+                { 636, Header1ColumnHdpImp },
+                { 637, Header1ColumnHdpImp },
+                { 638, Header1ColumnTeamImp },
+                { 639, Header1ColumnHdpImp },
+                { 641, Header1ColumnTeamImp }
             };
         }
 
