@@ -434,7 +434,7 @@
             worksheet.SetColumnWidth(0, 170 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(2, 150 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(4, 220 * NPOIExcelUtility.FontWidth);
-
+            worksheet.SetColumnWidth(7, 170 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(8, 80 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(9, 170 * NPOIExcelUtility.FontWidth);
             worksheet.SetColumnWidth(numberColumns - 2, 220 * NPOIExcelUtility.FontWidth);
