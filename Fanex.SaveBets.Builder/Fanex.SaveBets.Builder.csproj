@@ -89,6 +89,8 @@
     <Compile Include="Content\ContentBetChoice2703_2704Imp.cs" />
     <Compile Include="Content\ContentBetChoice2705_2706Imp.cs" />
     <Compile Include="Content\ContentBetChoice2Imp.cs" />
+    <Compile Include="Content\ContentBetChoice3BetTeamHdp2BetCheck.cs" />
+    <Compile Include="Content\ContentBetChoice3Hdp2Hdp1OddsSpread.cs" />
     <Compile Include="Content\ContentBetChoice401Imp.cs" />
     <Compile Include="Content\ContentBetChoice405Imp.cs" />
     <Compile Include="Content\ContentBetChoice406Imp.cs" />
@@ -144,6 +146,8 @@
     <Compile Include="Header\Header2ColumnTeamOtherOptionsImp.cs" />
     <Compile Include="Header\Header3ColumnBetOptionHandicapImp.cs" />
     <Compile Include="Header\Header3ColumnImp.cs" />
+    <Compile Include="Header\Header3ColumnOtherOptionsIntervalHdp1.cs" />
+    <Compile Include="Header\Header3ColumnTeamHdp2OddsDetails.cs" />
     <Compile Include="Header\Header3ColumnTeamIntervalHandicapImp.cs" />
     <Compile Include="Header\Header4ColumnImp.cs" />
     <Compile Include="Header\HeaderBuilder.cs" />
