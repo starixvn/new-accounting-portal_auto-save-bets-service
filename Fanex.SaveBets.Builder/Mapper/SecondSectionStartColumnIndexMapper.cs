@@ -11,25 +11,25 @@ namespace Fanex.SaveBets.Builder.Mapper
     {
         private readonly Dictionary<int, int> groupBettypeStartColumnIndex = new Dictionary<int, int>()
         {
-            { 606, 13 },
-            { 607, 13 },
-            { 609, 13 },
-            { 610, 13 },
-            { 611, 13 },
-            { 612, 13 },
-            { 613, 13 },
-            { 615, 13 },
-            { 616, 13 },
-            { 617, 13 },
+            { 606, 19 },
+            { 607, 19 },
+            { 609, 19 },
+            { 610, 19 },
+            { 611, 19 },
+            { 612, 19 },
+            { 613, 19 },
+            { 615, 19 },
+            { 616, 19 },
+            { 617, 19 },
 
-            { 707, 13 },
-            { 708, 13 },
-            { 712, 13 },
-            { 713, 13 },
-            { 709, 13 },
-            { 710, 13 },
-            { 383, 13 },
-            { 228, 14 },
+            { 707, 19 },
+            { 708, 19 },
+            { 712, 19 },
+            { 713, 19 },
+            { 709, 19 },
+            { 710, 19 },
+            { 383, 19 },
+            { 228, 20 }
 
             { 9410, 13 },
             { 9411, 13 },
@@ -72,7 +72,7 @@ namespace Fanex.SaveBets.Builder.Mapper
 
         public int GetStartColumnIndexOfSecondSection(int bettype)
         {
-            int startColumnIndex = 12;
+            int startColumnIndex = 19;
             startColumnIndex = groupBettypeStartColumnIndex.ContainsKey(bettype) ? groupBettypeStartColumnIndex[bettype] : startColumnIndex;
 
             return startColumnIndex;
