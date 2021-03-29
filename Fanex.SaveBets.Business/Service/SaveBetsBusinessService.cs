@@ -120,7 +120,7 @@ namespace SaveBetsBusiness.Service
                 }
 
                 _processSaveBets.ExecuteEndMatchJob(endMatchCriteria);
-                
+
                 /// var endTime = DateTime.Now;
                 /// var duration = endTime.Subtract(startTime).TotalSeconds;
                 /// Logger.Log.Info($"Save Bets Service - MatchId: {matchId}, StartTime: {startTime}, EndTime: {endTime}, Duration: {duration:##,###} seconds");
@@ -167,7 +167,7 @@ namespace SaveBetsBusiness.Service
         /// <param name="excelFile">The excel file.</param>
         private void RenderDeadTB_LiveTBSheet(ref XSSFWorkbook excelFile)
         {
-            ExportDeadAndLiveTotalBetService _exportDeadAndLiveTotalBetService = null;            
+            ExportDeadAndLiveTotalBetService _exportDeadAndLiveTotalBetService = null;
             int currentRow = 0;
             GetTotalBetCriteria criteria = new GetTotalBetCriteria();
             var bettypes = _processSaveBets.Bettypes_TB;
@@ -196,7 +196,6 @@ namespace SaveBetsBusiness.Service
                         _exportDeadAndLiveTotalBetService.ExportDeadAndLiveTBSheet(excelFile, ref worksheet, ref currentRow, totalBets, criteria.Bettype);
                     }
                 }
-             
             }
             catch (Exception ex)
             {
@@ -214,7 +213,7 @@ namespace SaveBetsBusiness.Service
         /// <param name="excelFile">The excel file.</param>
         private void RenderEachBettypeLiveIndicatorSheet(ref XSSFWorkbook excelFile)
         {
-            ExportDataByBetTypeService _exportDataByBetTypeService = null;            
+            ExportDataByBetTypeService _exportDataByBetTypeService = null;
             GetBetTicketsCriteria criteria = new GetBetTicketsCriteria();
 
             try
@@ -238,7 +237,7 @@ namespace SaveBetsBusiness.Service
                         ////Render each bettype a Sheet depend on the value of liveIndicator = true or false
                         _exportDataByBetTypeService.ExportDataByBetTypeAndLiveIndicator(excelFile, betTickets, criteria.Bettype, criteria.LiveIndicator);
                     }
-                }               
+                }
             }
             catch (Exception ex)
             {
