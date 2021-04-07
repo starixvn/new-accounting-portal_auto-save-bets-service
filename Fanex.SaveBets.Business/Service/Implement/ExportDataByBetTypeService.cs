@@ -496,10 +496,10 @@
                 worksheet.AutoSizeColumn(i);
             }
 
-            worksheet.SetColumnWidth(12, 40 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(13, 40 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(31, 40 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(32, 40 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(14, 40 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(15, 40 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(35, 40 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(36, 40 * NPOIExcelUtility.FontWidth);
         }
 
         /// <summary>
