@@ -28,7 +28,8 @@
             ref XSSFSheet worksheet,
             ref int currentRow,
             DataTable totalBets,
-            int bettype)
+            int bettype,
+            string rateTypeColumn)
         {
             IDataFormat dataFormat = excelFile.CreateDataFormat();
             XSSFRow row = null;
@@ -77,7 +78,7 @@
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, bettypeName, headerStyle);
             currentRow += 2;
 
-            foreach(DataRow reader in totalBets.Rows)
+            foreach (DataRow reader in totalBets.Rows)
             {
                 if (numberBetTypeElements == 0)
                 {
@@ -101,33 +102,33 @@
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, reader["hdp"], decimalNumberStyle);
                 string score = string.Format("{0}-{1}", reader["livehomescore"], reader["liveawayscore"]);
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, score, textStyle);
-                decimal odds = Converter.ToDecimal(reader["FC_mX"]) == 0 ?
+                decimal odds = Converter.ToDecimal(reader[$"FC_mX_{rateTypeColumn}"]) == 0 ?
                     0 :
                     Converter.ToDecimal(
-                    Converter.ToDecimal(reader["FC_pX"]) /
-                    Converter.ToDecimal(reader["FC_mX"]));
-                fc_pXTotal += Converter.ToDecimal(reader["FC_pX"]);
-                fc_p3Total += Converter.ToDecimal(reader["FC_p3"]);
-                fc_p2Total += Converter.ToDecimal(reader["FC_p2"]);
-                fc_p1Total += Converter.ToDecimal(reader["FC_p1"]);
-                fc_p0Total += Converter.ToDecimal(reader["FC_p0"]);
-                fc_mXTotal += Converter.ToDecimal(reader["FC_mX"]);
-                fc_m1Total += Converter.ToDecimal(reader["FC_m1"]);
-                fc_m2Total += Converter.ToDecimal(reader["FC_m2"]);
-                fc_m3Total += Converter.ToDecimal(reader["FC_m3"]);
+                    Converter.ToDecimal(reader[$"FC_pX_{rateTypeColumn}"]) /
+                    Converter.ToDecimal(reader[$"FC_mX_{rateTypeColumn}"]));
+                fc_pXTotal += Converter.ToDecimal(reader[$"FC_pX_{rateTypeColumn}"]);
+                fc_p3Total += Converter.ToDecimal(reader[$"FC_p3_{rateTypeColumn}"]);
+                fc_p2Total += Converter.ToDecimal(reader[$"FC_p2_{rateTypeColumn}"]);
+                fc_p1Total += Converter.ToDecimal(reader[$"FC_p1_{rateTypeColumn}"]);
+                fc_p0Total += Converter.ToDecimal(reader[$"FC_p0_{rateTypeColumn}"]);
+                fc_mXTotal += Converter.ToDecimal(reader[$"FC_mX_{rateTypeColumn}"]);
+                fc_m1Total += Converter.ToDecimal(reader[$"FC_m1_{rateTypeColumn}"]);
+                fc_m2Total += Converter.ToDecimal(reader[$"FC_m2_{rateTypeColumn}"]);
+                fc_m3Total += Converter.ToDecimal(reader[$"FC_m3_{rateTypeColumn}"]);
 
                 NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, odds, boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["FC_p3"]), boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["FC_p2"]), boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["FC_p1"]), boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["FC_p0"]), boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["FC_m1"]), boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["FC_m2"]), boldDecimalNumberStyle);
-                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["FC_m3"]), boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader[$"FC_p3_{rateTypeColumn}"]), boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader[$"FC_p2_{rateTypeColumn}"]), boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader[$"FC_p1_{rateTypeColumn}"]), boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader[$"FC_p0_{rateTypeColumn}"]), boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader[$"FC_m1_{rateTypeColumn}"]), boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader[$"FC_m2_{rateTypeColumn}"]), boldDecimalNumberStyle);
+                NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader[$"FC_m3_{rateTypeColumn}"]), boldDecimalNumberStyle);
 
                 var isSameMatch = numberBetTypeElements != 0 ? string.Equals(hdpScoreString, tempHdpScoreString) : true;
-                decimal homeTotal = Converter.ToDecimal(reader["HomeTotal"]);
-                decimal awayTotal = Converter.ToDecimal(reader["AwayTotal"]);
+                decimal homeTotal = Converter.ToDecimal(reader[$"HomeTotal_{rateTypeColumn}"]);
+                decimal awayTotal = Converter.ToDecimal(reader[$"AwayTotal_{rateTypeColumn}"]);
                 homeTotalByBetType += homeTotal;
                 awayTotalByBetType += awayTotal;
                 string balance = string.Format(
@@ -143,16 +144,16 @@
 
                 if (Converter.ToString2(reader["status"]).ToLower() == "lose")
                 {
-                    loseHomeTotal = Converter.ToDecimal(reader["HomeTotal"]);
-                    loseAwayTotal = Converter.ToDecimal(reader["AwayTotal"]);
+                    loseHomeTotal = Converter.ToDecimal(reader[$"HomeTotal_{rateTypeColumn}"]);
+                    loseAwayTotal = Converter.ToDecimal(reader[$"AwayTotal_{rateTypeColumn}"]);
                     isHaveLoseTicket = true;
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, balance, textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, total, boldDecimalNumberStyle);
                 }
                 else if (Converter.ToString2(reader["status"]).ToLower() == "won")
                 {
-                    wonHomeTotal = Converter.ToDecimal(reader["HomeTotal"]);
-                    wonAwayTotal = Converter.ToDecimal(reader["AwayTotal"]);
+                    wonHomeTotal = Converter.ToDecimal(reader[$"HomeTotal_{rateTypeColumn}"]);
+                    wonAwayTotal = Converter.ToDecimal(reader[$"AwayTotal_{rateTypeColumn}"]);
 
                     if (isSameMatch && isHaveLoseTicket)
                     {

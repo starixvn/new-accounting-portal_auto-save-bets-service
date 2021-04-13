@@ -172,28 +172,36 @@ namespace SaveBetsBusiness.Service
             GetTotalBetCriteria criteria = new GetTotalBetCriteria();
             var bettypes = _processSaveBets.Bettypes_TB;
             var liveIndicators = bettypes.Select(b => b.LiveIndicator).Distinct().ToList();
+            var rateTypes = new Dictionary<string, string>
+            {
+                { "Virtual", "V" },
+                { "Real", "A" },
+            };
 
             try
             {
                 _exportDeadAndLiveTotalBetService = new ExportDeadAndLiveTotalBetService();
 
-                foreach (var liveIndicator in liveIndicators)
+                foreach (var rateType in rateTypes)
                 {
-                    string sheetName = liveIndicator ? "Live-TB" : "Dead-TB";
-                    XSSFSheet worksheet = excelFile.GetSheet(sheetName) as XSSFSheet ?? excelFile.CreateSheet(sheetName) as XSSFSheet;
-                    _exportDeadAndLiveTotalBetService.InitColumnWidth(worksheet);
-                    currentRow = 0;
-                    var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator).OrderBy(b => b.Bettype);
-
-                    foreach (var bettype in bettypesByLiveIndicator)
+                    foreach (var liveIndicator in liveIndicators)
                     {
-                        criteria.MatchId = _processSaveBets.MatchId;
-                        criteria.LiveIndicator = bettype.LiveIndicator;
-                        criteria.Bettype = bettype.Bettype;
+                        string sheetName = liveIndicator ? $"Live-TB ({rateType.Key})" : $"Dead-TB ({rateType.Key})";
+                        XSSFSheet worksheet = excelFile.GetSheet(sheetName) as XSSFSheet ?? excelFile.CreateSheet(sheetName) as XSSFSheet;
+                        _exportDeadAndLiveTotalBetService.InitColumnWidth(worksheet);
+                        currentRow = 0;
+                        var bettypesByLiveIndicator = bettypes.Where(s => s.LiveIndicator == liveIndicator).OrderBy(b => b.Bettype);
 
-                        var totalBets = _processSaveBets.GetTotalBets(criteria);
-                        ////Render Dead-TB/Live-TB Sheet depend on the value of liveIndicator = true or false
-                        _exportDeadAndLiveTotalBetService.ExportDeadAndLiveTBSheet(excelFile, ref worksheet, ref currentRow, totalBets, criteria.Bettype);
+                        foreach (var bettype in bettypesByLiveIndicator)
+                        {
+                            criteria.MatchId = _processSaveBets.MatchId;
+                            criteria.LiveIndicator = bettype.LiveIndicator;
+                            criteria.Bettype = bettype.Bettype;
+
+                            var totalBets = _processSaveBets.GetTotalBets(criteria);
+                            ////Render Dead-TB/Live-TB Sheet depend on the value of liveIndicator = true or false
+                            _exportDeadAndLiveTotalBetService.ExportDeadAndLiveTBSheet(excelFile, ref worksheet, ref currentRow, totalBets, criteria.Bettype, rateType.Value);
+                        }
                     }
                 }
             }

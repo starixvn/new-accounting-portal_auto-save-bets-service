@@ -11,12 +11,12 @@ namespace Fanex.SaveBets.Builder.Mapper
     {
         private Dictionary<int, int> oneSectionBettypeNumberColumns = new Dictionary<int, int>()
         {
-            { 614, 14 }
+            { 614, 21 }
         };
 
         public int GetNumberColumns(int bettype)
         {
-            int numberColumn = 13;
+            int numberColumn = 20;
             numberColumn = oneSectionBettypeNumberColumns.ContainsKey(bettype) ? oneSectionBettypeNumberColumns[bettype] : numberColumn;
 
             return numberColumn;

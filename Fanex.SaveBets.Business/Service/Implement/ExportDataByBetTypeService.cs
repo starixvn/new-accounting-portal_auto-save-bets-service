@@ -84,11 +84,18 @@
             int startMergeColumn = 0;
             XSSFRow row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "SITE", headerStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Account.ToUpper(), headerStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "BOT", headerStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "DGR", headerStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "CC", headerStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Odds.ToUpper(), headerStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "ORI.ODDS", headerStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.BetId.ToUpper(), headerStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Cur.ToUpper(), headerStyle);
             NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, SaveBetsBusinessLabel.Amount.ToUpper(), headerStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "VAR", headerStyle);
+            NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, "%", headerStyle);
             var header = new HeaderBuilderImp();
             var headerList = header.GetHeaderHandicapAndBetteamOf(bettype);
             var sectionObj = new SectionBettypeMapperImp();
@@ -177,11 +184,18 @@
                     {
                         row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["SITE"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["BOT"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["DGR"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["CC"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["ori.odds"]), blueBoldDecimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["transid"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, amount, redBoldTextStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["VAR"]), numberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["%"]), decimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["betfrom"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["transdate"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["creator"]), textStyle);
@@ -190,12 +204,19 @@
                     else if (Converter.ToString2(reader["betteam"]).ToLower() == "x")
                     {
                         row = worksheet.GetRow(currentBetTwoRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetTwoRowIndex) as XSSFRow;
-                        currentColumn = 9;
+                        currentColumn = 16;
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["SITE"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetTwoRowIndex, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["BOT"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["DGR"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["CC"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetTwoRowIndex, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["ori.odds"]), blueBoldDecimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetTwoRowIndex, ref currentColumn, Converter.ToDecimal(reader["transid"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetTwoRowIndex, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetTwoRowIndex, ref currentColumn, amount, redBoldTextStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["VAR"]), numberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["%"]), decimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetTwoRowIndex, ref currentColumn, Converter.ToString2(reader["betfrom"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetTwoRowIndex, ref currentColumn, Converter.ToString2(reader["transdate"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetTwoRowIndex, ref currentColumn, Converter.ToString2(reader["creator"]), textStyle);
@@ -204,12 +225,19 @@
                     else if (Converter.ToString2(reader["betteam"]).ToLower() == "2")
                     {
                         row = worksheet.GetRow(currentBetXRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetXRowIndex) as XSSFRow;
-                        currentColumn = 18;
+                        currentColumn = 32;
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["SITE"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetXRowIndex, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["BOT"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["DGR"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["CC"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetXRowIndex, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["ori.odds"]), blueBoldDecimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetXRowIndex, ref currentColumn, Converter.ToDecimal(reader["transid"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetXRowIndex, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetXRowIndex, ref currentColumn, amount, redBoldTextStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["VAR"]), numberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["%"]), decimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetXRowIndex, ref currentColumn, Converter.ToString2(reader["betfrom"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetXRowIndex, ref currentColumn, Converter.ToString2(reader["transdate"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetXRowIndex, ref currentColumn, Converter.ToString2(reader["creator"]), textStyle);
@@ -276,11 +304,18 @@
                     {
                         row = worksheet.GetRow(currentRow) as XSSFRow ?? worksheet.CreateRow(currentRow) as XSSFRow;
 
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["Site"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["BOT"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["DGR"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["CC"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["ori.odds"]), blueBoldDecimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["transid"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, amount, redBoldTextStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["VAR"]), numberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["%"]), decimalNumberStyle);
 
                         foreach (var choice in betChoices)
                         {
@@ -310,11 +345,19 @@
                         var secondSectionStartColumnIndexMapper = new SecondSectionStartColumnIndexMapperImp();
                         row = worksheet.GetRow(currentBetAwayTeamRowIndex) as XSSFRow ?? worksheet.CreateRow(currentBetAwayTeamRowIndex) as XSSFRow;
                         currentColumn = secondSectionStartColumnIndexMapper.GetStartColumnIndexOfSecondSection(bettype);
+
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["SITE"]), textStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["BOT"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["DGR"]), textStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["CC"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["ori.odds"]), blueBoldDecimalNumberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["transid"]), numberStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                         NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, amount, redBoldTextStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["VAR"]), numberStyle);
+                        NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentBetAwayTeamRowIndex, ref currentColumn, Converter.ToDecimal(reader["%"]), decimalNumberStyle);
 
                         foreach (var choice in betChoices)
                         {
@@ -385,11 +428,18 @@
 
                     row = worksheet.CreateRow(currentRow) as XSSFRow;
 
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["Site"]), textStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["username"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["Bot"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["DGR"]), textStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["CC"]), numberStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["odds"]), blueBoldDecimalNumberStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["ori.odds"]), blueBoldDecimalNumberStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["transid"]), numberStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToString2(reader["currency"]), boldTextStyle);
                     NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, amount, redBoldTextStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["VAR"]), numberStyle);
+                    NPOIExcelUtility.RenderCell(ref worksheet, ref row, currentRow, ref currentColumn, Converter.ToDecimal(reader["%"]), decimalNumberStyle);
 
                     foreach (var choice in betChoices)
                     {
@@ -428,24 +478,11 @@
             int numberColumns = oneSectionNumberColumnMapperImp.GetNumberColumns(bettype);
             for (int i = 0; i < numberColumns; i++)
             {
-                worksheet.SetColumnWidth(i, 80 * NPOIExcelUtility.FontWidth);
+                worksheet.AutoSizeColumn(i);
             }
 
-            worksheet.SetColumnWidth(0, 170 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(2, 150 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(4, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(7, 170 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(8, 80 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(9, 170 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(numberColumns - 2, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(numberColumns - 1, 150 * NPOIExcelUtility.FontWidth);
-            worksheet.AutoSizeColumn(5);
-            worksheet.AutoSizeColumn(10);
-
-            if (numberColumns == 14)
-            {
-                worksheet.AutoSizeColumn(6);
-            }
+            worksheet.SetColumnWidth(15, 40 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(16, 40 * NPOIExcelUtility.FontWidth);
         }
 
         /// <summary>
@@ -454,38 +491,15 @@
         /// <param name="worksheet">The worksheet.</param>
         private void InitTwoSectionColumnWidth(XSSFSheet worksheet, int bettype)
         {
-            for (int i = 0; i < 23; i++)
+            for (int i = 0; i < 37; i++)
             {
-                worksheet.SetColumnWidth(i, 90 * NpoiExcelExtensions.FontWidth);
+                worksheet.AutoSizeColumn(i);
             }
 
-            var secondSectionStartColumnIndexMapper = new SecondSectionStartColumnIndexMapperImp();
-            var secondSectionStartColumnIndex = secondSectionStartColumnIndexMapper.GetStartColumnIndexOfSecondSection(bettype);
-
-            worksheet.SetColumnWidth(0, 170 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(2, 150 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(4, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(secondSectionStartColumnIndex - 3, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(secondSectionStartColumnIndex - 2, 150 * NPOIExcelUtility.FontWidth);
-
-            worksheet.SetColumnWidth(secondSectionStartColumnIndex, 170 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(secondSectionStartColumnIndex + 2, 150 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(secondSectionStartColumnIndex + 4, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(2 * secondSectionStartColumnIndex - 3, 220 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(2 * secondSectionStartColumnIndex - 2, 150 * NPOIExcelUtility.FontWidth);
-            worksheet.AutoSizeColumn(5);
-            worksheet.AutoSizeColumn(secondSectionStartColumnIndex + 5);
-            worksheet.AutoSizeColumn(secondSectionStartColumnIndex - 4);
-            worksheet.AutoSizeColumn(2 * secondSectionStartColumnIndex - 4);
-
-            worksheet.SetColumnWidth(5, 250 * NPOIExcelUtility.FontWidth);
-            worksheet.SetColumnWidth(17, 250 * NPOIExcelUtility.FontWidth);
-
-            if (secondSectionStartColumnIndex == 13)
-            {
-                worksheet.AutoSizeColumn(6);
-                worksheet.AutoSizeColumn(19);
-            }
+            worksheet.SetColumnWidth(14, 40 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(15, 40 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(35, 40 * NPOIExcelUtility.FontWidth);
+            worksheet.SetColumnWidth(36, 40 * NPOIExcelUtility.FontWidth);
         }
 
         /// <summary>
@@ -494,28 +508,12 @@
         /// <param name="worksheet">The worksheet.</param>
         private void InitThreeSectionColumnWidth(XSSFSheet worksheet)
         {
-            for (int i = 0; i < 26; i++)
+            for (int i = 0; i < 46; i++)
             {
-                worksheet.SetColumnWidth(i, 90 * NpoiExcelExtensions.FontWidth);
+                worksheet.AutoSizeColumn(i);
             }
 
-            worksheet.SetColumnWidth(0, 170 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(2, 150 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(4, 220 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(6, 220 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(7, 150 * NpoiExcelExtensions.FontWidth);
-
-            worksheet.SetColumnWidth(9, 170 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(11, 150 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(13, 220 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(15, 220 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(16, 150 * NpoiExcelExtensions.FontWidth);
-
-            worksheet.SetColumnWidth(18, 170 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(20, 150 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(22, 220 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(24, 220 * NpoiExcelExtensions.FontWidth);
-            worksheet.SetColumnWidth(25, 150 * NpoiExcelExtensions.FontWidth);
+            //worksheet.SetColumnWidth(12, 40 * NPOIExcelUtility.FontWidth);
         }
 
         [SuppressMessage("StyleCop.CSharp.StylecopPlus.Rules",
