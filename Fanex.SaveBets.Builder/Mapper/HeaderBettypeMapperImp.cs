@@ -458,7 +458,8 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 9561, Header4ColumnTeamHdp1Hdp2OtherOptions },
                 { 9562, Header4ColumnTeamHdp1Hdp2OtherOptions },
                 { 9563, Header4ColumnTeamHdp1Hdp2OtherOptions },
-                { 9564, Header4ColumnTeamHdp1Hdp2OtherOptions }
+                { 9564, Header4ColumnTeamHdp1Hdp2OtherOptions },
+                { 229, Header3ColumnOtherOptionsIntervalHdp1 },
             };
         }
 

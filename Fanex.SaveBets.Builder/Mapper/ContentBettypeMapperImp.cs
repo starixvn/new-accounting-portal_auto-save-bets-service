@@ -482,7 +482,8 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 9561, ContentBetChoice4ColumnImp },
                 { 9562, ContentBetChoice4ColumnImp },
                 { 9563, ContentBetChoice4ColumnImp },
-                { 9564, ContentBetChoice4ColumnImp }
+                { 9564, ContentBetChoice4ColumnImp },
+                { 229, ContentBetChoice3Hdp2Hdp1OddsSpread },
             };
         }
 

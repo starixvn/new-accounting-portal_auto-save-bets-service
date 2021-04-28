@@ -282,7 +282,8 @@ namespace Fanex.SaveBets.Builder.Mapper
             { 9516, TwoSection },
             { 9517, TwoSection },
             { 9518, TwoSection },
-            { 9519, TwoSection }
+            { 9519, TwoSection },
+            { 229, TwoSection }
         };
 
         public int GetNumberSectionOf(int bettype)
