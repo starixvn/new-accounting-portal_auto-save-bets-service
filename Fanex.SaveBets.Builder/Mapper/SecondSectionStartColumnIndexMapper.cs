@@ -66,7 +66,8 @@ namespace Fanex.SaveBets.Builder.Mapper
             { 9516, 20 },
             { 9517, 20 },
             { 9518, 20 },
-            { 9519, 20 }
+            { 9519, 20 },
+            { 229, 21 },
         };
 
         public int GetStartColumnIndexOfSecondSection(int bettype)
