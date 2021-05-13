@@ -162,6 +162,15 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="App_Data\Local\DBWH.bodb_dwrs.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\PRO\DBWH.bodb_dwrs.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\UAT\DBWH.bodb_dwrs.bodbAdminNet.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Configurations\_Fanex.AutoSaveBets.Service.UAT-2.1.exe.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
