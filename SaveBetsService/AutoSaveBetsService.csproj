@@ -255,15 +255,15 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Local\DBACC.bodb_ACC.bodbAdminNet.xml">
+    <Content Include="App_Data\Local\DBACC.bodb02.bodbAdminNet.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="App_Data\PRO\DBACC.bodb_ACC.bodbAdminNet.xml">
+    <Content Include="App_Data\PRO\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="App_Data\UAT\DBACC.bodb_ACC.bodbAdminNet.xml">
+    <Content Include="App_Data\UAT\DBACC.bodb02.bodbAdminNet.xml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
