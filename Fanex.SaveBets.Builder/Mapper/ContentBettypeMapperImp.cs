@@ -361,6 +361,8 @@ namespace Fanex.SaveBets.Builder.Mapper
 
                 { 9400, ContentBetChoice1Imp },
                 { 9401, ContentBetChoice1Imp },
+                { 9442, ContentBetChoice1Imp },
+                { 9443, ContentBetChoice1Imp },
 
                 { 9404, ContentBetChoice2Imp },
                 { 9405, ContentBetChoice2Imp },
@@ -400,6 +402,14 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 9431, ContentBetChoice709Imp },
                 { 9432, ContentBetChoice709Imp },
                 { 9433, ContentBetChoice709Imp },
+                { 9607, ContentBetChoice709Imp },
+                { 9608, ContentBetChoice709Imp },
+                { 9609, ContentBetChoice709Imp },
+                { 9610, ContentBetChoice709Imp },
+                { 9611, ContentBetChoice709Imp },
+                { 9612, ContentBetChoice709Imp },
+                { 9613, ContentBetChoice709Imp },
+                { 9614, ContentBetChoice709Imp },
                 { 9504, ContentBetChoice709Imp },
                 { 9505, ContentBetChoice709Imp },
                 { 9506, ContentBetChoice709Imp },
