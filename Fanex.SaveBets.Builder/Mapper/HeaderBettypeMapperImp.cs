@@ -339,12 +339,15 @@ namespace Fanex.SaveBets.Builder.Mapper
 
                 { 9400, Header1ColumnHdpImp },
                 { 9401, Header1ColumnHdpImp },
+                { 9442, Header1ColumnHdpImp },
+                { 9443, Header1ColumnHdpImp },
                 { 9404, Header1ColumnHdpImp },
                 { 9405, Header1ColumnHdpImp },
                 { 9406, Header1ColumnHdpImp },
                 { 9407, Header1ColumnHdpImp },
                 { 9408, Header1ColumnHdpImp },
                 { 9409, Header1ColumnHdpImp },
+
                 { 9446, Header1ColumnHdpImp },
                 { 9447, Header1ColumnHdpImp },
                 { 9449, Header1ColumnHdpImp },
@@ -392,6 +395,16 @@ namespace Fanex.SaveBets.Builder.Mapper
                 { 9431, Header2ColumnHdpOtherOptionsImp },
                 { 9432, Header2ColumnHdpOtherOptionsImp },
                 { 9433, Header2ColumnHdpOtherOptionsImp },
+                { 9607, Header2ColumnHdpOtherOptionsImp },
+                { 9608, Header2ColumnHdpOtherOptionsImp },
+                { 9609, Header2ColumnHdpOtherOptionsImp },
+                { 9610, Header2ColumnHdpOtherOptionsImp },
+                { 9611, Header2ColumnHdpOtherOptionsImp },
+                { 9612, Header2ColumnHdpOtherOptionsImp },
+                { 9613, Header2ColumnHdpOtherOptionsImp },
+                { 9614, Header2ColumnHdpOtherOptionsImp },
+
+
                 { 9434, Header2ColumnTeamOtherOptionsImp },
                 { 9435, Header2ColumnTeamOtherOptionsImp },
                 { 9436, Header2ColumnTeamOtherOptionsImp },
