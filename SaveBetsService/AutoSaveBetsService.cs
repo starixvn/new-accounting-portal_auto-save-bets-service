@@ -9,17 +9,16 @@
 
 namespace AutoSaveBetsService
 {
-    using System;
-    using System.IO;
-    using System.ServiceProcess;
-    using System.Timers;
     using Fanex.Common;
-    using Fanex.Data.Configuration;
     using ONEbook.UM.Services;
     using ONEbook.UM.Services.Impl;
     using SaveBetsBusiness;
     using SaveBetsBusiness.Common;
     using SaveBetsBusiness.Service;
+    using System;
+    using System.IO;
+    using System.ServiceProcess;
+    using System.Timers;
 
     /// <summary>
     /// Auto mail service.
@@ -47,7 +46,6 @@ namespace AutoSaveBetsService
         {
             Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
 
-            DbSettingProviderManager.Current.Start();
             timer = new Timer();
             timer.Interval = AppSettings.Interval;
             timer.Elapsed += new ElapsedEventHandler(OnInterval);
@@ -56,7 +54,7 @@ namespace AutoSaveBetsService
 
             AppSettings.OnProcessing = false;
             AppSettings.ForceRunningOnProcessing = false;
-            RemotingRefRegister.Register();
+            RegisterService.RegisterServices();
 
             string username = AppSettings.UserName;
             string password = AppSettings.Password;

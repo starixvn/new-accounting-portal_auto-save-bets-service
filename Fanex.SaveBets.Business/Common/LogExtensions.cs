@@ -6,8 +6,10 @@
 
 namespace SaveBetsBusiness.Common
 {
-    using System;
     using Fanex.Logging;
+    using Fanex.Logging.Extensions;
+    using Fanex.Logging.Extensions.Database;
+    using System;
 
     /// <summary>
     /// TODO: Update summary.
@@ -16,13 +18,13 @@ namespace SaveBetsBusiness.Common
     {
         public static void ExceptionHandler(Exception ex)
         {
-            string message = ex.Message +
-                              "<br>\r\nSOURCE: " + ex.Source +
-                              "<br>\r\nTARGETSITE: " + ex.TargetSite +
-                              "<br>\r\nSTACKTRACE: " + ex.StackTrace +
-                              "<br>\r\nINNEREXCEPTION: " + ex.InnerException +
-                              "<br>\r\nMESSAGE: " + ex.Message;
-            Logger.Log.Error(message);
+            var logMessage = new LogMessage(ex.Message)
+                        .AddSection("Database Info", DatabaseInfoGetters.GetDbExceptionInfo(ex))
+                        .AddSection("Server Info", CommonInfoGetters.GetServerInfo())
+                        .AddSection("Exception Info", CommonInfoGetters.GetExceptionInfo(ex))
+                        .ToString();
+
+            LogService.Error(logMessage);
         }
     }
 }

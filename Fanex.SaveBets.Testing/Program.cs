@@ -1,16 +1,10 @@
 ﻿using Fanex.Common;
-using Fanex.Data.Configuration;
 using Fanex.Logging;
 using Fanex.MailDelivery.Core.Models;
-using Fanex.RemotingRef;
 using Newtonsoft.Json;
-using ONEbook.UM.Services;
-using ONEbook.UM.Services.Impl;
 using SaveBetsBusiness;
 using SaveBetsBusiness.Service;
 using System;
-using System.Configuration;
-using System.IO;
 
 namespace Fanex.SaveBets.Testing
 {
@@ -20,16 +14,7 @@ namespace Fanex.SaveBets.Testing
         {
             try
             {
-                IMaintenanceService um = new MaintenanceService();
-                var downTime = um.GetUnderMaintenanceTime();
-                if (downTime.IsUnderMaintenanceTime)
-                {
-                    return;
-                }
-
-                Directory.SetCurrentDirectory(AppDomain.CurrentDomain.BaseDirectory);
-                DbSettingProviderManager.Current.Start();
-                RegisterRemotingRef();
+                RegisterService.RegisterServices();
 
                 AppSettings.OnProcessing = false;
                 AppSettings.ForceRunningOnProcessing = true;
@@ -59,13 +44,6 @@ namespace Fanex.SaveBets.Testing
             {
                 LogService.Error(ex.Message);
             }
-        }
-
-        private static void RegisterRemotingRef()
-        {
-            RefDataTypeContainer
-                .ConnectTo(new Uri(ConfigurationManager.AppSettings["RemoteRefURL"]))
-                .FromApplication("Fanex.AutoSaveBets.Service");
         }
     }
 }

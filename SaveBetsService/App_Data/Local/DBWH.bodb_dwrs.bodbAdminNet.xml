@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Functions>
-  <Function Name="NAP_SaveBet">
-    <Setting Key="NAP_SaveBet_GetJob" SpName="NAP_SaveBet_GetJob" DbName="DBWH.bodb_dwrs.bodbAdminNet" TimeOut="0" />
-    <Setting Key="NAP_SaveBet_EndMatch" SpName="NAP_SaveBet_UpdateJobCompleted" DbName="DBWH.bodb_dwrs.bodbAdminNet" Timeout="0" />
-  </Function>
-</Functions>
